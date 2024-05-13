@@ -27,6 +27,8 @@
 
     <link href="{{ asset('css/paginate.css') }} " rel="stylesheet"/>
 
+    <link href="{{ asset('css/mobiscroll.javascript.min.css') }} " rel="stylesheet"/>
+
     @yield('css')
     <title>Painel Control</title>
 </head>
@@ -45,6 +47,7 @@
     <script src="{{ asset('vendor/php-email-form/validate.js') }}"></script>
 
     <!-- Template Main JS File -->
+    <script src="{{ asset('js/mobiscroll.javascript.min.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
     @yield('script')
 </body>

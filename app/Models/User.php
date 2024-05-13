@@ -66,6 +66,9 @@ class User extends Authenticatable
         return $this->hasOne(Professor::class);
     }
 
+    public function funcionario(){
+        return $this->hasOne(Funcionario::class);
+    }
 
     function genero() : string{
         return $this->genero == 'M' ? 'MASCULINO' :  'FEMENINO';

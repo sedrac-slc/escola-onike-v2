@@ -17,8 +17,11 @@ class Professor extends Model
         'updated_by',
     ];
 
-    public function horarios(){
-        return $this->belongsToMany(Horario::class);
+    public function disciplinas(){
+        return $this->belongsToMany(Disciplina::class);
     }
 
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

@@ -93,17 +93,17 @@
                     </a>
                     <ul id="forms-user" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                         <li>
-                            <a href="#">
+                            <a href="{{ route('alunos.index') }}">
                                 <i class="bi bi-circle"></i><span>Alunos</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{ route('professores.index') }}">
                                 <i class="bi bi-circle"></i><span>Professores</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{ route('funcionarios.index') }}">
                                 <i class="bi bi-circle"></i><span>Funcionário</span>
                             </a>
                         </li>
@@ -141,7 +141,14 @@
                     <a class="nav-link collapsed @if ($page == 'disciplina') active @endif"
                         href="{{ route('disciplinas.index') }}">
                         <i class="bi bi-book"></i>
-                        <span>Disciplinas</span>
+                        <span>Disciplina</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed @if ($page == 'classe') active @endif"
+                        href="{{ route('classes.index') }}">
+                        <i class="bi bi-basket"></i>
+                        <span>Classe</span>
                     </a>
                 </li>
             @endif

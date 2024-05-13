@@ -1,8 +1,10 @@
 <?php
 
+use App\Enum\GeneroEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -15,7 +17,7 @@ return new class extends Migration
             $table->uuid('id')->primary()->default(DB::raw('uuid()'));
             $table->string('name');
             $table->string('email')->unique();
-            $table->enum('genero',['M','F'])->default('M');
+            $table->enum('genero',GeneroEnum::keys())->default('M');
             $table->date('data_nascimento');
             $table->string('bilhete_identidade');
             $table->string('funcao');

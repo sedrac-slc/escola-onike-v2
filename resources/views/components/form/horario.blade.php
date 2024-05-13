@@ -1,3 +1,4 @@
+@php $dia_semanas = App\Enum\DiaSemanaEnum::list(); @endphp
 <div class="row">
     @isset($turmas)
         <div class="col-md-6">
@@ -13,20 +14,18 @@
             </select>
         </div>
     @endisset
-    @isset($dia_semanas)
-        <div class="col-md-6">
-            <label for="dia_semana" class="form-label">
-                <i class="bi bi-brightness-high"></i>
-                <span>Dia da semana:</span>
-                <span class="text-danger">*</span>
-            </label>
-            <select name="dia_semana" id="dia_semana" class="form-control">
-                @foreach ($dia_semanas as $key => $value)
-                    <option value="{{ $key }}">{{ $value }}</option>
-                @endforeach
-            </select>
-        </div>
-    @endisset
+    <div class="col-md-6">
+        <label for="dia_semana" class="form-label">
+            <i class="bi bi-brightness-high"></i>
+            <span>Dia da semana:</span>
+            <span class="text-danger">*</span>
+        </label>
+        <select name="dia_semana" id="dia_semana" class="form-control">
+            @foreach ($dia_semanas as $key => $value)
+                <option value="{{ $key }}">{{ $value }}</option>
+            @endforeach
+        </select>
+    </div>
 </div>
 <div class="row mt-2">
     <div class="col-md-6  @isset($inline) inline @endisset">

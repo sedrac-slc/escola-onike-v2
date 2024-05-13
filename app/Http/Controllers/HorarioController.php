@@ -5,20 +5,18 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Models\Turma;
 use App\Models\Horario;
-use App\Enum\DiaSemanaEnum;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\HorarioRequest;
 
 class HorarioController extends Controller
 {
-    public function index(Request $request){
+    public function index(){
         $horarios = Horario::orderBy('created_at','DESC')->paginate();
         $turmas = Turma::orderBy('created_at','DESC')->get();
         return view('pages.horario',[
             'horarios' => $horarios,
             'turmas' => $turmas,
-            'dia_semanas' => DiaSemanaEnum::list(),
             'painel' => 'horario'
         ]);
     }

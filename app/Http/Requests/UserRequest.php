@@ -30,9 +30,9 @@ class UserRequest extends FormRequest
     public function rulesNotCredencials(){
         return [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255'],
             'data_nascimento' => ['required', 'date'],
-            'bilhete_identidade' => ['required', 'string', 'regex:/[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][A-Z][A-Z][0-9][0-9][0-9]/', 'unique:users']
+            'bilhete_identidade' => ['required', 'string', 'regex:/[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][A-Z][A-Z][0-9][0-9][0-9]/']
         ];
     }
 

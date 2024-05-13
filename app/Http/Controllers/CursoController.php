@@ -11,9 +11,12 @@ use Illuminate\Http\Request;
 class CursoController extends Controller
 {
 
-    public function index(Request $request){
+    public function index(){
         $cursos = Curso::orderBy('created_at','DESC')->paginate();
-        return view('pages.curso',['cursos' => $cursos , 'painel' => 'curso']);
+        return view('pages.curso',[
+            'cursos' => $cursos ,
+            'painel' => 'curso'
+        ]);
     }
 
     public function store(CursoRequest $request){

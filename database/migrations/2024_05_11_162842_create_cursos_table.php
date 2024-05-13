@@ -3,6 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
+use App\Enum\NumeroClasseEnum;
 
 return new class extends Migration
 {
@@ -14,7 +16,7 @@ return new class extends Migration
         Schema::create('cursos', function (Blueprint $table) {
             $table->uuid('id')->primary()->default(DB::raw('uuid()'));
             $table->string('nome')->unique();
-            $table->enum('num_classe',['7','8','9','10','11','12','13']);
+            $table->enum('num_classe',NumeroClasseEnum::keys());
             $table->uuid('created_by')->nullable();
             $table->uuid('updated_by')->nullable();
             $table->timestamps();

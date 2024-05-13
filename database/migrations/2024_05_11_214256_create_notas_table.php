@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -13,10 +14,6 @@ return new class extends Migration
     {
         Schema::create('notas', function (Blueprint $table) {
             $table->uuid('id')->primary()->default(DB::raw('uuid()'));
-            $table->foreignUuid('aluno_id')->constrained('alunos')->cascadeDelete();
-            $table->foreignUuid('pauta_id')->constrained('pautas')->cascadeDelete();
-            $table->foreignUuid('trimestre_id')->constrained('trimestes')->cascadeDelete();
-            $table->foreignUuid('disciplina_id')->constrained('disciplinas')->cascadeDelete();
             $table->integer('mac')->unsigned();
             $table->integer('npp')->unsigned();
             $table->integer('npt')->unsigned();

@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -13,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('disciplinas', function (Blueprint $table) {
             $table->uuid('id')->primary()->default(DB::raw('uuid()'));
-            $table->foreignUuid('horario_id')->constrained('horarios')->cascadeDelete();
+            $table->foreignUuid('horario_id')->constrained('horarios')->cascadeOnDelete();
             $table->string('nome')->unique();
             $table->uuid('created_by')->nullable();
             $table->uuid('updated_by')->nullable();

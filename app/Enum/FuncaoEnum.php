@@ -23,4 +23,12 @@ final class FuncaoEnum{
         }
     }
 
+    public static function jobs(){
+        return [
+            static::DIRECTOR_GERAL => static::funcao(static::DIRECTOR_GERAL),
+            static::SECRETARIO => static::funcao(static::SECRETARIO)
+        ];
+    }
+
+
 }

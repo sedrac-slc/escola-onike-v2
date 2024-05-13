@@ -1,3 +1,4 @@
+@php $numeroClasse = App\Enum\NumeroClasseEnum::list(); @endphp
 <div class="row">
     <div class="col-md-6 @isset($inline) inline @endisset">
         <label for="nome" class="form-label">
@@ -18,14 +19,10 @@
                 <span class="text-danger">*</span>
             @endif
         </label>
-        @php $classes = ["7","8","9","10","11","12","13"]; @endphp
         <select id="num_classe" name="num_classe" class="form-control"
             @isset($disabled) disabled @endisset>
-            @foreach ($classes as $class)
-                <option value="{{ $class }}"
-                    @isset($curso)   @if ($curso->num_classe == $class) selected @endif @endisset>
-                    {{ $class }}
-                </option>
+            @foreach ($numeroClasse as $key => $value)
+                <option value="{{ $key }}">{{ $value }}</option>
             @endforeach
         </select>
     </div>

@@ -10,13 +10,13 @@
                 </th>
                 <th>
                     <div class="th-icone">
-                        <i class="bi bi-file-word"></i>
+                        <i class="bi bi-person-lines-fill"></i>
                         <span>Horario</span>
                     </div>
                 </th>
                 <th>
                     <div class="th-icone">
-                        <i class="bi bi-file-word"></i>
+                        <i class="bi bi-archive"></i>
                         <span>Turma</span>
                     </div>
                 </th>
@@ -32,9 +32,8 @@
             @foreach ($disciplinas as $disciplina)
                 <tr>
                     <td>{{ $disciplina->nome }}</td>
-                    <td>{{ $disciplina->horario->text() }}</td>
+                    <td data-value={{ $disciplina->horario_id }}>{{ $disciplina->horario->text() }}</td>
                     <td>{{ $disciplina->horario->turma->text() }}</td>
-                    </td>
                     <td>
                         <button class="btn btn-outline-danger btn-sm rounded-pill btn-del" data-bs-toggle="modal"
                             data-bs-target="#modalDelete"

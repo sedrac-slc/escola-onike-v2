@@ -6,17 +6,18 @@ use Exception;
 use App\Models\Horario;
 use App\Models\Disciplina;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Http\Requests\DisciplinaRequest;
+use App\Enum\NumeroClasseEnum;
 
 class DisciplinaController extends Controller
 {
-    public function index(Request $request){
+    public function index(){
         $disciplinas = Disciplina::orderBy('created_at','DESC')->paginate();
         $horarios = Horario::orderBy('created_at','DESC')->get();
         return view('pages.disciplina',[
             'disciplinas' => $disciplinas,
             'horarios' => $horarios,
+            'numeroClasse' => NumeroClasseEnum::list(),
             'painel' => 'disciplina'
         ]);
     }

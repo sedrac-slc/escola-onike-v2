@@ -67,9 +67,19 @@
         const span = document.querySelector('#formadd');
         const form = document.querySelector('#form');
 
+        function selectDefault(value, id) {
+            let select = document.querySelector('#' + id);
+            let children = select.childNodes;
+            children.forEach(option => {
+                if (option.value == value) {
+                    option.selected = true;
+                }
+            });
+        }
+
         function text(...arg) {
             document.querySelector('#nome').value = arg[0];
-            document.querySelector('#descricao').innerHTML = arg[1];
+            selectDefault(arg[1], 'horario_id');
             document.querySelector('#span-disciplina').innerHTML = arg[2];
         }
 
@@ -86,7 +96,7 @@
                 let tds = row.querySelectorAll('td');
                 form.action = item.dataset.up;
                 if (span.classList.contains('d-none')) span.classList.remove('d-none');
-                text(tds[0].innerHTML, tds[1].innerHTML, "Actualizar");
+                text(tds[0].innerHTML, tds[1].dataset.value, "Actualizar");
                 method.value = "PUT";
             });
         });
