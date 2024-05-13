@@ -1,0 +1,36 @@
+<div class="row">
+    <div class="col-md-6">
+        <label for="ano_lectivo" class="form-label" class="form-control">
+            <i class="bi bi-123"></i>
+            <span>Ano lectivo:</span>
+            <span class="text-danger">*</span>
+        </label>
+        <input type="text" class="form-control" name="ano_lectivo" id="ano_lectivo" />
+    </div>
+    @isset($periodos)
+        <div class="col-md-6">
+            <label for="periodo" class="form-label">
+                <i class="bi bi-brightness-high"></i>
+                <span>Periodo:</span>
+                <span class="text-danger">*</span>
+            </label>
+            <select name="periodo" id="periodo" class="form-control">
+                @foreach ($periodos as $key => $value)
+                    <option value="{{ $key }}">{{ $value }}</option>
+                @endforeach
+            </select>
+        </div>
+    @endisset
+    <div class="col-md-6">
+        <label for="sala" class="form-label" class="form-control">
+            <i class="bi bi-1-circle"></i>
+            <span>Sala:</span>
+            <span class="text-danger">*</span>
+        </label>
+        <input type="number" class="form-control" name="sala" id="sala" min="0" max="100" />
+    </div>
+</div>
+<button class="btn btn-outline-primary rounded-pill mt-3">
+    <i class="bi bi-check-circle"></i>
+    <span id="span-turma">cadastra</span>
+</button>

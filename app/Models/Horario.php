@@ -1,0 +1,44 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use App\Enum\DiaSemanaEnum;
+
+class Horario extends Model
+{
+    use HasFactory, HasUuids;
+
+    protected $fillable = [
+        'id',
+        'turma_id',
+        'dia_semana',
+        'hora_inicio',
+        'hora_termino',
+        'created_by',
+        'updated_by',
+    ];
+
+    public function turma(){
+        return $this->belongsTo(Turma::class);
+    }
+
+    public function disciplina(){
+        return $this->belongsTo(Disciplina::class);
+    }
+
+    public function professores(){
+        return $this->belongsToMany(Professor::class);
+    }
+
+    public function diaSemana(){
+        return DiaSemanaEnum::diaSemana($this->dia_semana);
+    }
+
+    public function text(){
+        return $this->dia_semana."|".$this->hora_inicio."|".$this->hora_termino;
+    }
+
+}
