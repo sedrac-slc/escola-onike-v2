@@ -38,9 +38,9 @@ class HomeController extends Controller
                 return redirect()->back();
             }
             $user->update($data);
-            toastr()->success("Operação de actualização foi realizada com sucesso","Successo");
+            toastr()->success("Operação de actualização foi realizada com sucesso");
         } catch (Exception) {
-            toastr()->error("Operação de actualização não foi possível a sua realização","Erro");
+            toastr()->error("Operação de actualização não foi possível a sua realização");
         }
         return redirect()->back();
     }
@@ -48,11 +48,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        $user = User::find(Auth::user()->id);
-        return view('home', [
-            "painel" => "home",
-            "auth" => $user
-        ]);
+        return view('home', [ "painel" => "home",]);
     }
 
 
@@ -75,7 +71,7 @@ class HomeController extends Controller
         ]);
 
         if($request->newpassword != $request->renewpassword){
-            toastr()->warning("Senhas fornecidas são diferentes, por favor tente de novo","Aviso");
+            toastr()->warning("Senhas fornecidas são diferentes, por favor tente de novo");
             return redirect()->back();
         }
 

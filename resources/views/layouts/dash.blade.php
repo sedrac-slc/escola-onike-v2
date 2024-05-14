@@ -1,6 +1,6 @@
 @extends('layouts.doc')
 @section('body')
-    @php $auth =  auth()->user(); @endphp
+    @php $auth = auth()->user(); @endphp
     @php $page = isset($painel) ? $painel : "" ; @endphp
     <header id="header" class="header fixed-top d-flex align-items-center">
 
@@ -149,6 +149,22 @@
                         href="{{ route('classes.index') }}">
                         <i class="bi bi-basket"></i>
                         <span>Classe</span>
+                    </a>
+                </li>
+            @endif
+            @if ($auth->isProfessor())
+                <li class="nav-item">
+                    <a class="nav-link collapsed @if ($page == 'classe') active @endif"
+                        href="{{ route('pautas.index') }}">
+                        <i class="bi bi-basket"></i>
+                        <span>Pautas</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed @if ($page == 'classe') active @endif"
+                        href="{{ route('notas.index') }}">
+                        <i class="bi bi-book"></i>
+                        <span>Notas</span>
                     </a>
                 </li>
             @endif

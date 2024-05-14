@@ -1,5 +1,6 @@
 @extends('layouts.dash')
 @section('content')
+    @php $auth = auth()->user(); @endphp
     @php $funcao =  $auth->funcao(); @endphp
     <div class="pagetitle">
         <h1>Bem vindo!</h1>
@@ -152,9 +153,8 @@
                                             required>
                                     </div>
                                     <hr />
-                                    @include('components.form.user', [
+                                    @include('components.form.utilizador', [
                                         'hidden_password' => true,
-                                        'hidden_btn' => true,
                                         'user' => $auth,
                                     ])
                                     <div class="text-center mt-4">

@@ -2,7 +2,7 @@
 <div class="row">
     @isset($turmas)
         <div class="col-md-6">
-            <label for="periodo" class="form-label">
+            <label for="turma_id" class="form-label">
                 <i class="bi bi-archive"></i>
                 <span>Turma:</span>
                 <span class="text-danger">*</span>

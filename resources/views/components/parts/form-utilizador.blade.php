@@ -24,6 +24,7 @@
         <div class="invalid-feedback">Verifica o email inserido!</div>
     </div>
 </div>
+@if(!isset($hidden_password))
 <div class="col-md-6 p-1 item-password">
     <label for="yourPassword" class="form-label">
         <i class="bi bi-shield"></i>
@@ -42,6 +43,7 @@
         value="{{ old('password_confirmation') }}">
     <div class="invalid-feedback">Verifica a senha inserido!</div>
 </div>
+@endif
 <div class="col-md-6 p-1">
     <label for="genero" class="form-label">
         <i class="bi bi-gender-ambiguous"></i>

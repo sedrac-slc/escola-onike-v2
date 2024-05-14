@@ -56,12 +56,6 @@
                                         <div class="col-12">
                                             <button class="btn btn-primary w-100" type="submit">Login</button>
                                         </div>
-                                        <div class="col-12">
-                                            <p class="small mb-0 mt-1">
-                                                <span>Não tenho uma conta?</span>
-                                                <a href="{{ route('register') }}">Criar uma conta</a>
-                                            </p>
-                                        </div>
                                     </form>
 
                                 </div>

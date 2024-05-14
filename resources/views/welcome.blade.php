@@ -50,12 +50,6 @@
                                         <i class="bil bi-key"></i>
                                         <span>Autenticação</span>
                                     </a>
-                                    @if (Route::has('register'))
-                                        <a href="{{ route('register') }}" class="btn btn-warning btn-lg rounded-pill">
-                                            <i class="bi bi-person-badge-fill"></i>
-                                            <span>Cadastramento</span>
-                                        </a>
-                                    @endif
                                 @endauth
                             </div>
                         @endif

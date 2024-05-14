@@ -23,7 +23,7 @@ class Disciplina extends Model
     }
 
     public function text(){
-        return $this->nome;
+        return $this->nome.'| horario: '.$this->horario->text();
     }
 
 }

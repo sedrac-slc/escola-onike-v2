@@ -1,6 +1,6 @@
 @php $numeroClasse = App\Enum\NumeroClasseEnum::list(); @endphp
 <div class="row">
-    <div class="col-md-6 @isset($inline) inline @endisset">
+    <div class="col-md-6">
         <label for="nome" class="form-label">
             <i class="bi bi-key"></i>
             <span>Nome:</span>
@@ -11,7 +11,7 @@
         <input type="text" id="nome" name="nome" class="form-control" placeholder=""
             value="{{ $curso->nome ?? old('nome') }}" @isset($disabled) disabled @endisset />
     </div>
-    <div class="col-md-6 @isset($inline) inline @endisset">
+    <div class="col-md-6 ">
         <label for="num_classe" class="form-label">
             <i class="bi bi-collection"></i>
             <span>Número da classe:</span>

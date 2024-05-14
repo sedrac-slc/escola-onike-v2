@@ -18,4 +18,8 @@ class Trimestre extends Model
         'updated_by',
     ];
 
+    public function text(){
+        return $this->data_inicio.' à '.$this->data_termino;
+    }
+
 }

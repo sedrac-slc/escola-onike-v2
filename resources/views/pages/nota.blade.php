@@ -6,17 +6,17 @@
 @section('content')
     <div class="card">
         <div class="pagetitle m-2">
-            <h1>Cursos</h1>
+            <h1>Notas</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}">Perfil</a></li>
                     <li class="breadcrumb-item active">
-                        <a href="{{ route('cursos.index') }}">Cursos</a>
+                        <a href="{{ route('notas.index') }}">Notas</a>
                     </li>
                 </ol>
             </nav>
         </div>
-        <span id="formadd" class="d-none fr" data-url="{{ route('cursos.store') }}">
+        <span id="formadd" class="d-none fr" data-url="{{ route('notas.store') }}">
             <i class="bi bi-plus h2"></i>
         </span>
         <div class="card-body">
@@ -31,10 +31,10 @@
                     </h2>
                     <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
                         data-bs-parent="#accordionFlushExample" style="">
-                        <form action="{{ route('cursos.store') }}" method="POST" id="form">
+                        <form action="{{ route('notas.store') }}" method="POST" id="form">
                             @csrf
                             @method('POST')
-                            @include('components.form.curso')
+                            @include('components.form.nota')
                         </form>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
                     </h2>
                     <div id="flush-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="flush-headingTwo"
                         data-bs-parent="#accordionFlushExample" style="">
-                        @include('components.table.curso')
+                        @include('components.table.nota')
                     </div>
                 </div>
             </div>
@@ -80,7 +80,7 @@
         function text(...arg) {
             document.querySelector('#nome').value = arg[0];
             selectDefault(arg[1], 'num_classe');
-            document.querySelector('#span-curso').innerHTML = arg[2];
+            document.querySelector('#span-nota').innerHTML = arg[2];
         }
 
         span.addEventListener('click', function(e) {

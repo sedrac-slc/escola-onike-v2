@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\{
     Aluno,
     User, Curso, Turma, Trimestre, Horario, Disciplina, Classe,
-    Professor
+    Professor, Funcionario
 };
 use App\Enum\{FuncaoEnum, DiaSemanaEnum, NumeroClasseEnum};
 use Illuminate\Database\Seeder;
@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
         $userProfessor = User::updateOrCreate(['email' => 'rucapires@example.com'], [
             'name' => 'Ruca Pires', 'email' => 'rucapires@example.com',
             'genero' => 'F', 'data_nascimento' => '2004-07-12',
-            'bilhete_identidade' => '002546012LA015', 'funcao' => FuncaoEnum::ALUNO,
+            'bilhete_identidade' => '002546012LA015', 'funcao' => FuncaoEnum::PROFESSOR,
             'password' => bcrypt('12345678')
         ]);
 
@@ -77,6 +77,10 @@ class DatabaseSeeder extends Seeder
 
         Professor::updateOrCreate(['user_id' => $userProfessor->id],[
             'user_id' => $userProfessor->id, 'created_by' => $user->id, 'updated_by' => $user->id
+        ]);
+
+        Funcionario::updateOrCreate(['user_id' => $user->id],[
+            'user_id' => $user->id, 'created_by' => $user->id, 'updated_by' => $user->id
         ]);
 
     }

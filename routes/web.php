@@ -7,7 +7,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes([
+    'register' => false
+]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -24,4 +26,6 @@ Route::middleware(['auth'])->group( function () {
     Route::resource('alunos', App\Http\Controllers\AlunoController::class);
     Route::resource('professores', App\Http\Controllers\ProfessorController::class);
     Route::resource('funcionarios', App\Http\Controllers\FuncionarioController::class);
+    Route::resource('pautas', App\Http\Controllers\PautaController::class);
+    Route::resource('notas', App\Http\Controllers\NotaController::class);
 });

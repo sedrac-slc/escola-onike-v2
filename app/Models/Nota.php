@@ -31,8 +31,8 @@ class Nota extends Model
         return $this->belongsTo(Disciplina::class);
     }
 
-    public function trimeste(){
-        return $this->belongsTo(Trimeste::class);
+    public function trimestre(){
+        return $this->belongsTo(Trimestre::class);
     }
 
     public function pauta(){

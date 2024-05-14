@@ -22,4 +22,8 @@ class Pauta extends Model
         'updated_by',
     ];
 
+    public function text(){
+        return "[MT1=".$this->mt1.", MT2=".$this->mt2.', MT3='.$this->mt3.', MFD='.$this->mfd.', EXAME='.$this->exame.', MF='.$this->mf.']';
+    }
+
 }

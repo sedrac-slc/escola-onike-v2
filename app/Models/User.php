@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Enum\FuncaoEnum;
+use App\Enum\GeneroEnum;
 
 class User extends Authenticatable
 {
@@ -71,7 +72,7 @@ class User extends Authenticatable
     }
 
     function genero() : string{
-        return $this->genero == 'M' ? 'MASCULINO' :  'FEMENINO';
+        return GeneroEnum::genero($this->genero);
     }
 
     function abreviarNome() : string{
@@ -84,9 +85,11 @@ class User extends Authenticatable
         return FuncaoEnum::funcao($this->funcao);
     }
 
-    function isDirector(): bool { return $this->funcao = FuncaoEnum::DIRECTOR_GERAL;}
+    function isDirector(): bool { return $this->funcao == FuncaoEnum::DIRECTOR_GERAL;}
 
-    function isSecretario(): bool { return $this->funcao = FuncaoEnum::SECRETARIO;}
+    function isSecretario(): bool { return $this->funcao == FuncaoEnum::SECRETARIO;}
+
+    function isProfessor(): bool { return $this->funcao == FuncaoEnum::PROFESSOR;}
 
     function isDirectorOrSecretario(){ return $this->isDirector() || $this->isSecretario(); }
 
