@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Enum\NumeroClasseEnum;
 use App\Http\Requests\ClasseRequest;
 use App\Http\Controllers\Controller;
-use Exception;
+use App\Enum\NumeroClasseEnum;
 use App\Models\Classe;
 use App\Models\Curso;
 use App\Models\Turma;
+use Exception;
 
 class ClasseController extends Controller
 {

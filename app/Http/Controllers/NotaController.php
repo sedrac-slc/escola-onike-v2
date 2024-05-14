@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\NotaRequest;
-use Illuminate\Http\Request;
+use App\Validator\NotaValidator;
 use App\Models\Disciplina;
 use App\Models\Trimestre;
 use App\Models\Aluno;
@@ -16,7 +16,7 @@ use Exception;
 class NotaController extends Controller
 {
     public function index(){
-        $notas = Nota::orderBy('created_at','DESC')->paginate();
+        $notas = NotaValidator::getNotas();
 
         $alunos = Aluno::orderBy('created_at','DESC')->get();
         $pautas = Pauta::orderBy('created_at','DESC')->get();

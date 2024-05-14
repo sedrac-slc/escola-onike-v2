@@ -160,6 +160,8 @@
                         <span>Pautas</span>
                     </a>
                 </li>
+            @endif
+            @if ($auth->isProfessor() || $auth->isAluno())
                 <li class="nav-item">
                     <a class="nav-link collapsed @if ($page == 'classe') active @endif"
                         href="{{ route('notas.index') }}">

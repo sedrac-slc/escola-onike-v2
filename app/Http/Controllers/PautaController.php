@@ -2,19 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Exception;
-use App\Models\Pauta;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PautaRequest;
-use Illuminate\Http\Request;
+use App\Models\Pauta;
+use Exception;
 
 class PautaController extends Controller
 {
     public function index(){
         $pautas = Pauta::orderBy('created_at','DESC')->paginate();
         return view('pages.pauta',[
-            'pautas' => $pautas ,
-            'painel' => 'pauta'
+            'pautas' => $pautas , 'painel' => 'pauta'
         ]);
     }
 

@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Exception;
-use App\Models\Curso;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CursoRequest;
-use Illuminate\Http\Request;
+use App\Models\Curso;
+use Exception;
 
 class CursoController extends Controller
 {

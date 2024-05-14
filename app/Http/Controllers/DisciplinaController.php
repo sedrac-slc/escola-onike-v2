@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Exception;
-use App\Models\Horario;
-use App\Models\Disciplina;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\DisciplinaRequest;
+use App\Http\Controllers\Controller;
 use App\Enum\NumeroClasseEnum;
+use App\Models\Disciplina;
+use App\Models\Horario;
+use Exception;
 
 class DisciplinaController extends Controller
 {

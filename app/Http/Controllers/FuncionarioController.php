@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Enum\FuncaoEnum;
 use App\Http\Requests\FuncionarioRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Validator\UserValidator;
 use App\Models\Funcionario;
+use App\Enum\FuncaoEnum;
 use App\Models\User;
 use Exception;
 

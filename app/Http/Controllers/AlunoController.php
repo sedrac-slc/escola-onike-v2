@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AlunoRequest;
-use App\Models\Aluno;
-use App\Models\Classe;
-use App\Models\User;
-use App\Validator\UserValidator;
-use Exception;
 use Illuminate\Support\Facades\DB;
+use App\Validator\UserValidator;
+use App\Models\Classe;
+use App\Models\Aluno;
+use App\Models\User;
+use Exception;
 
 class AlunoController extends Controller
 {

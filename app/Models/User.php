@@ -75,14 +75,14 @@ class User extends Authenticatable
         return GeneroEnum::genero($this->genero);
     }
 
+    function funcao() : string{
+        return FuncaoEnum::funcao($this->funcao);
+    }
+
     function abreviarNome() : string{
         $array = explode(" ",$this->name);
         $tam = sizeof($array);
         return $array[0][0].'.'.$array[$tam-1];
-    }
-
-    function funcao() : string{
-        return FuncaoEnum::funcao($this->funcao);
     }
 
     function isDirector(): bool { return $this->funcao == FuncaoEnum::DIRECTOR_GERAL;}
@@ -90,6 +90,8 @@ class User extends Authenticatable
     function isSecretario(): bool { return $this->funcao == FuncaoEnum::SECRETARIO;}
 
     function isProfessor(): bool { return $this->funcao == FuncaoEnum::PROFESSOR;}
+
+    function isAluno(): bool { return $this->funcao == FuncaoEnum::ALUNO;}
 
     function isDirectorOrSecretario(){ return $this->isDirector() || $this->isSecretario(); }
 
