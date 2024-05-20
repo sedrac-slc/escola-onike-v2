@@ -25,6 +25,10 @@ class Turma extends Model
         return $this->hasMany(Horario::class);
     }
 
+    public function matriculas(){
+        return $this->hasMany(Matricula::class);
+    }
+
     public function curso(){
         return $this->belongsTo(Curso::class);
     }

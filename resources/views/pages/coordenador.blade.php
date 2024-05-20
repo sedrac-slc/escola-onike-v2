@@ -9,17 +9,17 @@
 @section('content')
     <div class="card">
         <div class="pagetitle m-2">
-            <h1>Alunos</h1>
+            <h1>Coordenadore de curso</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}">Perfil</a></li>
                     <li class="breadcrumb-item active">
-                        <a href="{{ route('alunos.index') }}">Alunos</a>
+                        <a href="{{ route('coordenador-curso.index') }}">Coordenadores de curso</a>
                     </li>
                 </ol>
             </nav>
         </div>
-        <span id="formadd" class="d-none fr" data-url="{{ route('alunos.store') }}">
+        <span id="formadd" class="d-none fr" data-url="{{ route('coordenador-curso.store') }}">
             <i class="bi bi-plus h2"></i>
         </span>
         <div class="card-body">
@@ -34,10 +34,10 @@
                     </h2>
                     <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
                         data-bs-parent="#accordionFlushExample" style="">
-                        <form action="{{ route('alunos.store') }}" method="POST" id="form">
+                        <form action="{{ route('coordenador-curso.store') }}" method="POST" id="form">
                             @csrf
                             @method('POST')
-                            @include('components.form.aluno')
+                            @include('components.form.coordenador')
                         </form>
                     </div>
                 </div>
@@ -51,21 +51,19 @@
                     </h2>
                     <div id="flush-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="flush-headingTwo"
                         data-bs-parent="#accordionFlushExample" style="">
-                        @include('components.table.aluno')
+                        @include('components.table.coordenador')
                     </div>
                 </div>
             </div>
 
         </div>
     </div>
-    @include('components.modal.matricula-form')
-    @include('components.modal.matricula-list')
+    @include('components.modal.coordenador-curso-list')
     @include('components.modal.delete')
 @endsection
 @section('script')
     @parent
-    <script src="{{ asset('js/matricula-form.js') }}"></script>
-    <script src="{{ asset('js/matricula-list.js') }}"></script>
+    <script src="{{ asset('js/coordenador-curso.js') }}"></script>
     <script>
         const btnDels = document.querySelectorAll('.btn-del');
         const btnUps = document.querySelectorAll('.btn-up');
@@ -105,7 +103,7 @@
             document.querySelector('#email').value = arg[2];
             selectDefault(arg[3], 'genero');
             document.querySelector('#data_nascimento').value = arg[4];
-            document.querySelector('#span-aluno').innerHTML = arg[5];
+            document.querySelector('#span-coordenador').innerHTML = arg[5];
         }
 
         span.addEventListener('click', function(e) {

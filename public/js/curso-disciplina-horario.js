@@ -10,7 +10,6 @@ btnCursoDisciplinaHorarioList.forEach(item => {
         if(item.dataset.professor){
             const professorCursoDisciplina = document.querySelector("#professorCursoDisciplina");
             professorCursoDisciplina.value = item.dataset.professor;
-            console.log("professor")
         }
     })
 })

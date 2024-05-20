@@ -3,6 +3,7 @@
 namespace App\Enum;
 
 final class FuncaoEnum{
+    public const COORDENADOR_CURSO = "COORDENADOR_CURSO";
     public const DIRECTOR_GERAL = "DIRECTOR_GERAL";
     public const SECRETARIO = "SECRETARIO";
     public const PROFESSOR = "PROFESSOR";
@@ -10,6 +11,8 @@ final class FuncaoEnum{
 
     public static function funcao($funcao) : string{
         switch($funcao){
+            case FuncaoEnum::COORDENADOR_CURSO:
+                return "Coordenador do curso";
             case FuncaoEnum::DIRECTOR_GERAL:
                 return "Director Geral";
             case FuncaoEnum::SECRETARIO:

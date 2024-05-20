@@ -55,7 +55,7 @@
             </tr>
         </thead>
         <tbody class="position-relative">
-            @foreach ($notas as $nota)
+            {{-- @foreach ($notas as $nota)
                 <tr>
                     <td data-value={{ $nota->aluno_id }}>{{ $nota->aluno->user->name }}</td>
                     <td data-value={{ $nota->trimestre_id }}>{{ $nota->trimestre->text() }}</td>
@@ -86,10 +86,10 @@
                         </td>
                     @endif
                 </tr>
-            @endforeach
+            @endforeach --}}
         </tbody>
     </table>
 </div>
 <div id="pag">
-    {{ $notas->links() }}
+    {{-- {{ $notas->links() }} --}}
 </div>

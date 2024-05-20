@@ -1,6 +1,8 @@
 @php $numeroClasse = App\Enum\NumeroClasseEnum::list(); @endphp
 <div class="row">
-    @isset($alunos)
+
+
+    {{-- @isset($alunos)
         <div class="col-md-6 p-1">
             <label for="aluno_id" class="form-label">
                 <i class="bi bi-person"></i>
@@ -88,7 +90,7 @@
             @endif
         </label>
         <input type="number" min="0" max="20" id="npt" name="npt" class="form-control" placeholder="" value="{{ $nota->npt ?? old('npt') }}" @isset($disabled) disabled @endisset />
-    </div>
+    </div> --}}
 
 </div>
 <button class="btn btn-outline-primary rounded-pill mt-3">

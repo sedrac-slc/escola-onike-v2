@@ -6,7 +6,7 @@
 <div class="modal fade" id="modalMatriculaForm" tabindex="-1" role="dialog"
     aria-labelledby="modalMatriculaFormLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-        <form class="modal-content" action="{{ route('curso-disciplina-horario.store') }}" method="POST" id="formCursoDisciplinaHorario">
+        <form class="modal-content" action="{{ route('aluno-matricula.store') }}" method="POST" id="formAlunoMatricula">
             @csrf
             <div class="modal-header">
                 <h5 class="modal-title" id="modalMatriculaFormLabel">
@@ -19,6 +19,7 @@
             </div>
             <div class="modal-body">
                 <div class="">
+                    <input type="hidden" name="aluno_id" id="aluno-matricula"/>
                     @isset($cursos)
                         <label for="curso_id_search" class="form-label">
                             <i class="bi bi-calendar-plus"></i>

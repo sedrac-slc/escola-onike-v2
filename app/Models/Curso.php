@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use App\Enum\NumeroClasseEnum;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
+use App\Enum\NumeroClasseEnum;
 
 class Curso extends Model
 {
@@ -21,6 +21,10 @@ class Curso extends Model
 
     public function turmas(){
         return $this->hasMany(Turma::class);
+    }
+
+    public function coordenadores(){
+        return $this->belongsToMany(Coordenador::class);
     }
 
     public function disciplinas(){

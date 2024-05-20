@@ -5,30 +5,21 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\NotaRequest;
-use App\Validator\NotaValidator;
-use App\Models\Disciplina;
-use App\Models\Trimestre;
 use App\Models\Aluno;
-use App\Models\Pauta;
 use App\Models\Nota;
 use Exception;
 
 class NotaController extends Controller
 {
     public function index(){
-        $notas = NotaValidator::getNotas();
 
         $alunos = Aluno::orderBy('created_at','DESC')->get();
-        $pautas = Pauta::orderBy('created_at','DESC')->get();
-        $trimestres = Trimestre::orderBy('created_at','DESC')->get();
-        $disciplinas = Disciplina::orderBy('created_at','DESC')->get();
+
+        $aluno = Nota::join('alunos', 'notas.aluno_id', 'alunos.id')
+                ->get();
 
         return view('pages.nota',[
-            'notas' => $notas ,
             'alunos' => $alunos,
-            'pautas' => $pautas,
-            'trimestres' => $trimestres,
-            'disciplinas' => $disciplinas,
             'painel' => 'nota'
         ]);
     }

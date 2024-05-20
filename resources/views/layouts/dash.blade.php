@@ -103,6 +103,11 @@
                             </a>
                         </li>
                         <li>
+                            <a href="{{ route('coordenador-curso.index') }}">
+                                <i class="bi bi-circle"></i><span>Coordenador</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{ route('funcionarios.index') }}">
                                 <i class="bi bi-circle"></i><span>Funcionário</span>
                             </a>
@@ -145,16 +150,7 @@
                     </a>
                 </li>
             @endif
-            @if ($auth->isProfessor())
-                <li class="nav-item">
-                    <a class="nav-link collapsed @if ($page == 'classe') active @endif"
-                        href="{{ route('pautas.index') }}">
-                        <i class="bi bi-basket"></i>
-                        <span>Pautas</span>
-                    </a>
-                </li>
-            @endif
-            @if ($auth->isProfessor() || $auth->isAluno())
+            @if ($auth->isDirectorOrSecretarioOrCoordenadorOrProfessor())
                 <li class="nav-item">
                     <a class="nav-link collapsed @if ($page == 'classe') active @endif"
                         href="{{ route('notas.index') }}">

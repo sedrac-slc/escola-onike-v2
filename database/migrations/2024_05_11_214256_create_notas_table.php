@@ -15,12 +15,16 @@ return new class extends Migration
         Schema::create('notas', function (Blueprint $table) {
             $table->uuid('id')->primary()->default(DB::raw('uuid()'));
             $table->foreignUuid('aluno_id')->constrained('alunos')->cascadeOnDelete();
-            $table->foreignUuid('pauta_id')->constrained('pautas')->cascadeOnDelete();
-            $table->foreignUuid('trimestre_id')->constrained('trimestres')->cascadeOnDelete();
             $table->foreignUuid('disciplina_id')->constrained('disciplinas')->cascadeOnDelete();
             $table->integer('mac')->unsigned();
             $table->integer('npp')->unsigned();
             $table->integer('npt')->unsigned();
+            $table->integer('mt1')->unsigned();
+            $table->integer('mt2')->unsigned();
+            $table->integer('mt3')->unsigned();
+            $table->integer('mf')->unsigned();
+            $table->integer('mfd')->unsigned();
+            $table->string('exame');
             $table->uuid('created_by')->nullable();
             $table->uuid('updated_by')->nullable();
             $table->timestamps();

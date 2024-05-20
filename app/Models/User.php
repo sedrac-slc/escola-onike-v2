@@ -71,6 +71,10 @@ class User extends Authenticatable
         return $this->hasOne(Funcionario::class);
     }
 
+    public function coordenador(){
+        return $this->hasOne(Coordenador::class);
+    }
+
     function genero() : string{
         return GeneroEnum::genero($this->genero);
     }
@@ -85,6 +89,8 @@ class User extends Authenticatable
         return $array[0][0].'.'.$array[$tam-1];
     }
 
+    function isCoordenador(): bool { return $this->funcao == FuncaoEnum::COORDENADOR_CURSO;}
+
     function isDirector(): bool { return $this->funcao == FuncaoEnum::DIRECTOR_GERAL;}
 
     function isSecretario(): bool { return $this->funcao == FuncaoEnum::SECRETARIO;}
@@ -94,5 +100,9 @@ class User extends Authenticatable
     function isAluno(): bool { return $this->funcao == FuncaoEnum::ALUNO;}
 
     function isDirectorOrSecretario(){ return $this->isDirector() || $this->isSecretario(); }
+
+    function isDirectorOrSecretarioOrCoordenadorOrProfessor(){
+        return $this->isDirector() || $this->isSecretario() || $this->isCoordenador() || $this->isProfessor();
+    }
 
 }

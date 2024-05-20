@@ -32,10 +32,10 @@
                         <span>Aniversário</span>
                     </div>
                 </th>
-                <th colspan="2">
+                <th>
                     <div class="th-icone">
                         <i class="bi bi-book"></i>
-                        <span>Matrícula</span>
+                        <span>Curso</span>
                     </div>
                 </th>
                 <th colspan="2">
@@ -47,27 +47,18 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($alunos as $aluno)
+            @foreach ($coordenadores as $coordenador)
                 <tr>
-                    <td>{{ $aluno->user->name }}</td>
-                    <td>{{ $aluno->user->email }}</td>
-                    <td>{{ $aluno->user->bilhete_identidade }}</td>
-                    <td data-value={{ $aluno->user->genero }}>{{ $aluno->user->genero() }}</td>
-                    <td>{{ $aluno->user->data_nascimento }}</td>
+                    <td>{{ $coordenador->user->name }}</td>
+                    <td>{{ $coordenador->user->email }}</td>
+                    <td>{{ $coordenador->user->bilhete_identidade }}</td>
+                    <td data-value={{ $coordenador->user->genero }}>{{ $coordenador->user->genero() }}</td>
+                    <td>{{ $coordenador->user->data_nascimento }}</td>
                     <td>
-                        <button class="btn btn-outline-primary btn-sm rounded-pill btn-aluno-matricula" data-bs-toggle="modal"
-                        data-bs-target="#modalMatriculaForm" data-aluno="{{$aluno->id}}">
-                            <div class="th-icone">
-                                <i class="bi bi-plus"></i>
-                                <span>adicionar</span>
-                            </div>
-                        </button>
-                    </td>
-                    <td>
-                        @php $count =  $aluno->matriculas->count(); @endphp
-                        <button class="btn btn-outline-info btn-sm rounded-pill @if($count > 0) btn-aluno-matricula-list  @endif" type="button"
-                            @if($count > 0)  data-bs-toggle="modal" data-bs-target="#modalMatriculaList" data-url="{{ route('aluno-matricula.ajaxturma', $aluno->id) }}" data-aluno="{{$aluno->id}}" @endif
-                        >
+                        @php $count =  $coordenador->cursos->count(); @endphp
+                        <button
+                            class="btn btn-outline-info btn-sm rounded-pill @if ($count > 0) btn-coordenador-curso-list @endif" type="button"
+                            @if ($count > 0) data-bs-toggle="modal" data-bs-target="#modalCursoDisciplinaHorarioList" data-url="{{ route('coordenador-curso.ajaxCoordenadorCursos', $coordenador->id) }}" data-coordenador="{{ $coordenador->id }}" @endif>
                             <div class="th-icone">
                                 <i class="bi bi-pencil-square"></i>
                                 <span>listar({{ $count }})</span>
@@ -76,7 +67,7 @@
                     </td>
                     <td>
                         <button class="btn btn-outline-danger btn-sm rounded-pill btn-del" data-bs-toggle="modal"
-                            data-bs-target="#modalDelete" data-del="{{ route('alunos.destroy', $aluno->user->id) }}">
+                            data-bs-target="#modalDelete" data-del="{{ route('coordenador-curso.destroy', $coordenador->user->id) }}">
                             <div class="th-icone">
                                 <i class="bi bi-trash"></i>
                                 <span>eliminar</span>
@@ -86,7 +77,7 @@
                     <td>
                         <button class="btn btn-outline-warning btn-sm rounded-pill btn-up" type="button"
                             data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
-                            aria-controls="flush-collapseOne" data-up="{{ route('alunos.update', $aluno->user->id) }}">
+                            aria-controls="flush-collapseOne" data-up="{{ route('coordenador-curso.update', $coordenador->user->id) }}">
                             <div class="th-icone">
                                 <i class="bi bi-pencil-square"></i>
                                 <span>editar</span>
@@ -99,5 +90,5 @@
     </table>
 </div>
 <div class="pagination mt-3">
-    {{ $alunos->links() }}
+    {{ $coordenadores->links() }}
 </div>
