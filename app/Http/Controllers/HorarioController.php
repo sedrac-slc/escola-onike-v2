@@ -13,10 +13,8 @@ class HorarioController extends Controller
 {
     public function index(){
         $horarios = Horario::orderBy('created_at','DESC')->paginate();
-        $turmas = Turma::orderBy('created_at','DESC')->get();
         return view('pages.horario',[
             'horarios' => $horarios,
-            'turmas' => $turmas,
             'painel' => 'horario'
         ]);
     }

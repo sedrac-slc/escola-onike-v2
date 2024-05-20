@@ -24,7 +24,6 @@ class AlunoRequest extends FormRequest
     public function rules()
     {
         $data = (new UserRequest())->rulesNotCredencials();
-        $data["classe_id"] = ['required'];
         return $data;
     }
 }

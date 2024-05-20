@@ -144,13 +144,6 @@
                         <span>Disciplina</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link collapsed @if ($page == 'classe') active @endif"
-                        href="{{ route('classes.index') }}">
-                        <i class="bi bi-basket"></i>
-                        <span>Classe</span>
-                    </a>
-                </li>
             @endif
             @if ($auth->isProfessor())
                 <li class="nav-item">

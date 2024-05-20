@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AlunoRequest;
 use Illuminate\Support\Facades\DB;
 use App\Validator\UserValidator;
-use App\Models\Classe;
+use App\Models\Turma;
 use App\Models\Aluno;
 use App\Models\User;
 use Exception;
@@ -15,10 +15,10 @@ class AlunoController extends Controller
 {
     public function index(){
         $alunos = Aluno::orderBy('created_at','DESC')->paginate();
-        $classes = Classe::orderBy('created_at','DESC')->get();
+        $turmas = Turma::orderBy('created_at','DESC')->get();
         return view('pages.aluno',[
             'alunos' => $alunos,
-            'classes' => $classes,
+            'turmas' => $turmas,
             'painel' => 'aluno'
         ]);
     }

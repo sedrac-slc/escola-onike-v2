@@ -78,16 +78,17 @@
         }
 
         function text(...arg) {
-            document.querySelector('#ano_lectivo').value = arg[0];
-            selectDefault(arg[1], 'periodo');
-            document.querySelector('#sala').value = arg[2];
-            document.querySelector('#span-turma').innerHTML = arg[3];
+            selectDefault(arg[0], 'curso_id');
+            document.querySelector('#ano_lectivo').value = arg[1];
+            selectDefault(arg[2], 'periodo');
+            document.querySelector('#sala').value = arg[3];
+            document.querySelector('#span-turma').innerHTML = arg[4];
         }
 
         span.addEventListener('click', function(e) {
             form.action = span.dataset.url;
             if (!span.classList.contains('d-none')) span.classList.add('d-none');
-            text("", "","", "Cadastra");
+            text("", "", "", "","Cadastra");
             method.value = "POST";
         });
 
@@ -97,7 +98,7 @@
                 let tds = row.querySelectorAll('td');
                 form.action = item.dataset.up;
                 if (span.classList.contains('d-none')) span.classList.remove('d-none');
-                text(tds[0].innerHTML, tds[1].dataset.value, tds[2].innerHTML, "Actualizar");
+                text(tds[0].dataset.value, tds[1].innerHTML, tds[2].dataset.value, tds[3].innerHTML, "Actualizar");
                 method.value = "PUT";
             });
         });

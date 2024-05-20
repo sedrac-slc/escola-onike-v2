@@ -4,6 +4,13 @@
     right: 5%;
 }
 
+.panel-empty{
+    border: 0.1rem dashed var(--bs-dark);
+    height: 50px;
+    color: #ccc;
+    font-size: 20px;
+}
+
 .msg-empty {
     border: 0.1rem dashed var(--bs-dark);
     height: 150px;
@@ -61,3 +68,4 @@ thead th div, tbody .btn{
     color: var(--bs-primary);
     font-weight: bolder;
 }
+

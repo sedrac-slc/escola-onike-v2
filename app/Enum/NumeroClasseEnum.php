@@ -21,13 +21,13 @@ final class NumeroClasseEnum{
             case NumeroClasseEnum::NONA:
                 return "Nona";
             case NumeroClasseEnum::DECIMA:
-                return "Decima";
+                return "Décima";
             case NumeroClasseEnum::DECIMA_PRIMEIRA:
-                return "Decima primeira";
+                return "Décima primeira";
             case NumeroClasseEnum::DECIMA_SEGUNDA:
-                return "Decima segunda";
+                return "Décima segunda";
             default:
-                return "Decima terceira";
+                return "Décima terceira";
         }
     }
 

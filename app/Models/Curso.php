@@ -19,6 +19,14 @@ class Curso extends Model
         'updated_by',
     ];
 
+    public function turmas(){
+        return $this->hasMany(Turma::class);
+    }
+
+    public function disciplinas(){
+        return $this->belongsToMany(Disciplina::class, CursoDisciplinaHorario::TABLE);
+    }
+
     public function numeroClasse(){
         return NumeroClasseEnum::numeroClasse($this->num_classe);
     }

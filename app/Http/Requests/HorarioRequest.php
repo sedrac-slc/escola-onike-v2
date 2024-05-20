@@ -25,7 +25,6 @@ class HorarioRequest extends FormRequest
     {
         return [
             'dia_semana'=> ['required','string'],
-            'turma_id'=> ['required','string'],
             'hora_inicio'=> ['required'],
             'hora_termino'=> ['required'],
         ];

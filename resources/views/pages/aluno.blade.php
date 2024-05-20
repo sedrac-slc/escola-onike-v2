@@ -2,6 +2,9 @@
 @section('css')
     @parent
     <link rel="stylesheet" href="{{ asset('css/panel.css') }}" />
+    <style>
+        .min-w{ min-width: 350px;  }
+    </style>
 @endsection
 @section('content')
     <div class="card">
@@ -55,10 +58,12 @@
 
         </div>
     </div>
+    @include('components.modal.matricula-form')
     @include('components.modal.delete')
 @endsection
 @section('script')
     @parent
+    <script src="{{ asset('js/matricula-form.js') }}"></script>
     <script>
         const btnDels = document.querySelectorAll('.btn-del');
         const btnUps = document.querySelectorAll('.btn-up');
@@ -98,14 +103,13 @@
             document.querySelector('#email').value = arg[2];
             selectDefault(arg[3], 'genero');
             document.querySelector('#data_nascimento').value = arg[4];
-            selectDefault(arg[5], 'classe_id');
-            document.querySelector('#span-aluno').innerHTML = arg[6];
+            document.querySelector('#span-aluno').innerHTML = arg[5];
         }
 
         span.addEventListener('click', function(e) {
             form.action = span.dataset.url;
             if (!span.classList.contains('d-none')) span.classList.add('d-none');
-            text("", "", "", "","", "", "Cadastra");
+            text("", "", "", "","", "Cadastra");
             hiddenOrShowInputsPassword(true);
             method.value = "POST";
         });
@@ -122,7 +126,6 @@
                     tds[1].innerHTML,
                     tds[3].dataset.value,
                     tds[4].innerHTML,
-                    tds[5].dataset.value,
                     "Actualizar"
                 );
                 hiddenOrShowInputsPassword(false);

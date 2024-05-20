@@ -13,7 +13,7 @@
         </div>
         <div class="modal-body">
           <span>
-            Tens certeza que desejas realizar esta acção?
+            Tens certeza que desejas realizar o processo de eliminação deste registo?
           </span>
         </div>
         <div class="modal-footer">

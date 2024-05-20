@@ -15,16 +15,10 @@ return new class extends Migration
         Schema::create('professors', function (Blueprint $table) {
             $table->uuid('id')->primary()->default(DB::raw('uuid()'));
             $table->foreignUuid('user_id')->constrained('users')->cascadeOnDelete()->unique();
+            $table->string('formacao')->nullable();
             $table->uuid('created_by')->nullable();
             $table->uuid('updated_by')->nullable();
             $table->timestamps();
-        });
-
-        Schema::create('disciplina_professor', function (Blueprint $table) {
-            $table->uuid('id')->primary()->default(DB::raw('uuid()'));
-            $table->foreignUuid('disciplina_id')->constrained('disciplinas')->cascadeOnDelete();
-            $table->foreignUuid('professor_id')->constrained('professors')->cascadeOnDelete();
-            $table->unique(['disciplina_id','professor_id']);
         });
     }
 
@@ -34,6 +28,5 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('professors');
-        Schema::dropIfExists('disciplina_professor');
     }
 };

@@ -13,13 +13,12 @@ class Aluno extends Model
     protected $fillable = [
         'id',
         'user_id',
-        'classe_id',
         'created_by',
         'updated_by',
     ];
 
-    public function classe(){
-        return $this->belongsTo(Classe::class);
+    public function turma(){
+        return $this->belongsTo(Turma::class);
     }
 
     public function user(){

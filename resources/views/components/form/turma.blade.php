@@ -1,14 +1,20 @@
 <div class="row">
-    <div class="col-md-6">
-        <label for="ano_lectivo" class="form-label" class="form-control">
-            <i class="bi bi-123"></i>
-            <span>Ano lectivo:</span>
-            <span class="text-danger">*</span>
-        </label>
-        <input type="text" class="form-control" name="ano_lectivo" id="ano_lectivo" />
-    </div>
+    @isset($cursos)
+        <div class="col-md-6 p-1">
+            <label for="curso_id" class="form-label">
+                <i class="bi bi-calendar-plus"></i>
+                <span>Curso:</span>
+                <span class="text-danger">*</span>
+            </label>
+            <select name="curso_id" id="curso_id" class="form-control">
+                @foreach ($cursos as $curso)
+                    <option value="{{ $curso->id }}">{{ $curso->text() }}</option>
+                @endforeach
+            </select>
+        </div>
+    @endisset
     @isset($periodos)
-        <div class="col-md-6">
+        <div class="col-md-6 p-1">
             <label for="periodo" class="form-label">
                 <i class="bi bi-brightness-high"></i>
                 <span>Periodo:</span>
@@ -21,7 +27,15 @@
             </select>
         </div>
     @endisset
-    <div class="col-md-6">
+    <div class="col-md-6 p-1">
+        <label for="ano_lectivo" class="form-label" class="form-control">
+            <i class="bi bi-123"></i>
+            <span>Ano lectivo:</span>
+            <span class="text-danger">*</span>
+        </label>
+        <input type="text" class="form-control" name="ano_lectivo" id="ano_lectivo" />
+    </div>
+    <div class="col-md-6 p-1">
         <label for="sala" class="form-label" class="form-control">
             <i class="bi bi-1-circle"></i>
             <span>Sala:</span>

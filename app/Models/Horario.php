@@ -13,7 +13,6 @@ class Horario extends Model
 
     protected $fillable = [
         'id',
-        'turma_id',
         'dia_semana',
         'hora_inicio',
         'hora_termino',
@@ -38,7 +37,7 @@ class Horario extends Model
     }
 
     public function text(){
-        return $this->dia_semana."|".$this->hora_inicio."|".$this->hora_termino;
+        return $this->diaSemana()."|".$this->hora_inicio." à ".$this->hora_termino;
     }
 
 }

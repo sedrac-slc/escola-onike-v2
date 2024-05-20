@@ -25,7 +25,7 @@ class ProfessorRequest extends FormRequest
     {
         $data = (new UserRequest())->rulesNotCredencials();
         $data["funcao"] = ['required'];
-        $data["disciplinas"] = [];
+        $data["formacao"] = ['required'];
         return $data;
     }
 }

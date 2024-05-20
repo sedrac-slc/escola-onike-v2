@@ -14,7 +14,6 @@ return new class extends Migration
     {
         Schema::create('horarios', function (Blueprint $table) {
             $table->uuid('id')->primary()->default(DB::raw('uuid()'));
-            $table->foreignUuid('turma_id')->constrained('turmas')->cascadeOnDelete();
             $table->string('dia_semana');
             $table->time('hora_inicio');
             $table->time('hora_termino');

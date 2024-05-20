@@ -4,6 +4,12 @@
             <tr>
                 <th>
                     <div class="th-icone">
+                        <i class="bi bi-123"></i>
+                        <span>Número</span>
+                    </div>
+                </th>
+                <th>
+                    <div class="th-icone">
                         <i class="bi bi-calendar-check"></i>
                         <span>Data inicio</span>
                     </div>
@@ -25,6 +31,7 @@
         <tbody>
             @foreach ($trimestres as $trimestre)
                 <tr>
+                    <td data-value={{ $trimestre->numero }}>{{ $trimestre->numero() }}</td>
                     <td>{{ $trimestre->data_inicio }}</td>
                     <td>{{ $trimestre->data_termino }}</td>
                     <td>

@@ -15,7 +15,6 @@ return new class extends Migration
         Schema::create('alunos', function (Blueprint $table) {
             $table->uuid('id')->primary()->default(DB::raw('uuid()'));
             $table->foreignUuid('user_id')->constrained('users')->cascadeOnDelete()->unique();
-            $table->foreignUuid('classe_id')->constrained('classes')->cascadeOnDelete();
             $table->uuid('created_by')->nullable();
             $table->uuid('updated_by')->nullable();
             $table->timestamps();

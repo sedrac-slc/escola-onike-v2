@@ -40,7 +40,6 @@
                     <td data-value={{ $horario->dia_semana }}>{{ $horario->diaSemana() }}</td>
                     <td>{{ $horario->hora_inicio }}</td>
                     <td>{{ $horario->hora_termino }}</td>
-                    <td data-value={{ $horario->turma_id }}>{{ $horario->turma->text() }}</td>
                     <td>
                         <button class="btn btn-outline-danger btn-sm rounded-pill btn-del" data-bs-toggle="modal"
                             data-bs-target="#modalDelete" data-del="{{ route('horarios.destroy', $horario->id) }}">

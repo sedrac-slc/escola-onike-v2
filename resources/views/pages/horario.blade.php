@@ -81,14 +81,13 @@
             selectDefault(arg[0], 'dia_semana');
             document.querySelector('#hora_inicio').value = arg[1];
             document.querySelector('#hora_termino').value = arg[2];
-            selectDefault(arg[3], 'turma_id');
-            document.querySelector('#span-horario').innerHTML = arg[4];
+            document.querySelector('#span-horario').innerHTML = arg[3];
         }
 
         span.addEventListener('click', function(e) {
             form.action = span.dataset.url;
             if (!span.classList.contains('d-none')) span.classList.add('d-none');
-            text("", "", "", "", "Cadastra");
+            text("", "", "", "Cadastra");
             method.value = "POST";
         });
 
@@ -98,7 +97,7 @@
                 let tds = row.querySelectorAll('td');
                 form.action = item.dataset.up;
                 if (span.classList.contains('d-none')) span.classList.remove('d-none');
-                text(tds[0].dataset.value, tds[1].innerHTML, tds[2].innerHTML, tds[3].dataset.value, "Actualizar");
+                text(tds[0].dataset.value, tds[1].innerHTML, tds[2].innerHTML, "Actualizar");
                 method.value = "PUT";
             });
         });

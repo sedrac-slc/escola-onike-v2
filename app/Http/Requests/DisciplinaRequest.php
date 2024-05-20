@@ -25,7 +25,6 @@ class DisciplinaRequest extends FormRequest
     {
         return [
             'nome' =>  ['required','string', 'max:255'],
-            'horario_id' => ['required', 'string'],
         ];
     }
 }

@@ -5,6 +5,12 @@
                 <th>
                     <div class="th-icone">
                         <i class="bi bi-calendar-plus"></i>
+                        <span>Curso</span>
+                    </div>
+                </th>
+                <th>
+                    <div class="th-icone">
+                        <i class="bi bi-calendar"></i>
                         <span>Ano lectivo</span>
                     </div>
                 </th>
@@ -31,6 +37,7 @@
         <tbody>
             @foreach ($turmas as $turma)
                 <tr>
+                    <td data-value={{ $turma->curso_id }}>{{ $turma->curso->text() }}</td>
                     <td>{{ $turma->ano_lectivo }}</td>
                     <td data-value={{ $turma->periodo }}>{{ $turma->periodo() }}</td>
                     <td>{{ $turma->sala }}</td>

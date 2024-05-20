@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Exception;
-use App\Models\Turma;
-use App\Enum\PeriodoEnum;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Http\Requests\TurmaRequest;
+use App\Enum\PeriodoEnum;
+use App\Models\Turma;
+use App\Models\Curso;
+use Exception;
 
 class TurmaController extends Controller
 {
-    public function index(Request $request){
+    public function index(){
         $turmas = Turma::orderBy('created_at','DESC')->paginate();
+        $cursos = Curso::orderBy('created_at','DESC')->get();
         return view('pages.turma',[
             'turmas' => $turmas ,
+            'cursos' => $cursos,
             'periodos' => PeriodoEnum::list(),
             'painel' => 'turma'
         ]);
@@ -56,6 +58,10 @@ class TurmaController extends Controller
             toastr()->error("Operação de eliminação não foi possível a sua realização");
         }
         return redirect()->back();
+    }
+
+    public function ajaxTurma($curso){
+        return Turma::with('curso')->where('curso_id',$curso)->get();
     }
 
 }

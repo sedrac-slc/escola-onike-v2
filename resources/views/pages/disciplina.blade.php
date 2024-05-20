@@ -55,13 +55,18 @@
 
         </div>
     </div>
+    @include('components.modal.curso-disciplina-horario-form')
+    @include('components.modal.curso-disciplina-horario-list')
     @include('components.modal.delete')
 @endsection
 @section('script')
     @parent
+    <script src="{{ asset('js/curso-disciplina-horario.js') }}"></script>
     <script>
         const btnDels = document.querySelectorAll('.btn-del');
         const btnUps = document.querySelectorAll('.btn-up');
+
+        const btnCursoDisciplinaHorario = document.querySelectorAll('.btn-curso-disciplina-horario');
 
         const method = document.querySelector('[name="_method"]');
         const span = document.querySelector('#formadd');
@@ -79,14 +84,13 @@
 
         function text(...arg) {
             document.querySelector('#nome').value = arg[0];
-            selectDefault(arg[1], 'horario_id');
-            document.querySelector('#span-disciplina').innerHTML = arg[2];
+            document.querySelector('#span-disciplina').innerHTML = arg[1];
         }
 
         span.addEventListener('click', function(e) {
             form.action = span.dataset.url;
             if (!span.classList.contains('d-none')) span.classList.add('d-none');
-            text("", "", "Cadastra");
+            text("", "Cadastra");
             method.value = "POST";
         });
 
@@ -96,7 +100,7 @@
                 let tds = row.querySelectorAll('td');
                 form.action = item.dataset.up;
                 if (span.classList.contains('d-none')) span.classList.remove('d-none');
-                text(tds[0].innerHTML, tds[1].dataset.value, "Actualizar");
+                text(tds[0].innerHTML, "Actualizar");
                 method.value = "PUT";
             });
         });
@@ -107,5 +111,11 @@
                 formDelete.action = item.dataset.del;
             });
         });
+
+        btnCursoDisciplinaHorario.forEach(item => {
+            item.addEventListener('click', function(e) {
+                selectDefault(item.dataset.disciplina, 'disciplina_id_search');
+            })
+        })
     </script>
 @endsection

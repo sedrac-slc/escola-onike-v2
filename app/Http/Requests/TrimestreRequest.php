@@ -24,6 +24,7 @@ class TrimestreRequest extends FormRequest
     public function rules()
     {
         return [
+            'numero'=> ['required'],
             'data_inicio'=> ['required','date'],
             'data_termino'=> ['required','date'],
         ];

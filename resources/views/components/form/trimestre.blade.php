@@ -23,6 +23,21 @@
             value="{{ $trimestre->data_termino ?? old('data_termino') }}"
             @isset($disabled) disabled @endisset />
     </div>
+    <div class="col-md-6 ">
+        <label for="numero" class="form-label">
+            <i class="bi bi-123"></i>
+            <span>Número:</span>
+            @if (!isset($require))
+                <span class="text-danger">*</span>
+            @endif
+        </label>
+        <select id="numero" name="numero" class="form-control"
+            @isset($disabled) disabled @endisset>
+            @foreach ($numeros as $key => $value)
+                <option value="{{ $key }}">{{ $value }}</option>
+            @endforeach
+        </select>
+    </div>
 </div>
 <button class="btn btn-outline-primary rounded-pill mt-3">
     <i class="bi bi-check-circle"></i>

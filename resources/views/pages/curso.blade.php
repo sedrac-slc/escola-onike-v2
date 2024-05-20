@@ -1,4 +1,5 @@
 @extends('layouts.dash')
+@php use App\Enum\NumeroClasseEnum; @endphp
 @section('css')
     @parent
     <link rel="stylesheet" href="{{ asset('css/panel.css') }}" />
@@ -55,17 +56,49 @@
 
         </div>
     </div>
+    @include('components.modal.curso-disciplina-horario-form')
+    @include('components.modal.curso-disciplina-horario-list')
     @include('components.modal.delete')
 @endsection
 @section('script')
     @parent
+    <script src="{{ asset('js/curso-disciplina-horario.js') }}"></script>
     <script>
         const btnDels = document.querySelectorAll('.btn-del');
         const btnUps = document.querySelectorAll('.btn-up');
 
+        const btnCursoDisciplinaHorario = document.querySelectorAll('.btn-curso-disciplina-horario');
+
         const method = document.querySelector('[name="_method"]');
         const span = document.querySelector('#formadd');
         const form = document.querySelector('#form');
+
+        const inputCurso = document.querySelector("#nome");
+        const selectNumClasse = document.querySelector("#num_classe");
+
+        cursoDefinedNameIfClasse();
+
+        function cursoInsertNome(nome){
+            inputCurso.value = nome;
+            if(!inputCurso.hasAttribute('readonly')) inputCurso.setAttribute('readonly', true);
+        }
+
+        function cursoDefinedNameIfClasse(){
+            switch(selectNumClasse.value){
+                case "SETIMA":
+                    cursoInsertNome("Classe sétima")
+                    break
+                case "OITAVA":
+                    cursoInsertNome("Classe oitava")
+                    break
+                case "NONA":
+                    cursoInsertNome("Classe nona")
+                    break
+                default:
+                    inputCurso.value = "";
+                    if(inputCurso.hasAttribute('readonly')) inputCurso.removeAttribute('readonly', true);
+            }
+        }
 
         function selectDefault(value, id) {
             let select = document.querySelector('#' + id);
@@ -90,6 +123,10 @@
             method.value = "POST";
         });
 
+        selectNumClasse.addEventListener('change', function(e){
+            cursoDefinedNameIfClasse()
+        })
+
         btnUps.forEach(item => {
             item.addEventListener('click', function(e) {
                 let row = item.parentNode.parentNode;
@@ -107,5 +144,12 @@
                 formDelete.action = item.dataset.del;
             });
         });
+
+        btnCursoDisciplinaHorario.forEach(item => {
+            item.addEventListener('click', function(e) {
+                selectDefault(item.dataset.curso, 'curso_id_search');
+            })
+        })
+
     </script>
 @endsection

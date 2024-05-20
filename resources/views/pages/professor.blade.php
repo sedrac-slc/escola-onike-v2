@@ -55,10 +55,12 @@
 
         </div>
     </div>
+    @include('components.modal.curso-disciplina-horario-list')
     @include('components.modal.delete')
 @endsection
 @section('script')
     @parent
+    <script src="{{ asset('js/curso-disciplina-horario.js') }}"></script>
     <script>
         const btnDels = document.querySelectorAll('.btn-del');
         const btnUps = document.querySelectorAll('.btn-up');
@@ -98,25 +100,14 @@
             document.querySelector('#email').value = arg[2];
             selectDefault(arg[3], 'genero');
             document.querySelector('#data_nascimento').value = arg[4];
-            document.querySelector('#span-professor').innerHTML = arg[5];
+            document.querySelector('#formacao').value = arg[5];
+            document.querySelector('#span-professor').innerHTML = arg[6];
         }
-
-        /*
-        mobiscroll.setOptions({
-            theme: 'ios',
-            themeVariant: 'light'
-        });
-
-        mobiscroll.select('#disciplinas', {
-            inputElement: document.getElementById('disciplina-lab'),
-            touchUi: false
-        });
-        */
 
         span.addEventListener('click', function(e) {
             form.action = span.dataset.url;
             if (!span.classList.contains('d-none')) span.classList.add('d-none');
-            text("", "", "", "", "", "Cadastra");
+            text("", "", "", "", "", "", "Cadastra");
             hiddenOrShowInputsPassword(true);
             method.value = "POST";
         });
@@ -133,6 +124,7 @@
                     tds[1].innerHTML,
                     tds[3].dataset.value,
                     tds[4].innerHTML,
+                    tds[5].innerHTML,
                     "Actualizar"
                 );
                 hiddenOrShowInputsPassword(false);

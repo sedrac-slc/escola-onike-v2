@@ -8,16 +8,10 @@
                         <span>Nome</span>
                     </div>
                 </th>
-                <th>
+                <th colspan="2">
                     <div class="th-icone">
-                        <i class="bi bi-person-lines-fill"></i>
-                        <span>Horario</span>
-                    </div>
-                </th>
-                <th>
-                    <div class="th-icone">
-                        <i class="bi bi-archive"></i>
-                        <span>Turma</span>
+                        <i class="bi bi-calendar-plus"></i>
+                        <span>Curso</span>
                     </div>
                 </th>
                 <th colspan="2">
@@ -32,8 +26,26 @@
             @foreach ($disciplinas as $disciplina)
                 <tr>
                     <td>{{ $disciplina->nome }}</td>
-                    <td data-value={{ $disciplina->horario_id }}>{{ $disciplina->horario->text() }}</td>
-                    <td>{{ $disciplina->horario->turma->text() }}</td>
+                    <td>
+                        <button class="btn btn-outline-primary btn-sm rounded-pill btn-curso-disciplina-horario" data-bs-toggle="modal"
+                        data-bs-target="#modalCursoDisciplinaHorario" data-disciplina="{{$disciplina->id}}">
+                            <div class="th-icone">
+                                <i class="bi bi-plus"></i>
+                                <span>adicionar</span>
+                            </div>
+                        </button>
+                    </td>
+                    <td>
+                        @php $count =  $disciplina->cursos->count(); @endphp
+                        <button class="btn btn-outline-info btn-sm rounded-pill @if($count > 0) btn-curso-disciplina-horario-list @endif" type="button"
+                            @if($count > 0)  data-bs-toggle="modal" data-bs-target="#modalCursoDisciplinaHorarioList" data-url="{{ route('curso-disciplina-horario.ajaxdisciplina', $disciplina->id) }}" @endif
+                        >
+                            <div class="th-icone">
+                                <i class="bi bi-pencil-square"></i>
+                                <span>listar({{ $count }})</span>
+                            </div>
+                        </button>
+                    </td>
                     <td>
                         <button class="btn btn-outline-danger btn-sm rounded-pill btn-del" data-bs-toggle="modal"
                             data-bs-target="#modalDelete"

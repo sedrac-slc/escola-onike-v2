@@ -13,6 +13,7 @@ class Turma extends Model
 
     protected $fillable = [
         'id',
+        'curso_id',
         'ano_lectivo',
         'periodo',
         'sala',
@@ -24,12 +25,16 @@ class Turma extends Model
         return $this->hasMany(Horario::class);
     }
 
+    public function curso(){
+        return $this->belongsTo(Curso::class);
+    }
+
     public function periodo(){
         return PeriodoEnum::periodo($this->periodo);
     }
 
     public function text(){
-        return $this->ano_lectivo . '|' . $this->periodo() . '|' . $this->sala;
+        return $this->curso->nome.'|'. $this->ano_lectivo . '|' . $this->periodo() . '|' . $this->sala;
     }
 
 }

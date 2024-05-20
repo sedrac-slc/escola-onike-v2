@@ -24,7 +24,8 @@ class TurmaRequest extends FormRequest
     public function rules()
     {
         return [
-            'ano_lectivo'=> ['required','string'],
+            'ano_lectivo' => ['required','string'],
+            'curso_id' => ['required','string'],
             'periodo' => ['required','string','regex:/[MANHA|TARDE|NOITE]/i'],
             'sala' => ['required','string']
         ];

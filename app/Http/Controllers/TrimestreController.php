@@ -2,17 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use Exception;
-use App\Models\Trimestre;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Http\Requests\TrimestreRequest;
+use App\Http\Controllers\Controller;
+use App\Models\Trimestre;
+use App\Enum\NumeroEnum;
+use Exception;
 
 class TrimestreController extends Controller
 {
-    public function index(Request $request){
+    public function index(){
         $trimestres = Trimestre::orderBy('created_at','DESC')->paginate();
-        return view('pages.trimestre',['trimestres' => $trimestres , 'painel' => 'trimestre']);
+        $numeros = NumeroEnum::list();
+        return view('pages.trimestre',[
+            'trimestres' => $trimestres,
+            'numeros' => $numeros ,
+            'painel' => 'trimestre'
+        ]);
     }
 
     public function store(TrimestreRequest $request){

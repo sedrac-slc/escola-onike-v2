@@ -27,4 +27,8 @@ final class PeriodoEnum{
         ];
     }
 
+    public static function keys(){
+        return array_keys(PeriodoEnum::list());
+    }
+
 }

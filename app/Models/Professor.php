@@ -13,15 +13,17 @@ class Professor extends Model
     protected $fillable = [
         'id',
         'user_id',
+        'formacao',
         'created_by',
         'updated_by',
     ];
 
-    public function disciplinas(){
-        return $this->belongsToMany(Disciplina::class);
-    }
-
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+    public function leciona(){
+        return $this->hasMany(ProfessorLeciona::class);
+    }
+
 }
