@@ -1,13 +1,15 @@
 <div class="modal fade" id="modalCursoDisciplinaHorarioList" tabindex="-1" role="dialog"
     aria-labelledby="modalCursoDisciplinaHorarioListLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-        <form class="modal-content" action="{{ $action ?? route('curso-disciplina-horario.remove') }}" method="POST" id="formCursoDisciplinaHorarioList">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+        <form class="modal-content" action="{{ $action ?? route('turma-disciplina-horario.remove') }}" method="POST" id="formCursoDisciplinaHorarioList">
             @csrf
             @method("DELETE")
-            <input type="hidden" name="professor_id" id="professorCursoDisciplina" />
+            @isset($professores)
+                <input type="hidden" name="professor_id" id="professorCursoDisciplina" />
+            @endisset
             <div class="modal-header">
                 <h5 class="modal-title" id="modalCursoDisciplinaHorarioListLabel">
-                    <span>{{ $title ?? 'Lista Disciplina no Curso' }}</span>
+                    <span>{{ $title ?? 'Lista Disciplina na Turma' }}</span>
                 </h5>
                 <button type="button" class="" data-bs-dismiss="modal" aria-label="Close"
                     style="background: none; border: none;">

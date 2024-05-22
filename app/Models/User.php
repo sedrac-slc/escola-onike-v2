@@ -101,8 +101,6 @@ class User extends Authenticatable
 
     function isDirectorOrSecretario(){ return $this->isDirector() || $this->isSecretario(); }
 
-    function isDirectorOrSecretarioOrCoordenadorOrProfessor(){
-        return $this->isDirector() || $this->isSecretario() || $this->isCoordenador() || $this->isProfessor();
-    }
+    function isCoordenadorOrProfessor(){ return $this->isCoordenador() || $this->isProfessor(); }
 
 }

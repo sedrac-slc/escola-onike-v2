@@ -9,12 +9,12 @@
 @section('content')
     <div class="card">
         <div class="pagetitle m-2">
-            <h1>Coordenadore de curso</h1>
+            <h1>Coordenador de curso</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}">Perfil</a></li>
                     <li class="breadcrumb-item active">
-                        <a href="{{ route('coordenador-curso.index') }}">Coordenadores de curso</a>
+                        <a href="{{ route('coordenador-curso.index') }}">Coordenadore de curso</a>
                     </li>
                 </ol>
             </nav>

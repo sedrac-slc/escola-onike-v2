@@ -13,7 +13,6 @@ class Coordenador extends Model
     protected $fillable = [
         'id',
         'user_id',
-        'curso_id',
         'created_by',
         'updated_by',
     ];

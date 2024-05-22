@@ -21,6 +21,10 @@ class Turma extends Model
         'updated_by',
     ];
 
+    public function disciplinas(){
+        return $this->belongsToMany(Disciplina::class, TurmaDisciplinaHorario::TABLE);
+    }
+
     public function horarios(){
         return $this->hasMany(Horario::class);
     }

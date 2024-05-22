@@ -55,13 +55,13 @@
 
         </div>
     </div>
-    @include('components.modal.curso-disciplina-horario-form')
-    @include('components.modal.curso-disciplina-horario-list')
+    @include('components.modal.turma-disciplina-horario-form')
+    @include('components.modal.turma-disciplina-horario-list')
     @include('components.modal.delete')
 @endsection
 @section('script')
     @parent
-    <script src="{{ asset('js/curso-disciplina-horario.js') }}"></script>
+    <script src="{{ asset('js/turma-disciplina-horario.js') }}"></script>
     <script>
         const btnDels = document.querySelectorAll('.btn-del');
         const btnUps = document.querySelectorAll('.btn-up');

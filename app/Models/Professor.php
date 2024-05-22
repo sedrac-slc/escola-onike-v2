@@ -23,7 +23,7 @@ class Professor extends Model
     }
 
     public function leciona(){
-        return $this->hasMany(ProfessorLeciona::class);
+        return $this->belongsToMany(TurmaDisciplinaHorario::class, ProfessorLeciona::TABLE);
     }
 
 }

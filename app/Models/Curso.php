@@ -27,10 +27,6 @@ class Curso extends Model
         return $this->belongsToMany(Coordenador::class);
     }
 
-    public function disciplinas(){
-        return $this->belongsToMany(Disciplina::class, CursoDisciplinaHorario::TABLE);
-    }
-
     public function numeroClasse(){
         return NumeroClasseEnum::numeroClasse($this->num_classe);
     }

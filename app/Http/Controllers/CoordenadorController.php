@@ -37,7 +37,7 @@ class CoordenadorController extends Controller
                 $user = User::create($data);
                 $data['user_id'] = $user->id;
                 $coordenador = Coordenador::create($data);
-                $coordenador->cursos()->attach($data['cursos']);
+                $coordenador->cursos()->attach(pivot_audict($data['cursos']));
             });
             toastr()->success("Operação de criação foi realizada com sucesso");
         }catch(Exception){
@@ -59,7 +59,7 @@ class CoordenadorController extends Controller
                 $user->update($data);
                 if(isset($data['cursos'])){
                     $coordenador = Coordenador::where('user_id', $id)->first();
-                    $coordenador->cursos()->sync($data['cursos']);
+                    $coordenador->cursos()->sync(pivot_audict($data['cursos']));
                 }
             });
 

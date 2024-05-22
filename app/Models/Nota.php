@@ -13,12 +13,17 @@ class Nota extends Model
     protected $fillable = [
         'id',
         'aluno_id',
-        'pauta_id',
-        'trimestre_id',
+        'turma_id',
         'disciplina_id',
         'mac',
         'npp',
         'npt',
+        'mt1',
+        'mt2',
+        'mt3',
+        'exame',
+        'mfd',
+        'mf',
         'created_by',
         'updated_by',
     ];
@@ -31,12 +36,8 @@ class Nota extends Model
         return $this->belongsTo(Disciplina::class);
     }
 
-    public function trimestre(){
-        return $this->belongsTo(Trimestre::class);
-    }
-
-    public function pauta(){
-        return $this->belongsTo(Pauta::class);
+    public function turma(){
+        return $this->belongsTo(Turma::class);
     }
 
 }

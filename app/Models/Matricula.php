@@ -10,6 +10,10 @@ class Matricula extends Model
 {
     use HasFactory, HasUuids;
 
+    public const TABLE = "matriculas";
+
+    protected $table = Matricula::TABLE;
+
     protected $fillable = [
         'id',
         'aluno_id',

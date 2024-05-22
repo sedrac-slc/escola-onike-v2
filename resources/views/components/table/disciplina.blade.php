@@ -36,9 +36,9 @@
                         </button>
                     </td>
                     <td>
-                        @php $count =  $disciplina->cursos->count(); @endphp
+                        @php $count =  $disciplina->turmas->count(); @endphp
                         <button class="btn btn-outline-info btn-sm rounded-pill @if($count > 0) btn-curso-disciplina-horario-list @endif" type="button"
-                            @if($count > 0)  data-bs-toggle="modal" data-bs-target="#modalCursoDisciplinaHorarioList" data-url="{{ route('curso-disciplina-horario.ajaxdisciplina', $disciplina->id) }}" @endif
+                            @if($count > 0)  data-bs-toggle="modal" data-bs-target="#modalCursoDisciplinaHorarioList" data-url="{{ route('turma-disciplina-horario.ajaxdisciplina', $disciplina->id) }}" @else disabled @endif
                         >
                             <div class="th-icone">
                                 <i class="bi bi-pencil-square"></i>

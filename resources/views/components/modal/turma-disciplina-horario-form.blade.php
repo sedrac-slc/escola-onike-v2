@@ -2,9 +2,9 @@
 
     use App\Models\Disciplina;
     use App\Models\Horario;
-    use App\Models\Curso;
+    use App\Models\Turma;
 
-    $cursos = Curso::orderBy('created_at', 'DESC')->get();
+    $turmas = Turma::orderBy('created_at', 'DESC')->get();
     $horarios = Horario::orderBy('created_at', 'DESC')->get();
     $disciplinas = Disciplina::orderBy('created_at', 'DESC')->get();
 
@@ -13,7 +13,7 @@
 <div class="modal fade" id="modalCursoDisciplinaHorario" tabindex="-1" role="dialog"
     aria-labelledby="modalCursoDisciplinaHorarioLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-        <form class="modal-content" action="{{ route('curso-disciplina-horario.store') }}" method="POST" id="formCursoDisciplinaHorario">
+        <form class="modal-content" action="{{ route('turma-disciplina-horario.store') }}" method="POST" id="formCursoDisciplinaHorario">
             @csrf
             <div class="modal-header">
                 <h5 class="modal-title" id="modalCursoDisciplinaHorarioLabel">
@@ -26,15 +26,15 @@
             </div>
             <div class="modal-body">
                 <div class="">
-                    @isset($cursos)
+                    @isset($turmas)
                         <label for="curso_id_search" class="form-label">
                             <i class="bi bi-calendar-plus"></i>
-                            <span>Curso</span>
+                            <span>Turma</span>
                             <span class="text-danger">*</span>
                         </label>
-                        <select name="curso_id" id="curso_id_search" class="form-control">
-                            @foreach ($cursos as $curso)
-                                <option value="{{ $curso->id }}"> {{ $curso->text() }}</option>
+                        <select name="turma_id" id="curso_id_search" class="form-control">
+                            @foreach ($turmas as $turma)
+                                <option value="{{ $turma->id }}"> {{ $turma->text() }}</option>
                             @endforeach
                         </select>
                     @else

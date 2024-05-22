@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\{
-    Aluno, User, Curso, Turma, Trimestre, Horario, Disciplina,
-    ProfessorLeciona, Professor, Funcionario, CursoDisciplinaHorario
+    Aluno, User, Curso, Turma, Trimestre, Horario, Disciplina, Matricula,
+    ProfessorLeciona, Professor, Funcionario, TurmaDisciplinaHorario, Coordenador
 };
 use App\Enum\{FuncaoEnum, DiaSemanaEnum, NumeroClasseEnum};
 use Illuminate\Database\Seeder;
@@ -53,8 +53,29 @@ class DatabaseSeeder extends Seeder
 
         $userSix = User::updateOrCreate(['email' => 'bertamaria@example.com'], [
             'name' => 'Berta Maria', 'email' => 'bertamaria@example.com',
-            'genero' => 'F', 'data_nascimento' => '2004-004-10',
+            'genero' => 'F', 'data_nascimento' => '2004-04-10',
             'bilhete_identidade' => '000747342BE026', 'funcao' => FuncaoEnum::ALUNO,
+            'password' => bcrypt('12345678')
+        ]);
+
+        $userSeven = User::updateOrCreate(['email' => 'lucasfirme@example.com'], [
+            'name' => 'Lucas Firme', 'email' => 'lucasfirme@example.com',
+            'genero' => 'M', 'data_nascimento' => '2004-04-10',
+            'bilhete_identidade' => '000947212CA036', 'funcao' => FuncaoEnum::ALUNO,
+            'password' => bcrypt('12345678')
+        ]);
+
+        $userEigth = User::updateOrCreate(['email' => 'orlandofernando@example.com'], [
+            'name' => 'Orlando Fernando', 'email' => 'orlandofernando@example.com',
+            'genero' => 'M', 'data_nascimento' => '1989-04-11',
+            'bilhete_identidade' => '000214212HU062', 'funcao' => FuncaoEnum::COORDENADOR_CURSO,
+            'password' => bcrypt('12345678')
+        ]);
+
+        $userNone = User::updateOrCreate(['email' => 'mirianlucas@example.com'], [
+            'name' => 'Mirian Lucas', 'email' => 'mirianlucas@example.com',
+            'genero' => 'F', 'data_nascimento' => '1990-04-11',
+            'bilhete_identidade' => '000318212LA159', 'funcao' => FuncaoEnum::COORDENADOR_CURSO,
             'password' => bcrypt('12345678')
         ]);
 
@@ -144,63 +165,90 @@ class DatabaseSeeder extends Seeder
             'user_id' => $userSix->id, 'created_by' => $user->id, 'updated_by' => $user->id
         ]);
 
+        $alunoThree = Aluno::updateOrCreate(['user_id' => $userSeven->id],[
+            'user_id' => $userSeven->id, 'created_by' => $user->id, 'updated_by' => $user->id
+        ]);
+
+        $coodenadorOne = Coordenador::updateOrCreate(['user_id' => $userEigth->id],[
+            'user_id' => $userEigth->id, 'created_by' => $user->id, 'updated_by' => $user->id
+        ]);
+
+        $coodenadorTwo = Coordenador::updateOrCreate(['user_id' => $userNone->id],[
+            'user_id' => $userNone->id, 'created_by' => $user->id, 'updated_by' => $user->id
+        ]);
+
+        $coodenadorOne->cursos()->sync([ $cursoOne->id ]);
+        $coodenadorTwo->cursos()->sync([ $cursoTwo->id ]);
+
         Funcionario::updateOrCreate(['user_id' => $user->id],[
             'user_id' => $user->id, 'created_by' => $user->id, 'updated_by' => $user->id
         ]);
 
-        $cursoDisciplinaHorarioOne = CursoDisciplinaHorario::updateOrCreate([
-            'curso_id' => $cursoOne->id, 'horario_id' => $horarioOne->id, 'disciplina_id' => $disciplinaOne->id
+        Matricula::updateOrCreate(['aluno_id' => $alunoOne->id, 'turma_id' => $turmaOne->id],[
+            'aluno_id' => $alunoOne->id, 'turma_id' => $turmaOne->id, 'created_by' => $user->id, 'updated_by' => $user->id
+        ]);
+
+        Matricula::updateOrCreate(['aluno_id' => $alunoThree->id, 'turma_id' => $turmaOne->id],[
+            'aluno_id' => $alunoThree->id, 'turma_id' => $turmaOne->id, 'created_by' => $user->id, 'updated_by' => $user->id
+        ]);
+
+        Matricula::updateOrCreate(['aluno_id' => $alunoTwo->id, 'turma_id' => $turmaTwo->id],[
+            'aluno_id' => $alunoTwo->id, 'turma_id' => $turmaTwo->id, 'created_by' => $user->id, 'updated_by' => $user->id
+        ]);
+
+        $turmaDisciplinaHorarioOne = TurmaDisciplinaHorario::updateOrCreate([
+            'turma_id' => $turmaOne->id, 'horario_id' => $horarioOne->id, 'disciplina_id' => $disciplinaOne->id
         ],[
-            'curso_id' => $cursoOne->id, 'horario_id' => $horarioOne->id, 'disciplina_id' => $disciplinaOne->id,
+            'turma_id' => $turmaOne->id, 'horario_id' => $horarioOne->id, 'disciplina_id' => $disciplinaOne->id,
             'created_by' => $user->id, 'updated_by' => $user->id
         ]);
 
-        $cursoDisciplinaHorarioTwo = CursoDisciplinaHorario::updateOrCreate([
-            'curso_id' => $cursoOne->id, 'horario_id' => $horarioTwo->id, 'disciplina_id' => $disciplinaTwo->id
+        $turmaDisciplinaHorarioTwo = TurmaDisciplinaHorario::updateOrCreate([
+            'turma_id' => $turmaOne->id, 'horario_id' => $horarioTwo->id, 'disciplina_id' => $disciplinaTwo->id
         ],[
-            'curso_id' => $cursoOne->id, 'horario_id' => $horarioTwo->id, 'disciplina_id' => $disciplinaTwo->id,
+            'turma_id' => $turmaOne->id, 'horario_id' => $horarioTwo->id, 'disciplina_id' => $disciplinaTwo->id,
             'created_by' => $user->id, 'updated_by' => $user->id
         ]);
 
-        $cursoDisciplinaHorarioThree = CursoDisciplinaHorario::updateOrCreate([
-            'curso_id' => $cursoTwo->id, 'horario_id' => $horarioTwo->id, 'disciplina_id' => $disciplinaThree->id
+        $turmaDisciplinaHorarioThree = TurmaDisciplinaHorario::updateOrCreate([
+            'turma_id' => $turmaTwo->id, 'horario_id' => $horarioTwo->id, 'disciplina_id' => $disciplinaThree->id
         ],[
-            'curso_id' => $cursoTwo->id, 'horario_id' => $horarioTwo->id, 'disciplina_id' => $disciplinaThree->id,
+            'turma_id' => $turmaTwo->id, 'horario_id' => $horarioTwo->id, 'disciplina_id' => $disciplinaThree->id,
             'created_by' => $user->id, 'updated_by' => $user->id
         ]);
 
-        $cursoDisciplinaHorarioFour = CursoDisciplinaHorario::updateOrCreate([
-            'curso_id' => $cursoTwo->id, 'horario_id' => $horarioThree->id, 'disciplina_id' => $disciplinaFour->id
+        $turmaDisciplinaHorarioFour = TurmaDisciplinaHorario::updateOrCreate([
+            'turma_id' => $turmaThree->id, 'horario_id' => $horarioThree->id, 'disciplina_id' => $disciplinaFour->id
         ],[
-            'curso_id' => $cursoTwo->id, 'horario_id' => $horarioThree->id, 'disciplina_id' => $disciplinaFour->id,
-            'created_by' => $user->id, 'updated_by' => $user->id
-        ]);
-
-        ProfessorLeciona::updateOrCreate([
-            'curso_disciplina_horario_id' => $cursoDisciplinaHorarioOne->id,  'professor_id' => $professorOne->id,
-        ],[
-            'curso_disciplina_horario_id' => $cursoDisciplinaHorarioOne->id,  'professor_id' => $professorOne->id,
-            'created_by' => $user->id, 'updated_by' => $user->id
-        ]);
-
-        ProfessorLeciona::updateOrCreate([
-            'curso_disciplina_horario_id' => $cursoDisciplinaHorarioTwo->id,  'professor_id' => $professorTwo->id,
-        ],[
-            'curso_disciplina_horario_id' => $cursoDisciplinaHorarioTwo->id,  'professor_id' => $professorTwo->id,
-            'created_by' => $user->id, 'updated_by' => $user->id
-        ]);
-
-        ProfessorLeciona::updateOrCreate([
-            'curso_disciplina_horario_id' => $cursoDisciplinaHorarioThree->id,  'professor_id' => $professorThree->id,
-        ],[
-            'curso_disciplina_horario_id' => $cursoDisciplinaHorarioThree->id,  'professor_id' => $professorThree->id,
+            'turma_id' => $turmaThree->id, 'horario_id' => $horarioThree->id, 'disciplina_id' => $disciplinaFour->id,
             'created_by' => $user->id, 'updated_by' => $user->id
         ]);
 
         ProfessorLeciona::updateOrCreate([
-            'curso_disciplina_horario_id' => $cursoDisciplinaHorarioFour->id,  'professor_id' => $professorOne->id,
+            'turma_disciplina_horario_id' => $turmaDisciplinaHorarioOne->id,  'professor_id' => $professorOne->id,
         ],[
-            'curso_disciplina_horario_id' => $cursoDisciplinaHorarioFour->id,  'professor_id' => $professorOne->id,
+            'turma_disciplina_horario_id' => $turmaDisciplinaHorarioOne->id,  'professor_id' => $professorOne->id,
+            'created_by' => $user->id, 'updated_by' => $user->id
+        ]);
+
+        ProfessorLeciona::updateOrCreate([
+            'turma_disciplina_horario_id' => $turmaDisciplinaHorarioTwo->id,  'professor_id' => $professorTwo->id,
+        ],[
+            'turma_disciplina_horario_id' => $turmaDisciplinaHorarioTwo->id,  'professor_id' => $professorTwo->id,
+            'created_by' => $user->id, 'updated_by' => $user->id
+        ]);
+
+        ProfessorLeciona::updateOrCreate([
+            'turma_disciplina_horario_id' => $turmaDisciplinaHorarioThree->id,  'professor_id' => $professorThree->id,
+        ],[
+            'turma_disciplina_horario_id' => $turmaDisciplinaHorarioThree->id,  'professor_id' => $professorThree->id,
+            'created_by' => $user->id, 'updated_by' => $user->id
+        ]);
+
+        ProfessorLeciona::updateOrCreate([
+            'turma_disciplina_horario_id' => $turmaDisciplinaHorarioFour->id,  'professor_id' => $professorOne->id,
+        ],[
+            'turma_disciplina_horario_id' => $turmaDisciplinaHorarioFour->id,  'professor_id' => $professorOne->id,
             'created_by' => $user->id, 'updated_by' => $user->id
         ]);
 

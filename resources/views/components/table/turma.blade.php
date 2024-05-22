@@ -28,6 +28,12 @@
                 </th>
                 <th colspan="2">
                     <div class="th-icone">
+                        <i class="bi bi-book"></i>
+                        <span>Disciplina</span>
+                    </div>
+                </th>
+                <th colspan="2">
+                    <div class="th-icone">
                         <i class="bi bi-tools"></i>
                         <span>Acção</span>
                     </div>
@@ -42,14 +48,34 @@
                     <td data-value={{ $turma->periodo }}>{{ $turma->periodo() }}</td>
                     <td>{{ $turma->sala }}</td>
                     <td>
-                        <button class="btn btn-outline-danger btn-sm rounded-pill btn-del" data-bs-toggle="modal"
+                        <button class="btn btn-sm btn-outline-primary btn-sm rounded-pill btn-curso-disciplina-horario" data-bs-toggle="modal"
+                        data-bs-target="#modalCursoDisciplinaHorario" data-turma="{{$turma->id}}">
+                            <div class="th-icone">
+                                <i class="bi bi-plus"></i>
+                                <span>adicionar</span>
+                            </div>
+                        </button>
+                    </td>
+                    <td>
+                        @php $count =  $turma->disciplinas->count(); @endphp
+                        <button class="btn btn-sm btn-outline-info btn-sm rounded-pill @if($count > 0) btn-curso-disciplina-horario-list @endif" type="button"
+                            @if($count > 0)  data-bs-toggle="modal" data-bs-target="#modalCursoDisciplinaHorarioList" data-url="{{ route('turma-disciplina-horario.ajaxcurso', $turma->id) }}" @else disabled @endif
+                        >
+                            <div class="th-icone">
+                                <i class="bi bi-pencil-square"></i>
+                                <span>listar({{ $count }})</span>
+                            </div>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-danger btn-sm rounded-pill btn-del" data-bs-toggle="modal"
                             data-bs-target="#modalDelete" data-del="{{ route('turmas.destroy', $turma->id) }}">
                             <i class="bi bi-trash"></i>
                             <span>eliminar</span>
                         </button>
                     </td>
                     <td>
-                        <button class="btn btn-outline-warning btn-sm rounded-pill btn-up" type="button"
+                        <button class="btn btn-sm btn-outline-warning btn-sm rounded-pill btn-up" type="button"
                             data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
                             aria-controls="flush-collapseOne" data-up="{{ route('turmas.update', $turma->id) }}">
                             <i class="bi bi-pencil-square"></i>

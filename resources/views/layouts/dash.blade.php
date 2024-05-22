@@ -2,7 +2,7 @@
 @section('body')
     @php $auth = auth()->user(); @endphp
     @php $page = isset($painel) ? $painel : "" ; @endphp
-    <header id="header" class="header fixed-top d-flex align-items-center">
+    <header id="header" class="header fixed-top d-flex align-items-center print-none">
 
         <div class="d-flex align-items-center justify-content-between">
             <a href="{{ asset('img/logo.png') }}" class="logo d-flex align-items-center">
@@ -74,8 +74,7 @@
 
     </header>
 
-    <aside id="sidebar" class="sidebar">
-
+    <aside id="sidebar" class="sidebar print-none">
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
@@ -150,24 +149,29 @@
                     </a>
                 </li>
             @endif
-            @if ($auth->isDirectorOrSecretarioOrCoordenadorOrProfessor())
+            @if ($auth->isDirectorOrSecretario() || $auth->isCoordenadorOrProfessor())
                 <li class="nav-item">
                     <a class="nav-link collapsed @if ($page == 'classe') active @endif"
                         href="{{ route('notas.index') }}">
+                        <i class="bi bi-123"></i>
+                        <span>Notas</span>
+                    </a>
+                </li>
+            @elseif($auth->isAluno())
+                <li class="nav-item">
+                    <a class="nav-link collapsed @if ($page == 'classe') active @endif"
+                        href="{{ route('notas.aluno') }}">
                         <i class="bi bi-book"></i>
                         <span>Notas</span>
                     </a>
                 </li>
             @endif
         </ul>
-
     </aside>
 
     <main id="main" class="main">
         @include('components.erros')
-
         @yield('content')
-
     </main>
 
     @if (isset($footer) && $footer)
@@ -182,7 +186,7 @@
         </footer>
     @endif
 
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center print-none">
         <i class="bi bi-arrow-up-short"></i>
     </a>
 @endsection

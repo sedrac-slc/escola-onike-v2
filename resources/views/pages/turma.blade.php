@@ -55,10 +55,13 @@
 
         </div>
     </div>
+    @include('components.modal.turma-disciplina-horario-form')
+    @include('components.modal.turma-disciplina-horario-list')
     @include('components.modal.delete')
 @endsection
 @section('script')
     @parent
+    <script src="{{ asset('js/turma-disciplina-horario.js') }}"></script>
     <script>
         const btnDels = document.querySelectorAll('.btn-del');
         const btnUps = document.querySelectorAll('.btn-up');
@@ -109,5 +112,14 @@
                 formDelete.action = item.dataset.del;
             });
         });
+
+        const btnCursoDisciplinaHorario = document.querySelectorAll('.btn-curso-disciplina-horario');
+
+        btnCursoDisciplinaHorario.forEach(item => {
+            item.addEventListener('click', function(e) {
+                selectDefault(item.dataset.turma, 'curso_id_search');
+            })
+        })
+
     </script>
 @endsection

@@ -15,7 +15,7 @@ class ProfessorLeciona extends Model
     protected $table = ProfessorLeciona::TABLE;
 
     protected $fillable = [
-        'curso_disciplina_horario_id',
+        'turma_disciplina_horario_id',
         'professor_id',
         'created_by',
         'updated_by'

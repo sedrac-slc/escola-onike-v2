@@ -40,4 +40,8 @@ class Horario extends Model
         return $this->diaSemana()."|".$this->hora_inicio." à ".$this->hora_termino;
     }
 
+    public function intervalo(){
+        return $this->hora_inicio." à ".$this->hora_termino;
+    }
+
 }

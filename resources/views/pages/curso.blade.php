@@ -56,18 +56,13 @@
 
         </div>
     </div>
-    @include('components.modal.curso-disciplina-horario-form')
-    @include('components.modal.curso-disciplina-horario-list')
     @include('components.modal.delete')
 @endsection
 @section('script')
     @parent
-    <script src="{{ asset('js/curso-disciplina-horario.js') }}"></script>
     <script>
         const btnDels = document.querySelectorAll('.btn-del');
         const btnUps = document.querySelectorAll('.btn-up');
-
-        const btnCursoDisciplinaHorario = document.querySelectorAll('.btn-curso-disciplina-horario');
 
         const method = document.querySelector('[name="_method"]');
         const span = document.querySelector('#formadd');
@@ -145,11 +140,7 @@
             });
         });
 
-        btnCursoDisciplinaHorario.forEach(item => {
-            item.addEventListener('click', function(e) {
-                selectDefault(item.dataset.curso, 'curso_id_search');
-            })
-        })
+
 
     </script>
 @endsection

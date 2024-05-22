@@ -14,16 +14,16 @@
             <div class="invalid-feedback">Verifica o nome inserido!</div>
         </div>
     </div>
-    @isset($cursoDisciplinas)
+    @isset($turmaDisciplinas)
         <div class="col-md-12 p-1">
-            <label for="curso_disciplina_horario" class="form-label">
+            <label for="turma_disciplina_horario" class="form-label">
                 <i class="bi bi-calendar-plus"></i>
-                <span>Curso-Disciplina-Horário:</span>
+                <span>Turma-Disciplina-Horário:</span>
                 <span class="text-danger">*</span>
             </label>
-            <select name="curso_disciplina_horario[]" id="curso_disciplina_horario" class="form-control" multiple>
-                @foreach ($cursoDisciplinas as $cursoDisciplina)
-                    <option value="{{ $cursoDisciplina->id }}">{{ $cursoDisciplina->text() }}</option>
+            <select name="turma_disciplina_horario[]" id="turma_disciplina_horario" class="form-control" multiple>
+                @foreach ($turmaDisciplinas as $turmaDisciplina)
+                    <option value="{{ $turmaDisciplina->id }}">{{ $turmaDisciplina->text() }}</option>
                 @endforeach
             </select>
         </div>

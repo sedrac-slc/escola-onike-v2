@@ -2,25 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CursoDisciplinaHorarioRequest;
-use App\Models\CursoDisciplinaHorario;
+use App\Http\Requests\TurmaDisciplinaHorarioRequest;
+use App\Models\TurmaDisciplinaHorario;
 use App\Http\Controllers\Controller;
 use App\Models\ProfessorLeciona;
 use Illuminate\Http\Request;
 use Exception;
 
-class CursoDisciplinaHorarioController extends Controller
+class TurmaDisciplinaHorarioController extends Controller
 {
 
-    public function store(CursoDisciplinaHorarioRequest $request){
+    public function store(TurmaDisciplinaHorarioRequest $request){
 
-        $data = $request->only(CursoDisciplinaHorario::FILLABLE);
-        $cursoDisciplinaHorario = CursoDisciplinaHorario::where($data)->first();
+        $data = $request->only(TurmaDisciplinaHorario::FILLABLE);
+        $cursoDisciplinaHorario = TurmaDisciplinaHorario::where($data)->first();
 
         if(!isset($cursoDisciplinaHorario->id)){
             $data['created_by'] = $data['updated_by'] = auth()->user()->id;
             $data['created_at'] = $data['updated_at'] = now();
-            CursoDisciplinaHorario::create($data);
+            TurmaDisciplinaHorario::create($data);
             toastr()->success("Operação de criação foi realizada com sucesso");
         }else{
             $data['updated_by'] = auth()->user()->id;
@@ -33,17 +33,16 @@ class CursoDisciplinaHorarioController extends Controller
 
     public function remove(Request $request){
         try{
-
-            if(isset($request->professor_id, $request->curso_disciplina_horario_id)){
+            if(isset($request->professor_id, $request->turma_disciplina_horario_id)){
                 $professorLenciona = ProfessorLeciona::where([
-                   'curso_disciplina_horario_id' => $request->curso_disciplina_horario_id, 'professor_id' => $request->professor_id
+                   'turma_disciplina_horario_id' => $request->turma_disciplina_horario_id, 'professor_id' => $request->professor_id
                 ])->first();
                 $professorLenciona->delete();
                 toastr()->success("Operação de eliminação foi realizada com sucesso");
                 return redirect()->back();
-            }elseif(isset($request->curso_disciplina_horario_id)){
-                $cursoDisciplinaHorario = CursoDisciplinaHorario::find($request->curso_disciplina_horario_id);
-                $cursoDisciplinaHorario->delete();
+            }elseif(isset($request->turma_disciplina_horario_id)){
+                $turmaDisciplinaHorario = TurmaDisciplinaHorario::find($request->turma_disciplina_horario_id);
+                $turmaDisciplinaHorario->delete();
                 toastr()->success("Operação de eliminação foi realizada com sucesso");
                 return redirect()->back();
             }
@@ -53,18 +52,18 @@ class CursoDisciplinaHorarioController extends Controller
         return redirect()->back();
     }
 
-    public function ajaxCurso($curso){
-        return CursoDisciplinaHorario::with('curso', 'disciplina', 'horario')->where('curso_id', $curso)->get();
+    public function ajaxCurso($turma){
+        return TurmaDisciplinaHorario::with('turma.curso', 'disciplina', 'horario')->where('turma_id', $turma)->get();
     }
 
     public function ajaxDisciplina($disciplina){
-        return CursoDisciplinaHorario::with('curso', 'disciplina', 'horario')->where('disciplina_id', $disciplina)->get();
+        return TurmaDisciplinaHorario::with('turma.curso', 'disciplina', 'horario')->where('disciplina_id', $disciplina)->get();
     }
 
     public function ajaxProfessor($professor){
-        return CursoDisciplinaHorario::with('curso', 'disciplina', 'horario')
-        ->join(ProfessorLeciona::TABLE,'curso_disciplina_horario_id', CursoDisciplinaHorario::TABLE .'.id')
-        ->select(CursoDisciplinaHorario::TABLE . '.*')
+        return TurmaDisciplinaHorario::with('turma.curso', 'disciplina', 'horario')
+        ->join(ProfessorLeciona::TABLE,'turma_disciplina_horario_id', TurmaDisciplinaHorario::TABLE .'.id')
+        ->select(TurmaDisciplinaHorario::TABLE . '.*')
         ->where('professor_id', $professor)
         ->get();
     }

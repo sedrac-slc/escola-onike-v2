@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
+use App\Models\Matricula;
 
 return new class extends Migration
 {
@@ -12,7 +13,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('matriculas', function (Blueprint $table) {
+        Schema::create(Matricula::TABLE, function (Blueprint $table) {
             $table->uuid('id')->primary()->default(DB::raw('uuid()'));
             $table->foreignUuid('aluno_id')->constrained('alunos')->cascadeOnDelete();
             $table->foreignUuid('turma_id')->constrained('turmas')->cascadeOnDelete();
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('matriculas');
+        Schema::dropIfExists(Matricula::TABLE);
     }
 };
