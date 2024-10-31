@@ -26,6 +26,18 @@
                         <span>Sala</span>
                     </div>
                 </th>
+                <th>
+                    <div class="th-icone">
+                        <i class="bi bi-3-circle"></i>
+                        <span>Ano curricular</span>
+                    </div>
+                </th>
+                <th>
+                    <div class="th-icone">
+                        <i class="bi bi-people"></i>
+                        <span>Alunos</span>
+                    </div>
+                </th>
                 <th colspan="2">
                     <div class="th-icone">
                         <i class="bi bi-book"></i>
@@ -47,6 +59,18 @@
                     <td>{{ $turma->ano_lectivo }}</td>
                     <td data-value={{ $turma->periodo }}>{{ $turma->periodo() }}</td>
                     <td>{{ $turma->sala }}</td>
+                    <td data-value={{ $turma->ano_curricular }}>{{ $turma->ano_curricular() }}</td>
+                    <td>
+                        @php $count =  $turma->alunos->count(); @endphp
+                        <button class="btn btn-sm btn-outline-info btn-sm rounded-pill @if($count > 0)  btn-turma-aluno-list @endif" type="button"
+                            @if($count > 0)  data-bs-toggle="modal" data-bs-target="#modalTurmaAlunoList" data-url="{{ route('turma.ajaxaluno', $turma->id) }}" @else disabled @endif
+                        >
+                            <div class="th-icone">
+                                <i class="bi bi-pencil-square"></i>
+                                <span>listar({{ $count }})</span>
+                            </div>
+                        </button>
+                    </td>
                     <td>
                         <button class="btn btn-sm btn-outline-primary btn-sm rounded-pill btn-curso-disciplina-horario" data-bs-toggle="modal"
                         data-bs-target="#modalCursoDisciplinaHorario" data-turma="{{$turma->id}}">

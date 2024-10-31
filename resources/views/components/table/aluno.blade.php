@@ -50,8 +50,8 @@
             @foreach ($alunos as $aluno)
                 <tr>
                     <td>{{ $aluno->user->name }}</td>
-                    <td>{{ $aluno->user->email }}</td>
                     <td>{{ $aluno->user->bilhete_identidade }}</td>
+                    <td>{{ $aluno->user->email }}</td>
                     <td data-value={{ $aluno->user->genero }}>{{ $aluno->user->genero() }}</td>
                     <td>{{ $aluno->user->data_nascimento }}</td>
                     <td>

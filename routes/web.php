@@ -20,6 +20,7 @@ Route::middleware(['auth'])->group( function () {
     Route::get('ajax-professor/{professor}', [App\Http\Controllers\TurmaDisciplinaHorarioController::class, 'ajaxProfessor'])->name('turma-disciplina-horario.ajaxprofessor');
     Route::get('ajax-curso/{curso}', [App\Http\Controllers\TurmaDisciplinaHorarioController::class, 'ajaxCurso'])->name('turma-disciplina-horario.ajaxcurso');
     Route::get('ajax-turmas/{curso}', [App\Http\Controllers\TurmaController::class, 'ajaxTurma'])->name('turmas.ajaxturma');
+    Route::get('ajax-alunos/{turma}', [App\Http\Controllers\TurmaController::class, 'ajaxAluno'])->name('turma.ajaxaluno');
     Route::get('ajax-matricula/{aluno}', [App\Http\Controllers\MatriculaController::class, 'ajaxTurma'])->name('aluno-matricula.ajaxturma');
 
     Route::get('notas-alunos/{id}', [App\Http\Controllers\NotaController::class, 'alunos'])->name('notas.alunos');

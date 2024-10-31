@@ -57,11 +57,13 @@
     </div>
     @include('components.modal.turma-disciplina-horario-form')
     @include('components.modal.turma-disciplina-horario-list')
+    @include('components.modal.turma-aluno-list')
     @include('components.modal.delete')
 @endsection
 @section('script')
     @parent
     <script src="{{ asset('js/turma-disciplina-horario.js') }}"></script>
+    <script src="{{ asset('js/turma-aluno.js') }}"></script>
     <script>
         const btnDels = document.querySelectorAll('.btn-del');
         const btnUps = document.querySelectorAll('.btn-up');
@@ -85,13 +87,14 @@
             document.querySelector('#ano_lectivo').value = arg[1];
             selectDefault(arg[2], 'periodo');
             document.querySelector('#sala').value = arg[3];
-            document.querySelector('#span-turma').innerHTML = arg[4];
+            selectDefault(arg[4], 'ano_curricular');
+            document.querySelector('#span-turma').innerHTML = arg[5];
         }
 
         span.addEventListener('click', function(e) {
             form.action = span.dataset.url;
             if (!span.classList.contains('d-none')) span.classList.add('d-none');
-            text("", "", "", "","Cadastra");
+            text("", "", "", "", "","Cadastra");
             method.value = "POST";
         });
 
@@ -101,7 +104,7 @@
                 let tds = row.querySelectorAll('td');
                 form.action = item.dataset.up;
                 if (span.classList.contains('d-none')) span.classList.remove('d-none');
-                text(tds[0].dataset.value, tds[1].innerHTML, tds[2].dataset.value, tds[3].innerHTML, "Actualizar");
+                text(tds[0].dataset.value, tds[1].innerHTML, tds[2].dataset.value, tds[3].innerHTML, tds[4].dataset.value, "Actualizar");
                 method.value = "PUT";
             });
         });

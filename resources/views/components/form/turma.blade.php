@@ -27,6 +27,20 @@
             </select>
         </div>
     @endisset
+    @isset($anoCurricular)
+        <div class="col-md-6 p-1">
+            <label for="ano_curricular" class="form-label">
+                <i class="bi bi-1-circle"></i>
+                <span>Ano curricular:</span>
+                <span class="text-danger">*</span>
+            </label>
+            <select name="ano_curricular" id="ano_curricular" class="form-control">
+                @foreach ($anoCurricular as $key => $value)
+                    <option value="{{ $key }}">{{ $value }}</option>
+                @endforeach
+            </select>
+        </div>
+    @endisset
     <div class="col-md-6 p-1">
         <label for="ano_lectivo" class="form-label" class="form-control">
             <i class="bi bi-123"></i>

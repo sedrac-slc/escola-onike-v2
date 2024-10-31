@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TurmaRequest;
+use App\Enum\AnoCurricularEnum;
 use App\Enum\PeriodoEnum;
 use App\Models\Turma;
 use App\Models\Curso;
+use App\Models\Aluno;
 use Exception;
 
 class TurmaController extends Controller
@@ -18,6 +20,7 @@ class TurmaController extends Controller
             'turmas' => $turmas ,
             'cursos' => $cursos,
             'periodos' => PeriodoEnum::list(),
+            'anoCurricular' => AnoCurricularEnum::list(),
             'painel' => 'turma'
         ]);
     }
@@ -63,5 +66,14 @@ class TurmaController extends Controller
     public function ajaxTurma($curso){
         return Turma::with('curso')->where('curso_id',$curso)->get();
     }
+
+    public function ajaxAluno($turma){
+        return Aluno::with('user')->join('matriculas', 'alunos.id', 'aluno_id')
+                ->join('turmas', 'turmas.id', 'turma_id')
+                ->where('turma_id', $turma)
+                ->select('alunos.*')
+                ->get();
+    }
+
 
 }

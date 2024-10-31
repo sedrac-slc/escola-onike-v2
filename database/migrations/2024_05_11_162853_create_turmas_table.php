@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
+use App\Enum\AnoCurricularEnum;
 use App\Enum\PeriodoEnum;
 
 return new class extends Migration
@@ -17,6 +18,7 @@ return new class extends Migration
             $table->uuid('id')->primary()->default(DB::raw('uuid()'));
             $table->foreignUuid('curso_id')->constrained('cursos')->cascadeOnDelete();
             $table->enum('periodo', PeriodoEnum::keys());
+            $table->enum("ano_curricular", AnoCurricularEnum::keys())->nullable();
             $table->string("ano_lectivo");
             $table->string("sala");
             $table->uuid('created_by')->nullable();
