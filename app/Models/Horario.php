@@ -16,9 +16,14 @@ class Horario extends Model
         'dia_semana',
         'hora_inicio',
         'hora_termino',
+        'concat_fields',
         'created_by',
         'updated_by',
     ];
+
+    public function concatFields(){
+        return $this->dia_semana.'|'.$this->hora_inicio.'|'.$this->hora_termino;
+    }
 
     public function turma(){
         return $this->belongsTo(Turma::class);

@@ -16,7 +16,15 @@ class Professor extends Model
         'formacao',
         'created_by',
         'updated_by',
+        'concat_fields',
     ];
+
+    function concatFields(){
+        $concat = $this->formacao;
+        $user = $this->user();
+        if(isset($user->id)) $concat += $user->concat_fields;
+        return $concat;
+    }
 
     public function user(){
         return $this->belongsTo(User::class);

@@ -15,7 +15,15 @@ class Coordenador extends Model
         'user_id',
         'created_by',
         'updated_by',
+        'concat_fields',
     ];
+
+    function concatFields(){
+        $concat = "";
+        $user = $this->user();
+        if(isset($user->id)) $concat += $user->concat_fields;
+        return $concat;
+    }
 
     public function user(){
         return $this->belongsTo(User::class);

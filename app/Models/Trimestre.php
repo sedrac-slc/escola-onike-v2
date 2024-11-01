@@ -16,9 +16,14 @@ class Trimestre extends Model
         'numero',
         'data_inicio',
         'data_termino',
+        'concat_fields',
         'created_by',
         'updated_by',
     ];
+
+    public function concatFields(){
+        return $this->data_inicio.'|'.$this->data_termino.'|'.NumeroEnum::numero($this->numero);
+    }
 
     public function numero(){
         return NumeroEnum::numero($this->numero);

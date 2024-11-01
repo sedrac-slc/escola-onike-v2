@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->uuid('created_by')->nullable();
             $table->uuid('updated_by')->nullable();
+            $table->text('concat_fields')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -114,6 +114,13 @@
                     </ul>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link collapsed @if ($page == 'matricula') active @endif"
+                        href="{{ route('matriculas.index') }}">
+                        <i class="bi bi-stack"></i>
+                        <span>Matricula</span>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link collapsed @if ($page == 'curso') active @endif"
                         href="{{ route('cursos.index') }}">
                         <i class="bi bi-calendar-plus"></i>

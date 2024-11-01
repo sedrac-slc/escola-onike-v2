@@ -20,7 +20,17 @@ class Matricula extends Model
         'turma_id',
         'created_by',
         'updated_by',
+        'concat_fields',
     ];
+
+    function concatFields(){
+        $concat = "";
+        $aluno = $this->aluno();
+        $turma = $this->turma();
+        if(isset($aluno->id)) $concat += $aluno->concat_fields;
+        if(isset($turma->id)) $concat += $turma->concat_fields;
+        return $concat;
+    }
 
     public function aluno(){
         return $this->belongsTo(Aluno::class);

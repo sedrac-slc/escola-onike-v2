@@ -2,14 +2,61 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MatriculaRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Models\Matricula;
 use App\Models\Turma;
 use Exception;
-use Illuminate\Http\Request;
 
 class MatriculaController extends Controller
 {
+    public function index(){
+        $matriculas = Matricula::orderBy('created_at','DESC')->paginate();
+        return view('pages.matricula',[
+            'matriculas' => $matriculas ,
+            'painel' => 'matricula'
+        ]);
+    }
+
+    public function store(MatriculaRequest $request){
+        try{
+            $data = $request->all();
+            $data['created_by'] = $data['updated_by'] = auth()->user()->id;
+            $data['created_at'] = $data['updated_at'] = now();
+            Matricula::create($data);
+            toastr()->success("Operação de criação foi realizada com sucesso");
+        }catch(Exception){
+            toastr()->error("Operação de criação não foi possível a sua realização");
+        }
+        return redirect()->back();
+    }
+
+    public function update(MatriculaRequest $request, $id){
+        try{
+            $data = $request->all();
+            $data['updated_by'] = auth()->user()->id;
+            $data['updated_at'] = now();
+            $matricula = Matricula::find($id);
+            $matricula->update($data);
+            toastr()->success("Operação de actualização foi realizada com sucesso");
+        }catch(Exception){
+            toastr()->error("Operação de actualização não foi possível a sua realização");
+        }
+        return redirect()->back();
+    }
+
+    public function destroy($id){
+        try{
+            $matricula = Matricula::find($id);
+            $matricula->delete();
+            toastr()->success("Operação de eliminação foi realizada com sucesso");
+        }catch(Exception){
+            toastr()->error("Operação de eliminação não foi possível a sua realização");
+        }
+        return redirect()->back();
+    }
+
     public function matricula(Request $request){
         try{
             if(isset($request->aluno_id, $request->turma_id)){

@@ -17,7 +17,18 @@ class TurmaDisciplinaHorario extends Model
 
     protected $table = TurmaDisciplinaHorario::TABLE;
 
-    protected $fillable = ['turma_id', 'horario_id', 'disciplina_id', 'created_by', 'updated_by'];
+    protected $fillable = ['turma_id', 'horario_id', 'disciplina_id', 'concat_fields', 'created_by', 'updated_by'];
+
+    function concatFields(){
+        $concat = "";
+        $turma = $this->turma();
+        $horario = $this->horario();
+        $disciplina = $this->disciplina();
+        if(isset($aluno->id)) $concat += $aluno->concat_fields;
+        if(isset($horario->id)) $concat += $horario->concat_fields;
+        if(isset($disciplina->id)) $concat += $disciplina->concat_fields;
+        return $concat;
+    }
 
     public function turma(){
         return $this->belongsTo(Turma::class, 'turma_id', 'id');

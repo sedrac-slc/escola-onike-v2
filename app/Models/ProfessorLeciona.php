@@ -16,13 +16,21 @@ class ProfessorLeciona extends Model
 
     protected $fillable = [
         'turma_disciplina_horario_id',
+        'concat_fields',
         'professor_id',
         'created_by',
         'updated_by'
     ];
 
-    public function cursoDisciplinaHorario(){
-        return $this->belongsTo(CursoDisciplinaHorario::class,'curso_disciplina_horario_id', 'id');
+    function concatFields(){
+        $concat = $this->formacao;
+        $user = $this->professor();
+        if(isset($user->id)) $concat += $user->concat_fields;
+        return $concat;
+    }
+
+    public function turmaDisciplinaHorario(){
+        return $this->belongsTo(TurmaDisciplinaHorario::class, 'turma_disciplina_horario_id', 'id');
     }
 
     public function professor(){

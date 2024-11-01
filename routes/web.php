@@ -40,6 +40,7 @@ Route::middleware(['auth'])->group( function () {
     Route::resource('disciplinas', App\Http\Controllers\DisciplinaController::class);
     Route::resource('professores', App\Http\Controllers\ProfessorController::class);
     Route::resource('trimestres', App\Http\Controllers\TrimestreController::class);
+    Route::resource('matriculas', App\Http\Controllers\MatriculaController::class);
     Route::resource('horarios', App\Http\Controllers\HorarioController::class);
     Route::resource('cursos', App\Http\Controllers\CursoController::class);
     Route::resource('turmas', App\Http\Controllers\TurmaController::class);

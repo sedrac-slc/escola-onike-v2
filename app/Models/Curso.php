@@ -15,9 +15,15 @@ class Curso extends Model
         'id',
         'nome',
         'num_classe',
+        'concat_fields',
         'created_by',
         'updated_by',
     ];
+
+    function concatFields(){
+        $num_classe = NumeroClasseEnum::numeroClasse($this->num_classe);
+        return $this->nome.'|'.$this->num_classe;
+    }
 
     public function turmas(){
         return $this->hasMany(Turma::class);

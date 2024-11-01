@@ -28,6 +28,7 @@ return new class extends Migration
             $table->integer('exame')->unsigned()->nullable();
             $table->uuid('created_by')->nullable();
             $table->uuid('updated_by')->nullable();
+            $table->text('concat_fields')->nullable();
             $table->timestamps();
         });
     }

@@ -30,6 +30,7 @@ class User extends Authenticatable
         'is_validado',
         'funcao',
         'image',
+        'concat_fields',
         'created_by',
         'updated_by',
         'created_at',
@@ -87,6 +88,12 @@ class User extends Authenticatable
         $array = explode(" ",$this->name);
         $tam = sizeof($array);
         return $array[0][0].'.'.$array[$tam-1];
+    }
+
+    function concatFields(){
+        $genero = GeneroEnum::genero($this->genero);
+        $funcao = FuncaoEnum::funcao($this->funcao);
+        return $this->name.'|'.$genero.'|'.$this->data_nascimento.'|'.$funcao;
     }
 
     function isCoordenador(): bool { return $this->funcao == FuncaoEnum::COORDENADOR_CURSO;}

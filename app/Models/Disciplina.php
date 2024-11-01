@@ -15,7 +15,12 @@ class Disciplina extends Model
         'nome',
         'created_by',
         'updated_by',
+        'concat_fields',
     ];
+
+    public function concatFields(){
+        return $this->nome;
+    }
 
     public function turmas(){
         return $this->belongsToMany(Turma::class, TurmaDisciplinaHorario::TABLE);

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->uuid('created_by')->nullable();
             $table->uuid('updated_by')->nullable();
             $table->timestamps();
+            $table->text('concat_fields')->nullable();
             $table->unique(['user_id']);
         });
 
@@ -27,6 +28,7 @@ return new class extends Migration
             $table->foreignUuid('curso_id')->constrained('cursos')->cascadeOnDelete();
             $table->uuid('created_by')->nullable();
             $table->uuid('updated_by')->nullable();
+            $table->text('concat_fields')->nullable();
             $table->timestamps();
         });
     }

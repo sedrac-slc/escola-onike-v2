@@ -19,9 +19,18 @@ class Turma extends Model
         'ano_curricular',
         'periodo',
         'sala',
+        'concat_fields',
         'created_by',
         'updated_by',
     ];
+
+    function concatFields(){
+        $periodo = PeriodoEnum::periodo($this->periodo);
+        $concat = $this->ano_lectivo.'|'.$periodo.'|'.$this->sala;
+        $curso = $this->curso();
+        if(isset($curso->id)) $concat += $curso->concat_fields;
+        return $concat;
+    }
 
     public function disciplinas(){
         return $this->belongsToMany(Disciplina::class, TurmaDisciplinaHorario::TABLE);

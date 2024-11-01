@@ -32,7 +32,8 @@ class AlunoController extends Controller
             if(!UserValidator::storeRequest($data)) return redirect()->back();
 
             DB::transaction(function () use ($data){
-                User::create($data)->aluno()->create($data);
+                $aluno = User::create($data)->aluno()->create($data);
+                dd($aluno);
             });
             toastr()->success("Operação de criação foi realizada com sucesso");
         }catch(Exception){
