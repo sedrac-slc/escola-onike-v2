@@ -38,7 +38,7 @@
                         <span>Formação</span>
                     </div>
                 </th>
-                <th>
+                <th colspan="2">
                     <div class="th-icone">
                         <i class="bi bi-book"></i>
                         <span>Disciplina</span>
@@ -61,6 +61,15 @@
                     <td data-value={{ $professor->user->genero }}>{{ $professor->user->genero() }}</td>
                     <td>{{ $professor->user->data_nascimento }}</td>
                     <td>{{ $professor->formacao }}</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary btn-sm rounded-pill btn-curso-disciplina-horario" data-bs-toggle="modal"
+                        data-bs-target="#modalCursoDisciplinaHorario" data-professor="{{$professor->id}}">
+                            <div class="th-icone">
+                                <i class="bi bi-plus"></i>
+                                <span>adicionar</span>
+                            </div>
+                        </button>
+                    </td>
                     <td>
                         @php $count =  $professor->leciona->count(); @endphp
                         <button

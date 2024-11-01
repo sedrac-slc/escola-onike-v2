@@ -26,7 +26,6 @@ class ProfessorController extends Controller
 
     public function store(ProfessorRequest $request){
         try{
-            $request->validate(['turma_disciplina_horario' => 'required']);
             $data = $request->all();
             $data['created_by'] = $data['updated_by'] = auth()->user()->id;
             $data['created_at'] = $data['updated_at'] = now();
@@ -35,8 +34,15 @@ class ProfessorController extends Controller
 
             DB::transaction(function () use ($data){
                 $user = User::create($data);
+                $user_concat_fields = $user->concatFields();
                 $professor = $user->professor()->create($data);
-                $professor->leciona()->attach(pivot_audict($data['turma_disciplina_horario']));
+
+                $professor->update([ "concat_fields" => $user_concat_fields.'|'.$data['formacao'] ]);
+                $user = $user->update([ "concat_fields" => $user_concat_fields ]);
+
+                if(isset($request->turma_disciplina_horario)){
+                    $professor->leciona()->attach(pivot_audict($data['turma_disciplina_horario']));
+                }
             });
             toastr()->success("Operação de criação foi realizada com sucesso");
         }catch(Exception){
@@ -56,8 +62,14 @@ class ProfessorController extends Controller
             DB::transaction(function () use ($data, $id){
                 $user = User::find($id);
                 $user->update($data);
+                $user_concat_fields = $user->concatFields();
+
                 $professor = $user->professor;
-                $professor->update(["formacao" => $data["formacao"]]);
+                $professor->update([
+                    "concat_fields" => $user_concat_fields.'|'.$data['formacao'],
+                    "formacao" => $data["formacao"]
+                ]);
+                $user->update([ "concat_fields" => $user_concat_fields]);
                 if(isset($data['turma_disciplina_horario']))  $professor->leciona()->sync(pivot_audict($data['turma_disciplina_horario']));
             });
             toastr()->success("Operação de actualização foi realizada com sucesso");

@@ -26,6 +26,7 @@
             </div>
             <div class="modal-body">
                 <div class="">
+                    <input type="hidden" id="professor" name="professor_id"/>
                     @isset($turmas)
                         <label for="curso_id_search" class="form-label">
                             <i class="bi bi-calendar-plus"></i>

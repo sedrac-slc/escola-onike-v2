@@ -124,8 +124,8 @@
                 if (span.classList.contains('d-none')) span.classList.remove('d-none');
                 text(
                     tds[0].innerHTML,
-                    tds[2].innerHTML,
                     tds[1].innerHTML,
+                    tds[2].innerHTML,
                     tds[3].dataset.value,
                     tds[4].innerHTML,
                     "Actualizar"

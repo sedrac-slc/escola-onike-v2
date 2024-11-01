@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TurmaRequest;
 use App\Enum\AnoCurricularEnum;
+use Illuminate\Http\Request;
 use App\Enum\PeriodoEnum;
 use App\Models\Turma;
 use App\Models\Curso;
@@ -30,7 +31,8 @@ class TurmaController extends Controller
             $data = $request->all();
             $data['created_by'] = $data['updated_by'] = auth()->user()->id;
             $data['created_at'] = $data['updated_at'] = now();
-            Turma::create($data);
+            $turma = Turma::create($data);
+            $turma->update(["concat_fields" => $turma->curso->concat_fields.'|'.$turma->concatFields() ]);
             toastr()->success("Operação de criação foi realizada com sucesso");
         }catch(Exception){
             toastr()->error("Operação de criação não foi possível a sua realização");
@@ -43,8 +45,9 @@ class TurmaController extends Controller
             $data = $request->all();
             $data['updated_by'] = auth()->user()->id;
             $data['updated_at'] = now();
-            $turma = Turma::find($id);
+            $turma = Turma::with('curso')->find($id);
             $turma->update($data);
+            $turma->update(["concat_fields" => $turma->curso->concat_fields.'|'.$turma->concatFields() ]);
             toastr()->success("Operação de actualização foi realizada com sucesso");
         }catch(Exception){
             toastr()->error("Operação de actualização não foi possível a sua realização");
@@ -75,5 +78,8 @@ class TurmaController extends Controller
                 ->get();
     }
 
+    public function ajaxSearch(Request $request){
+        return Turma::with('curso')->where('concat_fields','like',"%{$request->content}%")->get();
+    }
 
 }

@@ -55,6 +55,7 @@
 
         </div>
     </div>
+    @include('components.modal.turma-disciplina-horario-form')
     @include('components.modal.turma-disciplina-horario-list')
     @include('components.modal.delete')
 @endsection
@@ -138,5 +139,16 @@
                 formDelete.action = item.dataset.del;
             });
         });
+
+
+        const btnCursoDisciplinaHorario = document.querySelectorAll('.btn-curso-disciplina-horario');
+
+        btnCursoDisciplinaHorario.forEach(item => {
+            item.addEventListener('click', function(e) {
+                const inputProfessor = document.querySelector('#professor');
+                inputProfessor.value = item.dataset.professor;
+            });
+        })
+
     </script>
 @endsection

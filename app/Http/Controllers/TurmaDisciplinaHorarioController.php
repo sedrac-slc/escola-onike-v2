@@ -12,21 +12,42 @@ use Exception;
 class TurmaDisciplinaHorarioController extends Controller
 {
 
+    private function existsProfessor($request, $turmaDisciplinaHorario){
+        if(!isset($request->professor_id)) return false;
+        $data = [
+            'professor_id' => $request->professor_id,
+            'turma_disciplina_horario_id' => $turmaDisciplinaHorario->id,
+        ];
+        $professorLenciona = ProfessorLeciona::where($data)->first();
+        if(isset($professorLenciona->id)){
+            toastr()->success("O professor já leciona esta disciplina");
+            return true;
+        }
+        $data['created_by'] = $data['updated_by'] = auth()->user()->id;
+        $data['created_at'] = $data['updated_at'] = now();
+        $professorLenciona = ProfessorLeciona::create($data);
+        $concat_fields = $professorLenciona->professor->concat_fields.'|'.$turmaDisciplinaHorario->concat_fields;
+        $professorLenciona->update([ "concat_fields" => $concat_fields ]);
+        toastr()->success("O disciplina adicona com successo ao professor");
+        return true;
+    }
+
     public function store(TurmaDisciplinaHorarioRequest $request){
 
         $data = $request->only(TurmaDisciplinaHorario::FILLABLE);
-        $cursoDisciplinaHorario = TurmaDisciplinaHorario::where($data)->first();
-
-        if(!isset($cursoDisciplinaHorario->id)){
+        $turmaDisciplinaHorario = TurmaDisciplinaHorario::where($data)->first();
+        if(!isset($turmaDisciplinaHorario->id)){
             $data['created_by'] = $data['updated_by'] = auth()->user()->id;
             $data['created_at'] = $data['updated_at'] = now();
-            TurmaDisciplinaHorario::create($data);
-            toastr()->success("Operação de criação foi realizada com sucesso");
+            $turmaDisciplinaHorario = TurmaDisciplinaHorario::create($data);
+            if(!$this->existsProfessor($request, $turmaDisciplinaHorario))
+                toastr()->success("Operação de criação foi realizada com sucesso");
         }else{
             $data['updated_by'] = auth()->user()->id;
             $data['updated_at'] = now();
-            $cursoDisciplinaHorario->update($data);
-            toastr()->success("Operação de actualização foi realizada com sucesso");
+            $turmaDisciplinaHorario->update($data);
+            if(!$this->existsProfessor($request, $turmaDisciplinaHorario))
+                toastr()->success("Operação de actualização foi realizada com sucesso");
         }
         return redirect()->back();
     }

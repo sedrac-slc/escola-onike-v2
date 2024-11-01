@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AlunoRequest;
 use Illuminate\Support\Facades\DB;
 use App\Validator\UserValidator;
+use Illuminate\Http\Request;
 use App\Models\Turma;
 use App\Models\Aluno;
 use App\Models\User;
@@ -32,8 +33,12 @@ class AlunoController extends Controller
             if(!UserValidator::storeRequest($data)) return redirect()->back();
 
             DB::transaction(function () use ($data){
-                $aluno = User::create($data)->aluno()->create($data);
-                dd($aluno);
+                $user = User::create($data);
+                $user_concat_fields = $user->concatFields();
+                $aluno = $user->aluno()->create($data);
+
+                $aluno->update(["concat_fields" => $user_concat_fields]);
+                $user->update(["concat_fields" => $user_concat_fields]);
             });
             toastr()->success("Operação de criação foi realizada com sucesso");
         }catch(Exception){
@@ -53,7 +58,13 @@ class AlunoController extends Controller
             DB::transaction(function () use ($data, $id){
                 $user = User::find($id);
                 $user->update($data);
-                $user->aluno->update($data);
+                $user_concat_fields = $user->concatFields();
+
+                $aluno = $user->aluno;
+                $aluno->update($data);
+
+                $aluno->update(["concat_fields" => $user_concat_fields]);
+                $user->update([ "concat_fields" => $user_concat_fields]);
             });
 
             toastr()->success("Operação de actualização foi realizada com sucesso");
@@ -74,5 +85,7 @@ class AlunoController extends Controller
         return redirect()->back();
     }
 
-
+    public function ajaxSearch(Request $request){
+        return Aluno::with('user')->where('concat_fields','like',"%{$request->content}%")->get();
+    }
 }
