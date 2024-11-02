@@ -126,7 +126,7 @@
                     <a class="nav-link collapsed @if ($page == 'curso') active @endif"
                         href="{{ route('cursos.index') }}">
                         <i class="bi bi-calendar-plus"></i>
-                        <span>Curso</span>
+                        <span>Curso/classe</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -209,10 +209,10 @@
         toggleSidebarBtn.addEventListener('click', () => {
             if(sidebarNav.classList.contains("d-none")){
                 sidebarNav.classList.remove('d-none');
-                sidebarNav.style.width = "300px";
+                sidebarNav.style.position = "fixed";
             }else{
                 sidebarNav.classList.add('d-none');
-                sidebarNav.style.width = "0px";
+                sidebarNav.style.position = "relative";
             }
         });
     </script>

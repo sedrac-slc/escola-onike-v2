@@ -21,12 +21,28 @@ class MatriculaController extends Controller
 
     public function store(MatriculaRequest $request){
         try{
-            $data = $request->all();
+            $data = $request->only(['turma_id', 'aluno_id']);
+            $matricula = Matricula::where($data)->first();
+
+            if(isset($matricula->id)){
+                toastr()->warning("O aluno já tem matricula nesta turma");
+                return redirect()->back();
+            }
+
             $data['created_by'] = $data['updated_by'] = auth()->user()->id;
             $data['created_at'] = $data['updated_at'] = now();
-            Matricula::create($data);
+
+            $matricula = Matricula::create($data);
+
+            $aluno = $matricula->aluno;
+            $turma = $matricula->turma;
+
+            $concat_fields = $aluno->concat_fields.'|'.$turma->concat_fields;
+            $matricula->update(["concat_fields" => $concat_fields]);
+
             toastr()->success("Operação de criação foi realizada com sucesso");
-        }catch(Exception){
+        }catch(Exception $e){
+            dd($e);
             toastr()->error("Operação de criação não foi possível a sua realização");
         }
         return redirect()->back();
@@ -34,11 +50,18 @@ class MatriculaController extends Controller
 
     public function update(MatriculaRequest $request, $id){
         try{
-            $data = $request->all();
+
+            $data = $request->only(['turma_id', 'aluno_id']);
             $data['updated_by'] = auth()->user()->id;
             $data['updated_at'] = now();
             $matricula = Matricula::find($id);
             $matricula->update($data);
+            $aluno = $matricula->aluno;
+            $turma = $matricula->turma;
+
+            $concat_fields = $aluno->concat_fields.'|'.$turma->concat_fields;
+            $matricula->update(["concat_fields" => $concat_fields]);
+
             toastr()->success("Operação de actualização foi realizada com sucesso");
         }catch(Exception){
             toastr()->error("Operação de actualização não foi possível a sua realização");

@@ -14,6 +14,18 @@
                         <span>Classe</span>
                     </div>
                 </th>
+                <th>
+                    <div class="th-icone">
+                        <i class="bi bi-people"></i>
+                        <span>Aluno</span>
+                    </div>
+                </th>
+                <th>
+                    <div class="th-icone">
+                        <i class="bi bi-archive"></i>
+                        <span>Turma</span>
+                    </div>
+                </th>
                 <th colspan="2">
                     <div class="th-icone">
                         <i class="bi bi-tools"></i>
@@ -27,6 +39,29 @@
                 <tr>
                     <td>{{ $curso->nome }}</td>
                     <td data-value={{ $curso->num_classe }}>{{ $curso->numeroClasse() }}</td>
+
+                    <td class="">
+                        <button class="btn btn-sm btn-outline-info btn-sm rounded-pill btn-curso-aluno-list" type="button"
+                            data-bs-toggle="modal" data-bs-target="#modalCursoAlunoList" data-url="{{ route('aluno.ajaxcurso', $curso->id) }}"
+                        >
+                            <div class="th-icone">
+                                <i class="bi bi-pencil-square"></i>
+                                <span>listar</span>
+                            </div>
+                        </button>
+                    </td>
+
+                    <td class="">
+                        @php $count =  $curso->turmas->count(); @endphp
+                        <button class="btn btn-sm btn-outline-info btn-sm rounded-pill @if($count > 0) btn-turma-list @endif" type="button"
+                            @if($count > 0)  data-bs-toggle="modal" data-bs-target="#modalCursoTurmaList" data-url="{{ route('turmas.ajaxturma', $curso->id) }}" @else disabled @endif
+                        >
+                            <div class="th-icone">
+                                <i class="bi bi-pencil-square"></i>
+                                <span>listar({{ $count }})</span>
+                            </div>
+                        </button>
+                    </td>
                     <td>
                         <button class="btn btn-outline-danger btn-sm rounded-pill btn-del" data-bs-toggle="modal"
                             data-bs-target="#modalDelete" data-del="{{ route('cursos.destroy', $curso->id) }}">

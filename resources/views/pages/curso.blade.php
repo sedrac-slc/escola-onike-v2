@@ -7,7 +7,7 @@
 @section('content')
     <div class="card">
         <div class="pagetitle m-2">
-            <h1>Cursos</h1>
+            <h1>Cursos/Classe</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}">Perfil</a></li>
@@ -56,10 +56,14 @@
 
         </div>
     </div>
+    @include('components.modal.curso-turma-list')
+    @include('components.modal.curso-aluno-list')
     @include('components.modal.delete')
 @endsection
 @section('script')
     @parent
+    <script src="{{ asset('js/curso-aluno.js') }}"></script>
+    <script src="{{ asset('js/curso-turma.js') }}"></script>
     <script>
         const btnDels = document.querySelectorAll('.btn-del');
         const btnUps = document.querySelectorAll('.btn-up');

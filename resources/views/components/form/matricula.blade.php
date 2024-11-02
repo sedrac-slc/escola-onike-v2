@@ -95,7 +95,7 @@
                         <th>
                             <div class="th-icone">
                                 <i class="bi bi-3-circle"></i>
-                                <span>Ano curricular</span>
+                                <span>Classe</span>
                             </div>
                         </th>
                     </tr>
@@ -114,14 +114,18 @@
 <script>
     const inputAlunoSearch = document.querySelector("#aluno_search");
     inputAlunoSearch.addEventListener('keyup', (e) => {
-        fetch("{{ route('aluno.ajaxsearch') }}" + `?content=${inputAlunoSearch.value}`)
+        createAluno("", false);
+    });
+
+    function createAluno(extra, check){
+        fetch("{{ route('aluno.ajaxsearch') }}" + `?content=${inputAlunoSearch.value}&${extra}`)
             .then(resp => resp.json())
             .then(resp => {
                 let html = ``
                 resp.forEach(item => { html +=
                 `<tr>
                     <td>
-                        <input type="radio" class='form-check' name="aluno_id" value="${item.id}"/>
+                        <input type="radio" class='form-check' name="aluno_id" value="${item.id}" checked="${check}"/>
                     </td>
                     <td>${item.user.name}</td>
                     <td>${item.user.bilhete_identidade}</td>
@@ -132,18 +136,22 @@
                 });
                 document.querySelector("#aluno-result").innerHTML = html;
             })
-    });
+    }
 
     const inputTurmaSearch = document.querySelector("#turma_search");
     inputTurmaSearch.addEventListener('keyup', (e) => {
-        fetch("{{ route('turma.ajaxsearch') }}" + `?content=${inputTurmaSearch.value}`)
+        createTurma("", false);
+    });
+
+    function createTurma(extra, check){
+        fetch("{{ route('turma.ajaxsearch') }}" + `?content=${inputTurmaSearch.value}&${extra}`)
             .then(resp => resp.json())
             .then(resp => {
                 let html = ``
                 resp.forEach(item => { html +=
                 `<tr>
                     <td>
-                        <input type="radio" class='form-check' name="turma_id" value="${item.id}"/>
+                        <input type="radio" class='form-check' name="turma_id" value="${item.id}" checked="${check}"/>
                     </td>
                     <td>${item.curso.nome}</td>
                     <td>${item.ano_lectivo}</td>
@@ -154,5 +162,5 @@
                 });
                 document.querySelector("#turma-result").innerHTML = html;
             })
-    });
+    }
 </script>

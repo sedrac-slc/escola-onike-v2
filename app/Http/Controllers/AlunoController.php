@@ -86,6 +86,18 @@ class AlunoController extends Controller
     }
 
     public function ajaxSearch(Request $request){
+        if(isset($request->aluno)) return Aluno::with('user')->where('id',$request->aluno)->get();
         return Aluno::with('user')->where('concat_fields','like',"%{$request->content}%")->get();
     }
+
+    public function ajaxCurso($curso){
+        return Aluno::with('user')->join('matriculas','aluno_id','alunos.id')
+            ->join('turmas','turma_id','turmas.id')
+            ->join('cursos','curso_id','cursos.id')
+            ->select('alunos.*')
+            ->distinct('alunos.id')
+            ->where('curso_id', $curso)
+            ->get();
+    }
+
 }

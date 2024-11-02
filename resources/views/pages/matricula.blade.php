@@ -61,4 +61,40 @@
 @section('script')
     @parent
 
+    <script>
+
+        const method = document.querySelector('[name="_method"]');
+        const span = document.querySelector('#formadd');
+        const form = document.querySelector('#form');
+
+        const btnUps = document.querySelectorAll('.btn-up');
+        const btnDels = document.querySelectorAll('.btn-del');
+
+        span.addEventListener('click', function(e) {
+            form.action = span.dataset.url;
+            if (!span.classList.contains('d-none')) span.classList.add('d-none');
+            document.querySelector("#turma-result").innerHTML = "";
+            document.querySelector("#aluno-result").innerHTML = "";
+            method.value = "POST";
+        });
+
+        btnUps.forEach(item => {
+            item.addEventListener('click', function(e) {
+                createAluno(`aluno=${item.dataset.aluno}`, true);
+                createTurma(`turma=${item.dataset.turma}`, true)
+                form.action = item.dataset.up;
+                method.value = "PUT";
+                if (span.classList.contains('d-none')) span.classList.remove('d-none');
+            })
+        });
+
+        btnDels.forEach(item => {
+            item.addEventListener('click', function(e) {
+                let formDelete = document.querySelector('#formDelete');
+                formDelete.action = item.dataset.del;
+            });
+        });
+
+    </script>
+
 @endsection

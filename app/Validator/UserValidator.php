@@ -3,6 +3,7 @@
 namespace App\Validator;
 
 use App\Models\User;
+use DateTime;
 
 class UserValidator{
 
@@ -22,9 +23,28 @@ class UserValidator{
         return false;
     }
 
+    private static function dataNascimentoMinimo($data)
+    {
+        if (!isset($data['data_nascimento'])) {
+            return false;
+        }
+
+        $dataNascimento = new DateTime($data['data_nascimento']);
+        $dataAtual = new DateTime();
+        $idade = $dataNascimento->diff($dataAtual)->y;
+
+        if($idade >= 5)  return true;
+
+        toastr()->warning("Informa pela data de nascimento o utilizador não tem a idade mínina (5 anos) aceite");
+        return false;
+    }
+
     public static function storeRequest($data) : bool {
+
+        if(!static::dataNascimentoMinimo($data)) return false;
         if(static::emailExist($data)) return false;
         if(static::bilheteIdentidadeExist($data)) return false;
+
         if(!isset($data['password'],$data['password_confirmation'])){
             toastr()->warning("Informa a paalavra-passe, a sua confirmação");
             return false;
@@ -37,6 +57,9 @@ class UserValidator{
     }
 
     public static function updateRequest(&$data, $id) : bool {
+
+        if(!static::dataNascimentoMinimo($data)) return false;
+
         $user = User::find($id);
 
         if($user->email == $data['email']){

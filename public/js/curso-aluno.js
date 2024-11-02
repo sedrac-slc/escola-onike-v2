@@ -1,23 +1,23 @@
 
-const modalTurmaAluno = document.querySelector('#formTurmaAlunoList');
-const modalTurmaAlunoBody = modalTurmaAluno.querySelector('.modal-body');
+const modalCursoAlunoList = document.querySelector('#formCursoAlunoList');
+const modalCursoAlunoListBody = modalCursoAlunoList.querySelector('.modal-body');
 
-const btnTurmaAlunoList = document.querySelectorAll('.btn-turma-aluno-list');
+const btnCursoAlunoList = document.querySelectorAll('.btn-curso-aluno-list');
 
-btnTurmaAlunoList.forEach(item => {
+btnCursoAlunoList.forEach(item => {
     item.addEventListener('click', function (e) {
-        requestTurmaAlunoCreateTable(item.dataset.url, item.dataset.turma);
+        requestCursoAlunoCreateTable(item.dataset.url);
     })
 })
 
-function requestTurmaAlunoCreateTable(url, init = "") {
+function requestCursoAlunoCreateTable(url) {
     fetch(url)
         .then(resp => resp.json())
         .then(resp => {
             let html = ``
             resp.forEach(item => {
                 html +=
-                    `<tr>
+                `<tr>
                     <td>${item.user.name}</td>
                     <td>${item.user.bilhete_identidade}</td>
                     <td>${item.user.email}</td>
@@ -31,13 +31,12 @@ function requestTurmaAlunoCreateTable(url, init = "") {
                 </tr>`;
             });
 
-            modalTurmaAlunoBody.innerHTML = createTurmaAlunoTable(html, init)
+            modalCursoAlunoListBody.innerHTML = createCursoAlunoTable(html)
         })
 }
 
-function createTurmaAlunoTable(html, init = "") {
-    return `<input type="hidden" name="turma_id" value="${init}"/>
-            <table class='table table-borderless  text-center'>
+function createCursoAlunoTable(html) {
+    return `<table class='table table-borderless  text-center'>
                 <thead>
                     <th><i class="bi bi-person"></i><span>Nome</span></th>
                     <th><i class="bi bi-person-vcard"></i><span>BI</span></th>
@@ -53,7 +52,6 @@ function createTurmaAlunoTable(html, init = "") {
 function genero(genero) {
     switch (genero) {
         case "M": return "Masculino";
-        case "F": return "Femenino";
-        default: return "-";
+        default: return "Femenino";
     }
 }

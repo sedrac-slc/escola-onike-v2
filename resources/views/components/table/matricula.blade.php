@@ -23,7 +23,7 @@
                 <th>
                     <div class="th-icone">
                         <i class="bi bi-3-circle"></i>
-                        <span>Ano curricular</span>
+                        <span>Classe</span>
                     </div>
                 </th>
                 <th>
@@ -52,8 +52,11 @@
                     <td data-value={{ $matricula->aluno_id }}>{{ $matricula->aluno->user->name }}</td>
                     <td>{{ $matricula->turma->curso->nome }}</td>
                     <td>{{ $matricula->turma->ano_lectivo }}</td>
-                    <td>{{ $matricula->turma->ano_curricular() }}</td>
-                    <td>{{ $matricula->turma->periodo() }}</td>
+                    <td data-value={{ $matricula->turma->ano_curricular }}>
+                        {{ $matricula->turma->ano_curricular() }}</td>
+                    <td data-value={{ $matricula->turma->periodo }}>
+                        {{ $matricula->turma->periodo() }}
+                    </td>
                     <td>{{ $matricula->turma->sala }}</td>
                     <td>
                         <button class="btn btn-outline-danger btn-sm rounded-pill btn-del" data-bs-toggle="modal"
@@ -67,7 +70,8 @@
                     <td>
                         <button class="btn btn-outline-warning btn-sm rounded-pill btn-up" type="button"
                             data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
-                            aria-controls="flush-collapseOne" data-up="{{ route('matriculas.update', $matricula->id) }}">
+                            aria-controls="flush-collapseOne" data-up="{{ route('matriculas.update', $matricula->id) }}"
+                            data-aluno="{{ $matricula->aluno_id }}" data-turma="{{ $matricula->turma_id }}">
                             <div class="th-icone">
                                 <i class="bi bi-pencil-square"></i>
                                 <span>editar</span>

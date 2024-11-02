@@ -29,7 +29,7 @@
                 <th>
                     <div class="th-icone">
                         <i class="bi bi-3-circle"></i>
-                        <span>Ano curricular</span>
+                        <span>Classe</span>
                     </div>
                 </th>
                 <th colspan="2">
@@ -72,7 +72,7 @@
                     <td>
                         @php $count =  $turma->alunos->count(); @endphp
                         <button class="btn btn-sm btn-outline-info btn-sm rounded-pill @if($count > 0)  btn-turma-aluno-list @endif" type="button"
-                            @if($count > 0)  data-bs-toggle="modal" data-bs-target="#modalTurmaAlunoList" data-url="{{ route('turma.ajaxaluno', $turma->id) }}" @else disabled @endif
+                            @if($count > 0)  data-bs-toggle="modal" data-bs-target="#modalTurmaAlunoList" data-url="{{ route('turma.ajaxaluno', $turma->id) }}" data-turma="{{$turma->id}}" @else disabled @endif
                         >
                             <div class="th-icone">
                                 <i class="bi bi-pencil-square"></i>

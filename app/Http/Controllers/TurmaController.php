@@ -7,6 +7,7 @@ use App\Http\Requests\TurmaRequest;
 use App\Enum\AnoCurricularEnum;
 use Illuminate\Http\Request;
 use App\Enum\PeriodoEnum;
+use App\Models\Matricula;
 use App\Models\Turma;
 use App\Models\Curso;
 use App\Models\Aluno;
@@ -66,6 +67,23 @@ class TurmaController extends Controller
         return redirect()->back();
     }
 
+    public function remove(Request $request){
+        $request->validate(['turma_id' => 'required']);
+        return $this->destroy($request->turma_id);
+    }
+
+    public function remove_aluno(Request $request){
+        $request->validate(['turma_id' => 'required', 'aluno_id' => 'required']);
+        $data = $request->only(['turma_id', 'aluno_id']);
+        $matricula = Matricula::where($data)->first();
+        if(!isset($matricula->id)) {
+            toastr()->warning("O aluno seleciona não tem matricula nesta turma");
+            return redirect()->back();
+        }
+        $matricula->delete();
+        return redirect()->back();
+    }
+
     public function ajaxTurma($curso){
         return Turma::with('curso')->where('curso_id',$curso)->get();
     }
@@ -79,6 +97,7 @@ class TurmaController extends Controller
     }
 
     public function ajaxSearch(Request $request){
+        if(isset($request->turma)) return Turma::with('curso')->where('id',$request->turma)->get();
         return Turma::with('curso')->where('concat_fields','like',"%{$request->content}%")->get();
     }
 

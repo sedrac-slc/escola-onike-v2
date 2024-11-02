@@ -11,11 +11,11 @@ final class AnoCurricularEnum{
     public static function anoCurricular($anoCurricular) : string{
         switch($anoCurricular){
             case AnoCurricularEnum::PRIMERO:
-                return "Primeiro";
+                return "A";
             case AnoCurricularEnum::SEGUNDO:
-                return "Segundo";
+                return "B";
             case AnoCurricularEnum::TERCEIRO:
-                return "Terceiro";
+                return "C";
             default:
                 return "-";
         }
