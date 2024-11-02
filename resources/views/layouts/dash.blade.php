@@ -9,7 +9,9 @@
                 <img src="{{ asset('img/logo.png') }}" alt="">
                 <span class="d-none d-lg-block">EscolaOnilka</span>
             </a>
-            <i class="bi bi-list toggle-sidebar-btn"></i>
+            <div id="toggle-sidebar-btn">
+                <i class="bi bi-list toggle-sidebar-btn"></i>
+            </div>
         </div>
 
         <nav class="header-nav ms-auto">
@@ -196,4 +198,22 @@
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center print-none">
         <i class="bi bi-arrow-up-short"></i>
     </a>
+@endsection
+
+@section('script')
+    @parent
+    <script>
+        const toggleSidebarBtn = document.querySelector('#toggle-sidebar-btn');
+        const sidebarNav = document.querySelector('.sidebar');
+
+        toggleSidebarBtn.addEventListener('click', () => {
+            if(sidebarNav.classList.contains("d-none")){
+                sidebarNav.classList.remove('d-none');
+                sidebarNav.style.width = "300px";
+            }else{
+                sidebarNav.classList.add('d-none');
+                sidebarNav.style.width = "0px";
+            }
+        });
+    </script>
 @endsection

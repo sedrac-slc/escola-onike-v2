@@ -105,11 +105,12 @@
         </div>
     </div>
 </div>
+@if(!isset($hidden_cadastra))
 <button class="btn btn-outline-primary rounded-pill mt-3">
     <i class="bi bi-check-circle"></i>
     <span id="span-curso">cadastra</span>
 </button>
-
+@endif
 <script>
     const inputAlunoSearch = document.querySelector("#aluno_search");
     inputAlunoSearch.addEventListener('keyup', (e) => {

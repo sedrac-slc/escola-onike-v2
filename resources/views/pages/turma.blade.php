@@ -58,6 +58,7 @@
     @include('components.modal.turma-disciplina-horario-form')
     @include('components.modal.turma-disciplina-horario-list')
     @include('components.modal.turma-aluno-list')
+    @include('components.modal.turma-matricula')
     @include('components.modal.delete')
 @endsection
 @section('script')
@@ -65,8 +66,9 @@
     <script src="{{ asset('js/turma-disciplina-horario.js') }}"></script>
     <script src="{{ asset('js/turma-aluno.js') }}"></script>
     <script>
-        const btnDels = document.querySelectorAll('.btn-del');
         const btnUps = document.querySelectorAll('.btn-up');
+        const btnDels = document.querySelectorAll('.btn-del');
+        const btnModals = document.querySelectorAll('.btn-turma-matricula');
 
         const method = document.querySelector('[name="_method"]');
         const span = document.querySelector('#formadd');
@@ -123,6 +125,24 @@
                 selectDefault(item.dataset.turma, 'curso_id_search');
             })
         })
+
+        btnModals.forEach(item => {
+            item.addEventListener('click', function(e) {
+                let tbody = document.querySelector('#turma-result');
+                let turmaSearch = document.querySelector('#turma_search');
+                let row = item.parentNode.parentNode;
+                let tds = row.querySelectorAll('td');
+                turmaSearch.setAttribute('disabled', true);
+                tbody.innerHTML = `<tr>
+                    <td><input type="radio" class="form-check" checked value="${item.dataset.turma}" name="turma_id"/></td>
+                    <td>${tds[0].innerHTML}</td>
+                    <td>${tds[1].innerHTML}</td>
+                    <td>${tds[2].dataset.value}</td>
+                    <td>${tds[3].innerHTML}</td>
+                    <td>${tds[4].dataset.value}</td>
+                </tr>`
+            });
+        });
 
     </script>
 @endsection

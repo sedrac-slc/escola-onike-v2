@@ -32,7 +32,7 @@
                         <span>Ano curricular</span>
                     </div>
                 </th>
-                <th>
+                <th colspan="2">
                     <div class="th-icone">
                         <i class="bi bi-people"></i>
                         <span>Alunos</span>
@@ -60,6 +60,15 @@
                     <td data-value={{ $turma->periodo }}>{{ $turma->periodo() }}</td>
                     <td>{{ $turma->sala }}</td>
                     <td data-value={{ $turma->ano_curricular }}>{{ $turma->ano_curricular() }}</td>
+                    <td>
+                        <button class="btn btn-outline-primary btn-sm rounded-pill btn-turma-matricula" data-bs-toggle="modal"
+                        data-bs-target="#modalMatriculaForm" data-turma="{{$turma->id}}">
+                            <div class="th-icone">
+                                <i class="bi bi-plus"></i>
+                                <span>adicionar</span>
+                            </div>
+                        </button>
+                    </td>
                     <td>
                         @php $count =  $turma->alunos->count(); @endphp
                         <button class="btn btn-sm btn-outline-info btn-sm rounded-pill @if($count > 0)  btn-turma-aluno-list @endif" type="button"
