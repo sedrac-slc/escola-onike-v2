@@ -7,17 +7,17 @@
 @section('content')
     <div class="card">
         <div class="pagetitle m-2">
-            <h1>Cursos</h1>
+            <h1>Classes</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}">Perfil</a></li>
                     <li class="breadcrumb-item active">
-                        <a href="{{ route('cursos.index') }}">Cursos</a>
+                        <a href="{{ route('classes.index') }}">Classes</a>
                     </li>
                 </ol>
             </nav>
         </div>
-        <span id="formadd" class="d-none fr" data-url="{{ route('cursos.store') }}">
+        <span id="formadd" class="d-none fr" data-url="{{ route('classes.store') }}">
             <i class="bi bi-plus h2"></i>
         </span>
         <div class="card-body">
@@ -32,10 +32,10 @@
                     </h2>
                     <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
                         data-bs-parent="#accordionFlushExample" style="">
-                        <form action="{{ route('cursos.store') }}" method="POST" id="form">
+                        <form action="{{ route('classes.store') }}" method="POST" id="form">
                             @csrf
                             @method('POST')
-                            @include('components.form.curso')
+                            @include('components.form.classe')
                         </form>
                     </div>
                 </div>
@@ -49,55 +49,24 @@
                     </h2>
                     <div id="flush-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="flush-headingTwo"
                         data-bs-parent="#accordionFlushExample" style="">
-                        @include('components.table.curso')
+                        @include('components.table.classe')
                     </div>
                 </div>
             </div>
 
         </div>
     </div>
-    @include('components.modal.curso-turma-list')
-    @include('components.modal.curso-aluno-list')
     @include('components.modal.delete')
 @endsection
 @section('script')
     @parent
-    <script src="{{ asset('js/curso-aluno.js') }}"></script>
-    <script src="{{ asset('js/curso-turma.js') }}"></script>
     <script>
-        const btnDels = document.querySelectorAll('.btn-del');
         const btnUps = document.querySelectorAll('.btn-up');
+        const btnDels = document.querySelectorAll('.btn-del');
 
         const method = document.querySelector('[name="_method"]');
         const span = document.querySelector('#formadd');
         const form = document.querySelector('#form');
-
-        const inputCurso = document.querySelector("#nome");
-        const selectNumClasse = document.querySelector("#num_classe");
-
-        cursoDefinedNameIfClasse();
-
-        function cursoInsertNome(nome){
-            inputCurso.value = nome;
-            if(!inputCurso.hasAttribute('readonly')) inputCurso.setAttribute('readonly', true);
-        }
-
-        function cursoDefinedNameIfClasse(){
-            switch(selectNumClasse.value){
-                case "SETIMA":
-                    cursoInsertNome("Classe sétima")
-                    break
-                case "OITAVA":
-                    cursoInsertNome("Classe oitava")
-                    break
-                case "NONA":
-                    cursoInsertNome("Classe nona")
-                    break
-                default:
-                    inputCurso.value = "";
-                    if(inputCurso.hasAttribute('readonly')) inputCurso.removeAttribute('readonly', true);
-            }
-        }
 
         function selectDefault(value, id) {
             let select = document.querySelector('#' + id);
@@ -110,21 +79,17 @@
         }
 
         function text(...arg) {
-            document.querySelector('#nome').value = arg[0];
-            selectDefault(arg[1], 'num_classe');
-            document.querySelector('#span-curso').innerHTML = arg[2];
+            selectDefault(arg[0], 'curso_id');
+            selectDefault(arg[2], 'numero_classe');
+            document.querySelector('#span-classe').innerHTML = arg[3];
         }
 
         span.addEventListener('click', function(e) {
             form.action = span.dataset.url;
             if (!span.classList.contains('d-none')) span.classList.add('d-none');
-            text("", "", "Cadastra");
+            text("", "", "","Cadastra");
             method.value = "POST";
         });
-
-        selectNumClasse.addEventListener('change', function(e){
-            cursoDefinedNameIfClasse()
-        })
 
         btnUps.forEach(item => {
             item.addEventListener('click', function(e) {
@@ -132,7 +97,8 @@
                 let tds = row.querySelectorAll('td');
                 form.action = item.dataset.up;
                 if (span.classList.contains('d-none')) span.classList.remove('d-none');
-                text(tds[0].innerHTML, tds[1].dataset.value, "Actualizar");
+                text(tds[0].dataset.value, "", tds[2].dataset.value, "Actualizar");
+                fecthTurma(item.dataset.url, item.dataset.classe)
                 method.value = "PUT";
             });
         });
@@ -144,5 +110,45 @@
             });
         });
 
+
+        const cursoSelect = document.querySelector('select#curso_id');
+        const turmaSelect = document.querySelector('select#turma_id');
+
+        cursoSelect.addEventListener('change', () => {
+            const url = cursoSelect.querySelector(`option[value="${cursoSelect.value}"]`).dataset.url;
+            fecthTurma(url);
+        });
+
+        function fecthTurma(url, turma_id = ''){
+            fetch(url)
+                .then(resp => resp.json())
+                .then(resp => {
+                    let html = ``
+                    resp.forEach(item => {
+                        html += `<option value="${item.id}" ${turma_id == item.id ? 'selected' : ''}>
+                            Ano lectivo:${item.ano_lectivo}|Periódo:${periodo(item.periodo)}|Sala:${item.sala}
+                        </option>`
+                    });
+
+                    if (html != "") {
+                        turmaSelect.innerHTML = html;
+                        if (turmaSelect.hasAttribute('disabled')) turmaSelect.removeAttribute('disabled');
+                    } else {
+                        if (!turmaSelect.hasAttribute('disabled')) turmaSelect.setAttribute('disabled', true);
+                        turmaSelect.innerHTML = ``;
+                    }
+                });
+        }
+
+        function periodo(periodo) {
+            switch (periodo) {
+                case "MANHA":
+                    return "Manhã";
+                case "TARDE":
+                    return "Tarde";
+                default:
+                    return "Noite";
+            }
+        }
     </script>
 @endsection

@@ -32,8 +32,8 @@ class TurmaDisciplinaHorarioController extends Controller
         return true;
     }
 
-    public function store(TurmaDisciplinaHorarioRequest $request){
 
+    private function requestStore($request){
         $data = $request->only(TurmaDisciplinaHorario::FILLABLE);
         $turmaDisciplinaHorario = TurmaDisciplinaHorario::where($data)->first();
         if(!isset($turmaDisciplinaHorario->id)){
@@ -50,6 +50,14 @@ class TurmaDisciplinaHorarioController extends Controller
                 toastr()->success("Operação de actualização foi realizada com sucesso");
         }
         return redirect()->back();
+    }
+
+    public function store(TurmaDisciplinaHorarioRequest $request){
+        return $this->requestStore($request);
+    }
+
+    public function store_professor(Request $request){
+        return $this->requestStore($request);
     }
 
     public function remove(Request $request){

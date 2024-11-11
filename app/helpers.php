@@ -31,3 +31,13 @@ if(!function_exists('nota')){
     }
 
 }
+
+if(!function_exists('countHorario')){
+
+    function countHorario($horario_id){
+        return App\Models\TurmaDisciplinaHorario::where([
+            'horario_id' => $horario_id,
+        ])->count();
+    }
+
+}

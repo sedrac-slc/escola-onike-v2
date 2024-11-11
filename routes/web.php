@@ -19,6 +19,7 @@ Route::middleware(['auth'])->group( function () {
     Route::get('ajax-disciplina/{disciplina}', [App\Http\Controllers\TurmaDisciplinaHorarioController::class, 'ajaxDisciplina'])->name('turma-disciplina-horario.ajaxdisciplina');
     Route::get('ajax-professor/{professor}', [App\Http\Controllers\TurmaDisciplinaHorarioController::class, 'ajaxProfessor'])->name('turma-disciplina-horario.ajaxprofessor');
     Route::get('ajax-curso/{curso}', [App\Http\Controllers\TurmaDisciplinaHorarioController::class, 'ajaxCurso'])->name('turma-disciplina-horario.ajaxcurso');
+    Route::get('ajax-turmas-professor/{professor}', [App\Http\Controllers\TurmaController::class, 'ajaxTurmaProfessor'])->name('turmas.ajaxprofessor');
     Route::get('ajax-matricula/{aluno}', [App\Http\Controllers\MatriculaController::class, 'ajaxTurma'])->name('aluno-matricula.ajaxturma');
     Route::get('ajax-turmas/{curso}', [App\Http\Controllers\TurmaController::class, 'ajaxTurma'])->name('turmas.ajaxturma');
     Route::get('ajax-alunos/{turma}', [App\Http\Controllers\TurmaController::class, 'ajaxAluno'])->name('turma.ajaxaluno');
@@ -40,6 +41,8 @@ Route::middleware(['auth'])->group( function () {
     Route::delete('turma-remove-aluno', [App\Http\Controllers\TurmaController::class, 'remove_aluno'])->name('turma.remove.aluno');
     Route::delete('turma-remove', [App\Http\Controllers\TurmaController::class, 'remove'])->name('turma.remove');
 
+    Route::post('turma-disciplina-horario-professor', [App\Http\Controllers\TurmaDisciplinaHorarioController::class, 'store_professor'])->name('turma-disciplina-horario.store_professor');
+
     Route::resource('turma-disciplina-horario', App\Http\Controllers\TurmaDisciplinaHorarioController::class)->only(['store']);
     Route::resource('coordenador-curso', App\Http\Controllers\CoordenadorController::class);
     Route::resource('funcionarios', App\Http\Controllers\FuncionarioController::class);
@@ -48,8 +51,9 @@ Route::middleware(['auth'])->group( function () {
     Route::resource('trimestres', App\Http\Controllers\TrimestreController::class);
     Route::resource('matriculas', App\Http\Controllers\MatriculaController::class);
     Route::resource('horarios', App\Http\Controllers\HorarioController::class);
+    Route::resource('classes', App\Http\Controllers\ClasseController::class);
     Route::resource('cursos', App\Http\Controllers\CursoController::class);
     Route::resource('turmas', App\Http\Controllers\TurmaController::class);
     Route::resource('alunos', App\Http\Controllers\AlunoController::class);
-    //Route::resource('notas', App\Http\Controllers\NotaController::class);
+    Route::resource('notas', App\Http\Controllers\NotaController::class);
 });

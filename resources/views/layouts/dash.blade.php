@@ -89,18 +89,18 @@
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#forms-user" data-bs-toggle="collapse" href="#">
                         <i class="bi bi-people"></i>
-                        <span>Usuarios</span>
+                        <span>Usuario</span>
                         <i class="bi bi-chevron-down ms-auto"></i>
                     </a>
                     <ul id="forms-user" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                         <li>
                             <a href="{{ route('alunos.index') }}">
-                                <i class="bi bi-circle"></i><span>Alunos</span>
+                                <i class="bi bi-circle"></i><span>Aluno</span>
                             </a>
                         </li>
                         <li>
                             <a href="{{ route('professores.index') }}">
-                                <i class="bi bi-circle"></i><span>Professores</span>
+                                <i class="bi bi-circle"></i><span>Professor</span>
                             </a>
                         </li>
                         <li>
@@ -126,14 +126,21 @@
                     <a class="nav-link collapsed @if ($page == 'curso') active @endif"
                         href="{{ route('cursos.index') }}">
                         <i class="bi bi-calendar-plus"></i>
-                        <span>Curso/classe</span>
+                        <span>Curso</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed @if ($page == 'curso') active @endif"
+                        href="{{ route('classes.index') }}">
+                        <i class="bi bi-bag"></i>
+                        <span>Classe</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link collapsed @if ($page == 'turma') active @endif"
                         href="{{ route('turmas.index') }}">
                         <i class="bi bi-archive"></i>
-                        <span>Turmas</span>
+                        <span>Turma</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -171,7 +178,7 @@
                     <a class="nav-link collapsed @if ($page == 'classe') active @endif"
                         href="{{ route('notas.aluno') }}">
                         <i class="bi bi-book"></i>
-                        <span>Notas</span>
+                        <span>Nota</span>
                     </a>
                 </li>
             @endif

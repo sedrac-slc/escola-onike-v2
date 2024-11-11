@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TurmaRequest;
+use App\Models\TurmaDisciplinaHorario;
 use App\Enum\AnoCurricularEnum;
 use Illuminate\Http\Request;
 use App\Enum\PeriodoEnum;
@@ -94,6 +95,20 @@ class TurmaController extends Controller
                 ->where('turma_id', $turma)
                 ->select('alunos.*')
                 ->get();
+    }
+
+    public function ajaxTurmaProfessor($professor){
+
+        $turmas = TurmaDisciplinaHorario::join('professor_leciona', 'professor_leciona.turma_disciplina_horario_id', 'turma_disciplina_horarios.id')
+            ->where('professor_leciona.professor_id', $professor)
+            ->select('turma_disciplina_horarios.turma_id')
+            ->distinct('turma_disciplina_horarios.turma_id')
+            ->get()
+            ->map(function($item){
+                return $item->turma_id;
+            })->all();
+
+        return Turma::with('curso')->whereIn('id', $turmas)->get();
     }
 
     public function ajaxSearch(Request $request){

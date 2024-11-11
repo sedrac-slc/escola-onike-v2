@@ -46,7 +46,7 @@ class UserValidator{
         if(static::bilheteIdentidadeExist($data)) return false;
 
         if(!isset($data['password'],$data['password_confirmation'])){
-            toastr()->warning("Informa a paalavra-passe, a sua confirmação");
+            toastr()->warning("Informa a palavra-passe, a sua confirmação");
             return false;
         }
         if($data['password'] != $data['password_confirmation']){
