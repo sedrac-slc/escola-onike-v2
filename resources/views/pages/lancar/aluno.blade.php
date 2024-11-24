@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{ asset('css/panel.css') }}" />
     <style>
         .form-control.disabled { background: #ccc;}
+        .min-w-max{ width: max-content; }
     </style>
     @if ($isPrint)
         <style>
@@ -48,6 +49,13 @@
                             value="{{ $turmaDisciplinaHorario->id }}" />
                     </div>
                 </div>
+            </div>
+            <div>
+                <select class="form-control min-w-max" name="trimestre_id">
+                    @foreach ($trimestres as $trimestre)
+                        <option value="{{$trimestre->id}}">{{ $trimestre->text() }}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="table-responsive">
                 <table class="table text-center">

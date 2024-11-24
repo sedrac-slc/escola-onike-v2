@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TrimestreRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Trimestre;
+use App\Models\Nota;
 use App\Enum\NumeroEnum;
 use Exception;
 
@@ -56,5 +57,9 @@ class TrimestreController extends Controller
             toastr()->error("Operação de eliminação não foi possível a sua realização");
         }
         return redirect()->back();
+    }
+
+    public function ajaxTrimestreNota($trimestre){
+        return Nota::with('aluno.user','turma','disciplina')->where('trimestre_id', $trimestre)->get();
     }
 }

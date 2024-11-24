@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\NotaRequest;
 use Illuminate\Http\Request;
 use App\Models\Matricula;
+use App\Models\Trimestre;
 use App\Models\Aluno;
 use App\Models\Nota;
 use Exception;
@@ -53,6 +54,7 @@ class NotaController extends Controller
 
         return view('pages.lancar.aluno',[
             'alunos' => $alunos,
+            'trimestres' => Trimestre::orderBy('created_at', 'DESC')->get(),
             'turmaDisciplinaHorario' => $turmaDisciplinaHorario,
             'painel' => 'nota'
         ]);
@@ -90,11 +92,13 @@ class NotaController extends Controller
                     'aluno_id' => $data['alunos'][$i],
                     'disciplina_id' => $turmaDisciplinaHorario->disciplina_id,
                     'turma_id' => $turmaDisciplinaHorario->turma_id,
+                    "trimestre_id" => $request->trimestre_id
                 ];
                $notas = [
                     "npt" => $data['npt'][$i], "npp" => $data['npp'][$i], "mac" => $data['mac'][$i],
                     "mt1" => $data['mt1'][$i], "mt2" => $data['mt2'][$i], "mt3" => $data['mt3'][$i],
-                    "exame" => $data['exame'][$i], "mfd" => $data['mfd'][$i], "mf" => $data['mf'][$i]
+                    "exame" => $data['exame'][$i], "mfd" => $data['mfd'][$i], "mf" => $data['mf'][$i],
+                    "trimestre_id" => $request->trimestre_id
                 ];
                 Nota::updateOrCreate($alunos, array_merge($alunos, $notas));
             }

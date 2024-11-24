@@ -61,6 +61,7 @@
 @endsection
 @section('script')
     @parent
+    <script src="{{ asset('js/turma-disciplina-horario.js') }}"></script>
     <script>
         const btnDels = document.querySelectorAll('.btn-del');
         const btnUps = document.querySelectorAll('.btn-up');

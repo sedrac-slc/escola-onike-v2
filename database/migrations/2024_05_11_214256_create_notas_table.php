@@ -16,6 +16,7 @@ return new class extends Migration
             $table->uuid('id')->primary()->default(DB::raw('uuid()'));
             $table->foreignUuid('aluno_id')->constrained('alunos')->cascadeOnDelete();
             $table->foreignUuid('turma_id')->constrained('turmas')->cascadeOnDelete();
+            $table->foreignUuid('trimestre_id')->constrained('trimestres')->cascadeOnDelete();
             $table->foreignUuid('disciplina_id')->constrained('disciplinas')->cascadeOnDelete();
             $table->integer('mac')->unsigned()->nullable();
             $table->integer('npp')->unsigned()->nullable();

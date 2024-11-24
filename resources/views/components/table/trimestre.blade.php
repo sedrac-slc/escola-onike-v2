@@ -20,6 +20,12 @@
                         <span>Data termino</span>
                     </div>
                 </th>
+                <th>
+                    <div class="th-icone">
+                        <i class="bi bi-123"></i>
+                        <span>Notas</span>
+                    </div>
+                </th>
                 <th colspan="2">
                     <div class="th-icone">
                         <i class="bi bi-tools"></i>
@@ -34,6 +40,17 @@
                     <td data-value={{ $trimestre->numero }}>{{ $trimestre->numero() }}</td>
                     <td>{{ $trimestre->data_inicio }}</td>
                     <td>{{ $trimestre->data_termino }}</td>
+                    <td>
+                        @php $count =  $trimestre->notas->count(); @endphp
+                        <button class="btn btn-outline-info btn-sm rounded-pill @if($count > 0) btn-nota-trimestre-list @endif" type="button"
+                            @if($count > 0)  data-bs-toggle="modal" data-bs-target="#modalTrimestreNotaList" data-url="{{ route('trimestre-nota.ajaxTrimestreNota', $trimestre->id) }}" @else disabled @endif
+                        >
+                            <div class="th-icone">
+                                <i class="bi bi-pencil-square"></i>
+                                <span>listar({{ $count }})</span>
+                            </div>
+                        </button>
+                    </td>
                     <td>
                         <button class="btn btn-outline-danger btn-sm rounded-pill btn-del" data-bs-toggle="modal"
                             data-bs-target="#modalDelete" data-del="{{ route('trimestres.destroy', $trimestre->id) }}">

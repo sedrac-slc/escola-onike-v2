@@ -170,7 +170,7 @@
                     <a class="nav-link collapsed @if ($page == 'classe') active @endif"
                         href="{{ route('notas.index') }}">
                         <i class="bi bi-123"></i>
-                        <span>Notas</span>
+                        <span>Pautas</span>
                     </a>
                 </li>
             @elseif($auth->isAluno())

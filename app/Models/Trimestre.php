@@ -30,7 +30,11 @@ class Trimestre extends Model
     }
 
     public function text(){
-        return $this->data_inicio.' à '.$this->data_termino;
+        return $this->numero() . ' | ' . $this->data_inicio.' à '.$this->data_termino;
+    }
+
+    public function notas(){
+        return $this->hasMany(Nota::class);
     }
 
 }

@@ -89,6 +89,19 @@ class TurmaDisciplinaHorarioController extends Controller
         return TurmaDisciplinaHorario::with('turma.curso', 'disciplina', 'horario')->where('disciplina_id', $disciplina)->get();
     }
 
+    public function ajaxDisciplinaHorario($horario){
+        return TurmaDisciplinaHorario::with('turma.curso', 'disciplina', 'horario')->where('horario_id', $horario)->get();
+    }
+
+    public function ajaxDisciplinaProfessor($disciplina){
+        return TurmaDisciplinaHorario::with('turma.curso', 'disciplina', 'horario')
+            ->join('professor_leciona','professor_leciona.turma_disciplina_horario_id','turma_disciplina_horarios.id')
+            ->join('professors','professor_leciona.professor_id','professors.id')
+            ->join('users','professors.user_id','users.id')
+            ->select('turma_disciplina_horarios.*', 'users.name as professor', 'professor_leciona.id as professor_leciona_id')
+            ->where('disciplina_id', $disciplina)->get();
+    }
+
     public function ajaxProfessor($professor){
         return TurmaDisciplinaHorario::with('turma.curso', 'disciplina', 'horario')
         ->join(ProfessorLeciona::TABLE,'turma_disciplina_horario_id', TurmaDisciplinaHorario::TABLE .'.id')

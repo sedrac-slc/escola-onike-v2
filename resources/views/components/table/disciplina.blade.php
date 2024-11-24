@@ -10,6 +10,12 @@
                 </th>
                 <th colspan="2">
                     <div class="th-icone">
+                        <i class="bi bi-people"></i>
+                        <span>Professor</span>
+                    </div>
+                </th>
+                <th colspan="2">
+                    <div class="th-icone">
                         <i class="bi bi-calendar-plus"></i>
                         <span>Curso</span>
                     </div>
@@ -26,6 +32,26 @@
             @foreach ($disciplinas as $disciplina)
                 <tr>
                     <td>{{ $disciplina->nome }}</td>
+                    <td>
+                        <button class="btn btn-outline-primary btn-sm rounded-pill btn-professor-disciplina-horario" data-bs-toggle="modal"
+                        data-bs-target="#modalProfessorDisciplinaHorario" data-disciplina="{{$disciplina->id}}">
+                            <div class="th-icone">
+                                <i class="bi bi-plus"></i>
+                                <span>adicionar</span>
+                            </div>
+                        </button>
+                    </td>
+                    <td>
+                        @php $count =  countDisciplina($disciplina->id); @endphp
+                        <button class="btn btn-outline-info btn-sm rounded-pill @if($count > 0) btn-professor-disciplina-horario-list @endif" type="button"
+                            @if($count > 0)  data-bs-toggle="modal" data-bs-target="#modalProfessorDisciplinaHorarioList" data-url="{{ route('turma-disciplina-horario.ajaxDisciplinaProfessor', $disciplina->id) }}" @else disabled @endif
+                        >
+                            <div class="th-icone">
+                                <i class="bi bi-pencil-square"></i>
+                                <span>listar({{ $count }})</span>
+                            </div>
+                        </button>
+                    </td>
                     <td>
                         <button class="btn btn-outline-primary btn-sm rounded-pill btn-curso-disciplina-horario" data-bs-toggle="modal"
                         data-bs-target="#modalCursoDisciplinaHorario" data-disciplina="{{$disciplina->id}}">

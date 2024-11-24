@@ -2,23 +2,26 @@
 
     use App\Models\Professor;
     use App\Models\Disciplina;
+    use App\Models\Horario;
     use App\Models\Turma;
 
     $turmas = Turma::orderBy('created_at', 'DESC')->get();
     $disciplinas = Disciplina::orderBy('created_at', 'DESC')->get();
     $professores = Professor::with('user')->orderBy('created_at', 'DESC')->get();
 
+    if(isset($with_horario)) $horarios = Horario::orderBy('created_at', 'DESC')->get();
+
 @endphp
 
-<div class="modal fade" id="modalCursoDisciplinaHorario" tabindex="-1" role="dialog"
-    aria-labelledby="modalCursoDisciplinaHorarioLabel" aria-hidden="true">
+<div class="modal fade" id="modalProfessorDisciplinaHorario" tabindex="-1" role="dialog"
+    aria-labelledby="modalProfessorDisciplinaHorarioLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-        <form class="modal-content" action="{{ route('turma-disciplina-horario.store_professor') }}" method="POST"
-            id="formCursoDisciplinaHorario">
+        <form class="modal-content" action="{{ $action ?? route('turma-disciplina-horario.store_professor') }}" method="POST"
+            id="formProfessorDisciplinaHorario">
             @csrf
             <div class="modal-header">
-                <h5 class="modal-title" id="modalCursoDisciplinaHorarioLabel">
-                    <span>{{ $title ?? 'Adicionar Disciplina no Curso' }}</span>
+                <h5 class="modal-title" id="modalProfessorDisciplinaHorarioLabel">
+                    <span>{{ $title ?? 'Adicionar professor' }}</span>
                 </h5>
                 <button type="button" class="" data-bs-dismiss="modal" aria-label="Close"
                     style="background: none; border: none;">
@@ -61,7 +64,7 @@
                     @endisset
                 </div>
 
-                <div class="mt-2">
+                <div class="mt-2 @if(isset($with_horario)) d-none @endif">
                     @isset($disciplinas)
                         <label for="disciplina_id" class="form-label">
                             <i class="bi bi-book"></i>
@@ -76,6 +79,25 @@
                     @else
                         <div class="panel-empty">Não tem disciplina cadastrado</div>
                     @endisset
+                </div>
+
+                <div class="mt-2">
+                    @if(isset($with_horario))
+                    @isset($horarios)
+                    <label for="horario_id" class="form-label">
+                        <i class="bi bi-clock"></i>
+                        <span>Horario:</span>
+                        <span class="text-danger">*</span>
+                    </label>
+                    <select name="horario_id" id="horario_id_search" class="form-control">
+                        @foreach ($horarios as $horario)
+                            <option value="{{ $horario->id }}"> {{ $horario->text() }}</option>
+                        @endforeach
+                    </select>
+                @else
+                    <div class="panel-empty">Não tem horario cadastrado</div>
+                @endisset
+                    @endif
                 </div>
 
             </div>

@@ -42,7 +42,7 @@
                     <td>{{ $horario->hora_termino }}</td>
                     <td>
                         <button class="btn btn-outline-primary btn-sm rounded-pill btn-turma-disciplina-horario" data-bs-toggle="modal"
-                        data-bs-target="#modalCursoDisciplinaHorario" data-horario="{{$horario->id}}">
+                        data-bs-target="#modalProfessorDisciplinaHorario" data-horario="{{$horario->id}}">
                             <div class="th-icone">
                                 <i class="bi bi-plus"></i>
                                 <span>adicionar</span>
@@ -51,8 +51,8 @@
                     </td>
                     <td>
                         @php $count =  countHorario($horario->id); @endphp
-                        <button class="btn btn-outline-info btn-sm rounded-pill @if($count > 0) btn-turma-horario-horario-list @endif" type="button"
-                            @if($count > 0)  data-bs-toggle="modal" data-bs-target="#modalDisciplinaHorarioList" data-url="#" @else disabled @endif
+                        <button class="btn btn-outline-info btn-sm rounded-pill @if($count > 0) btn-curso-disciplina-horario-list @endif" type="button"
+                            @if($count > 0)  data-bs-toggle="modal" data-bs-target="#modalCursoDisciplinaHorarioList" data-url="{{ route('turma-disciplina-horario.ajaxDisciplinaHorario', $horario->id) }}" @else disabled @endif
                         >
                             <div class="th-icone">
                                 <i class="bi bi-pencil-square"></i>

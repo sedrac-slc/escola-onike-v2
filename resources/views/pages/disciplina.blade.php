@@ -55,6 +55,11 @@
 
         </div>
     </div>
+
+    @include('components.modal.professor-disciplina-horario-form', ['with_horario' => true])
+    @include('components.modal.professor-disciplina-horario-list', [
+        'action' => route('professor-leciona.remove')
+    ])
     @include('components.modal.turma-disciplina-horario-form')
     @include('components.modal.turma-disciplina-horario-list')
     @include('components.modal.delete')
@@ -62,13 +67,15 @@
 @section('script')
     @parent
     <script src="{{ asset('js/turma-disciplina-horario.js') }}"></script>
+    <script src="{{ asset('js/professor-disciplina-horario.js') }}"></script>
     <script>
         const btnDels = document.querySelectorAll('.btn-del');
         const btnUps = document.querySelectorAll('.btn-up');
 
         const btnCursoDisciplinaHorario = document.querySelectorAll('.btn-curso-disciplina-horario');
+        const btnProfessorDisciplinaHorario = document.querySelectorAll('.btn-professor-disciplina-horario');
 
-        const method = document.querySelector('[name="_method"]');
+        const method = document.querySelector('#form [name="_method"]');
         const span = document.querySelector('#formadd');
         const form = document.querySelector('#form');
 
@@ -113,6 +120,12 @@
         });
 
         btnCursoDisciplinaHorario.forEach(item => {
+            item.addEventListener('click', function(e) {
+                selectDefault(item.dataset.disciplina, 'disciplina_id_search');
+            })
+        })
+
+        btnProfessorDisciplinaHorario.forEach(item => {
             item.addEventListener('click', function(e) {
                 selectDefault(item.dataset.disciplina, 'disciplina_id_search');
             })

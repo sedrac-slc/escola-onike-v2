@@ -41,3 +41,17 @@ if(!function_exists('countHorario')){
     }
 
 }
+
+
+if(!function_exists('countDisciplina')){
+
+    function countDisciplina($disciplina_id){
+        return App\Models\TurmaDisciplinaHorario::join('professor_leciona','professor_leciona.turma_disciplina_horario_id','turma_disciplina_horarios.id')
+        ->join('professors','professor_leciona.professor_id','professors.id')
+        ->where([
+            'disciplina_id' => $disciplina_id,
+        ])->count();
+    }
+
+}
+

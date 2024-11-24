@@ -55,10 +55,12 @@
 
         </div>
     </div>
+    @include('components.modal.trimestre-nota-list')
     @include('components.modal.delete')
 @endsection
 @section('script')
     @parent
+    <script src="{{ asset('js/trimestre-nota.js') }}"></script>
     <script>
         const btnDels = document.querySelectorAll('.btn-del');
         const btnUps = document.querySelectorAll('.btn-up');

@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Validator\UserValidator;
 use App\Models\ProfessorLeciona;
+use Illuminate\Http\Request;
 use App\Models\Professor;
 use App\Models\User;
 use Exception;
@@ -52,6 +53,7 @@ class ProfessorController extends Controller
     }
 
     public function update(ProfessorRequest $request, $id){
+
         try{
             $data = $request->all();
             $data['updated_by'] = auth()->user()->id;
@@ -84,6 +86,17 @@ class ProfessorController extends Controller
         try{
             $user = User::find($id);
             $user->delete();
+            toastr()->success("Operação de eliminação foi realizada com sucesso");
+        }catch(Exception){
+            toastr()->error("Operação de eliminação não foi possível a sua realização");
+        }
+        return redirect()->back();
+    }
+
+    public function remove_professor_leciona(Request $request){
+        try{
+            $professorLeciona = ProfessorLeciona::find($request->professor_leciona_id);
+            $professorLeciona->delete();
             toastr()->success("Operação de eliminação foi realizada com sucesso");
         }catch(Exception){
             toastr()->error("Operação de eliminação não foi possível a sua realização");

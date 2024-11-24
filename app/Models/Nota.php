@@ -15,6 +15,7 @@ class Nota extends Model
         'aluno_id',
         'turma_id',
         'disciplina_id',
+        'trimestre_id',
         'mac',
         'npp',
         'npt',
@@ -38,6 +39,10 @@ class Nota extends Model
 
     public function turma(){
         return $this->belongsTo(Turma::class);
+    }
+
+    public function trimestre(){
+        return $this->belongsTo(Trimestre::class);
     }
 
 }

@@ -14,7 +14,10 @@ Route::put('usuarios/{id}', [App\Http\Controllers\HomeController::class, 'update
 Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth'])->group( function () {
+    Route::get('ajax-trimestre-notas/{trimestre}', [App\Http\Controllers\TrimestreController::class, 'ajaxTrimestreNota'])->name('trimestre-nota.ajaxTrimestreNota');
 
+    Route::get('ajax-disciplina-professor/{disciplina}', [App\Http\Controllers\TurmaDisciplinaHorarioController::class, 'ajaxDisciplinaProfessor'])->name('turma-disciplina-horario.ajaxDisciplinaProfessor');
+    Route::get('ajax-disciplina-horario/{horario}', [App\Http\Controllers\TurmaDisciplinaHorarioController::class, 'ajaxDisciplinaHorario'])->name('turma-disciplina-horario.ajaxDisciplinaHorario');
     Route::get('ajax-coordenador-curso/{coordenador}', [App\Http\Controllers\CoordenadorController::class, 'ajaxCoordenadorCursos'])->name('coordenador-curso.ajaxCoordenadorCursos');
     Route::get('ajax-disciplina/{disciplina}', [App\Http\Controllers\TurmaDisciplinaHorarioController::class, 'ajaxDisciplina'])->name('turma-disciplina-horario.ajaxdisciplina');
     Route::get('ajax-professor/{professor}', [App\Http\Controllers\TurmaDisciplinaHorarioController::class, 'ajaxProfessor'])->name('turma-disciplina-horario.ajaxprofessor');
@@ -35,6 +38,7 @@ Route::middleware(['auth'])->group( function () {
     Route::post('notas-lancar', [App\Http\Controllers\NotaController::class, 'lancar'])->name('notas.lancar');
     Route::post('aluno-matricula.store', [App\Http\Controllers\MatriculaController::class, 'matricula'])->name('aluno-matricula.store');
 
+    Route::delete('professor-leciona-remove', [App\Http\Controllers\ProfessorController::class, 'remove_professor_leciona'])->name('professor-leciona.remove');
     Route::delete('turma-disciplina-remove', [App\Http\Controllers\TurmaDisciplinaHorarioController::class, 'remove'])->name('turma-disciplina-horario.remove');
     Route::delete('coordenador-curso-remove', [App\Http\Controllers\CoordenadorController::class, 'remove'])->name('coordenador-curso.remove');
     Route::delete('aluno-matricula-remove', [App\Http\Controllers\MatriculaController::class, 'remove'])->name('aluno-matricula.remove');
