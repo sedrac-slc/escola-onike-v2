@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
+use App\Enum\NumeroClasseEnum;
 
 class Classe extends Model
 {
@@ -12,9 +13,8 @@ class Classe extends Model
 
     protected $fillable = [
         'id',
-        'turma_id',
         'curso_id',
-        'numero_classe',
+        'num_classe',
         'created_by',
         'updated_by',
     ];
@@ -23,7 +23,7 @@ class Classe extends Model
         return $this->belongsTo(Curso::class);
     }
 
-    public function turma(){
-        return $this->belongsTo(Turma::class);
+    public function numeroClasse(){
+        return NumeroClasseEnum::numeroClasse($this->num_classe);
     }
 }

@@ -4,30 +4,30 @@ namespace App\Enum;
 
 final class NumeroClasseEnum{
 
-    public const SETIMA = "SETIMA";
-    public const OITAVA = "OITAVA";
-    public const NONA = "NONA";
-    public const DECIMA = "DECIMA";
-    public const DECIMA_PRIMEIRA = "DECIMA_PRIMEIRA";
-    public const DECIMA_SEGUNDA = "DECIMA_SEGUNDA";
-    public const DECIMA_TERCEIRA = "DECIMA_TERCEIRA";
+    public const SETIMA = "7";
+    public const OITAVA = "8";
+    public const NONA = "9";
+    public const DECIMA = "10";
+    public const DECIMA_PRIMEIRA = "11";
+    public const DECIMA_SEGUNDA = "12";
+    public const DECIMA_TERCEIRA = "13";
 
     public static function numeroClasse($num_classe) : string{
         switch($num_classe){
             case NumeroClasseEnum::SETIMA:
-                return "Sétima";
+                return "7ª classe";
             case NumeroClasseEnum::OITAVA:
-                return "Oitava";
+                return "8ª classe";
             case NumeroClasseEnum::NONA:
-                return "Nona";
+                return "9ª classe";
             case NumeroClasseEnum::DECIMA:
-                return "Décima";
+                return "10ª classe";
             case NumeroClasseEnum::DECIMA_PRIMEIRA:
-                return "Décima primeira";
+                return "11ª classe";
             case NumeroClasseEnum::DECIMA_SEGUNDA:
-                return "Décima segunda";
+                return "12ª classe";
             default:
-                return "Décima terceira";
+                return "13ª classe";
         }
     }
 

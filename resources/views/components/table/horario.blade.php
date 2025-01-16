@@ -12,10 +12,13 @@
                     <span>Disciplina</span>
                 </th>
                 <th>
-                    <span>Hora inicio</span>
+                    <span>Periódo</span>
                 </th>
                 <th>
-                    <span>Hora termino</span>
+                    <span>Inicio</span>
+                </th>
+                <th>
+                    <span>Termino</span>
                 </th>
                 <th colspan="2">
                     <span>Disciplina</span>
@@ -31,6 +34,7 @@
                     <td data-value={{ $horario->dia_semana }}>{{ $horario->diaSemana() }}</td>
                     <td>{{ $horario->curso->nome }}</td>
                     <td>{{ $horario->disciplina->nome }}</td>
+                    <td>{{ $horario->periodo() }}</td>
                     <td>{{ $horario->hora_inicio }}</td>
                     <td>{{ $horario->hora_termino }}</td>
                     <td>

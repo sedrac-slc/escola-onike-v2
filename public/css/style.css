@@ -662,10 +662,13 @@ h6 {
   background-color: #fdfdfd;
 }
 
-@media (max-width: 1199px) {
-  .sidebar {
-    left: -300px;
-  }
+.sidebar.viewer{
+    position: fixed;
+    width: 300px;
+}
+
+#main.viewer{
+    margin-left: 0px;
 }
 
 .sidebar::-webkit-scrollbar {

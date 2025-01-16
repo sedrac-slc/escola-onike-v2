@@ -80,14 +80,14 @@
 
         function text(...arg) {
             selectDefault(arg[0], 'curso_id');
-            selectDefault(arg[2], 'numero_classe');
-            document.querySelector('#span-classe').innerHTML = arg[3];
+            selectDefault(arg[1], 'num_classe');
+            document.querySelector('#span-classe').innerHTML = arg[2];
         }
 
         span.addEventListener('click', function(e) {
             form.action = span.dataset.url;
             if (!span.classList.contains('d-none')) span.classList.add('d-none');
-            text("", "", "","Cadastra");
+            text("", "","Cadastra");
             method.value = "POST";
         });
 
@@ -97,8 +97,7 @@
                 let tds = row.querySelectorAll('td');
                 form.action = item.dataset.up;
                 if (span.classList.contains('d-none')) span.classList.remove('d-none');
-                text(tds[0].dataset.value, "", tds[2].dataset.value, "Actualizar");
-                fecthTurma(item.dataset.url, item.dataset.classe)
+                text(tds[0].dataset.value, tds[1].dataset.value, "Actualizar");
                 method.value = "PUT";
             });
         });
@@ -110,35 +109,7 @@
             });
         });
 
-
         const cursoSelect = document.querySelector('select#curso_id');
-        const turmaSelect = document.querySelector('select#turma_id');
-
-        cursoSelect.addEventListener('change', () => {
-            const url = cursoSelect.querySelector(`option[value="${cursoSelect.value}"]`).dataset.url;
-            fecthTurma(url);
-        });
-
-        function fecthTurma(url, turma_id = ''){
-            fetch(url)
-                .then(resp => resp.json())
-                .then(resp => {
-                    let html = ``
-                    resp.forEach(item => {
-                        html += `<option value="${item.id}" ${turma_id == item.id ? 'selected' : ''}>
-                            Ano lectivo:${item.ano_lectivo}|Periódo:${periodo(item.periodo)}|Sala:${item.sala}
-                        </option>`
-                    });
-
-                    if (html != "") {
-                        turmaSelect.innerHTML = html;
-                        if (turmaSelect.hasAttribute('disabled')) turmaSelect.removeAttribute('disabled');
-                    } else {
-                        if (!turmaSelect.hasAttribute('disabled')) turmaSelect.setAttribute('disabled', true);
-                        turmaSelect.innerHTML = ``;
-                    }
-                });
-        }
 
         function periodo(periodo) {
             switch (periodo) {

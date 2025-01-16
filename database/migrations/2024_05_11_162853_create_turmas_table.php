@@ -17,6 +17,7 @@ return new class extends Migration
         Schema::create('turmas', function (Blueprint $table) {
             $table->uuid('id')->primary()->default(DB::raw('uuid()'));
             $table->foreignUuid('curso_id')->constrained('cursos')->cascadeOnDelete();
+            $table->foreignUuid('classe_id')->constrained('classes')->cascadeOnDelete();
             $table->enum('periodo', PeriodoEnum::keys());
             $table->enum("ano_curricular", AnoCurricularEnum::keys())->nullable();
             $table->string("ano_lectivo");

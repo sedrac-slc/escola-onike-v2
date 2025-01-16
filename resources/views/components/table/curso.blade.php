@@ -3,34 +3,16 @@
         <thead>
             <tr>
                 <th>
-                    <div class="th-icone">
-                        <i class="bi bi-file-word"></i>
-                        <span>Nome</span>
-                    </div>
+                    <span>Nome</span>
                 </th>
                 <th>
-                    <div class="th-icone">
-                        <i class="bi bi-collection"></i>
-                        <span>Classe</span>
-                    </div>
+                    <span>Aluno</span>
                 </th>
                 <th>
-                    <div class="th-icone">
-                        <i class="bi bi-people"></i>
-                        <span>Aluno</span>
-                    </div>
-                </th>
-                <th>
-                    <div class="th-icone">
-                        <i class="bi bi-archive"></i>
-                        <span>Turma</span>
-                    </div>
+                    <span>Turma</span>
                 </th>
                 <th colspan="2">
-                    <div class="th-icone">
-                        <i class="bi bi-tools"></i>
-                        <span>Acção</span>
-                    </div>
+                    <span>Acção</span>
                 </th>
             </tr>
         </thead>
@@ -38,12 +20,10 @@
             @foreach ($cursos as $curso)
                 <tr>
                     <td>{{ $curso->nome }}</td>
-                    <td data-value={{ $curso->num_classe }}>{{ $curso->numeroClasse() }}</td>
-
                     <td class="">
-                        <button class="btn btn-sm btn-outline-info btn-sm rounded-pill btn-curso-aluno-list" type="button"
-                            data-bs-toggle="modal" data-bs-target="#modalCursoAlunoList" data-url="{{ route('aluno.ajaxcurso', $curso->id) }}"
-                        >
+                        <button class="btn btn-sm btn-outline-info btn-sm rounded-pill btn-curso-aluno-list"
+                            type="button" data-bs-toggle="modal" data-bs-target="#modalCursoAlunoList"
+                            data-url="{{ route('aluno.ajaxcurso', $curso->id) }}">
                             <div class="th-icone">
                                 <i class="bi bi-pencil-square"></i>
                                 <span>listar</span>
@@ -53,9 +33,10 @@
 
                     <td class="">
                         @php $count =  $curso->turmas->count(); @endphp
-                        <button class="btn btn-sm btn-outline-info btn-sm rounded-pill @if($count > 0) btn-turma-list @endif" type="button"
-                            @if($count > 0)  data-bs-toggle="modal" data-bs-target="#modalCursoTurmaList" data-url="{{ route('turmas.ajaxturma', $curso->id) }}" @else disabled @endif
-                        >
+                        <button
+                            class="btn btn-sm btn-outline-info btn-sm rounded-pill @if ($count > 0) btn-turma-list @endif"
+                            type="button"
+                            @if ($count > 0) data-bs-toggle="modal" data-bs-target="#modalCursoTurmaList" data-url="{{ route('turmas.ajaxturma', $curso->id) }}" @else disabled @endif>
                             <div class="th-icone">
                                 <i class="bi bi-pencil-square"></i>
                                 <span>listar({{ $count }})</span>

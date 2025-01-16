@@ -1,7 +1,6 @@
 <div class="row">
     <div class="col-md-6  @isset($inline) inline @endisset">
         <label for="data_inicio" class="form-label" class="form-control">
-            <i class="bi bi-calendar-check"></i>
             <span>Data inicio:</span>
             @if (!isset($require))
                 <span class="text-danger">*</span>
@@ -13,7 +12,6 @@
     </div>
     <div class="col-md-6  @isset($inline) inline @endisset">
         <label for="data_termino" class="form-label" class="form-control">
-            <i class="bi bi-calendar-x"></i>
             <span>Data termino:</span>
             @if (!isset($require))
                 <span class="text-danger">*</span>
@@ -25,7 +23,6 @@
     </div>
     <div class="col-md-6 ">
         <label for="numero" class="form-label">
-            <i class="bi bi-123"></i>
             <span>Número:</span>
             @if (!isset($require))
                 <span class="text-danger">*</span>
@@ -40,6 +37,5 @@
     </div>
 </div>
 <button class="btn btn-outline-primary rounded-pill mt-3">
-    <i class="bi bi-check-circle"></i>
     <span id="span-trimestre">cadastra</span>
 </button>

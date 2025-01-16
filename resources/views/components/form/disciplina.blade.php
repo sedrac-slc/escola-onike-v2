@@ -1,7 +1,6 @@
 <div class="row">
     <div class="col-md-12">
         <label for="nome" class="form-label">
-            <i class="bi bi-key"></i>
             <span>Nome:</span>
             @if (!isset($require))
                 <span class="text-danger">*</span>
@@ -12,6 +11,5 @@
     </div>
 </div>
 <button class="btn btn-outline-primary rounded-pill mt-3">
-    <i class="bi bi-check-circle"></i>
     <span id="span-disciplina">cadastra</span>
 </button>

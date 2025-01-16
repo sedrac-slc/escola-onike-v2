@@ -73,30 +73,10 @@
         const form = document.querySelector('#form');
 
         const inputCurso = document.querySelector("#nome");
-        const selectNumClasse = document.querySelector("#num_classe");
-
-        cursoDefinedNameIfClasse();
 
         function cursoInsertNome(nome){
             inputCurso.value = nome;
             if(!inputCurso.hasAttribute('readonly')) inputCurso.setAttribute('readonly', true);
-        }
-
-        function cursoDefinedNameIfClasse(){
-            switch(selectNumClasse.value){
-                case "SETIMA":
-                    cursoInsertNome("Classe sétima")
-                    break
-                case "OITAVA":
-                    cursoInsertNome("Classe oitava")
-                    break
-                case "NONA":
-                    cursoInsertNome("Classe nona")
-                    break
-                default:
-                    inputCurso.value = "";
-                    if(inputCurso.hasAttribute('readonly')) inputCurso.removeAttribute('readonly', true);
-            }
         }
 
         function selectDefault(value, id) {
@@ -111,20 +91,15 @@
 
         function text(...arg) {
             document.querySelector('#nome').value = arg[0];
-            selectDefault(arg[1], 'num_classe');
-            document.querySelector('#span-curso').innerHTML = arg[2];
+            document.querySelector('#span-curso').innerHTML = arg[1];
         }
 
         span.addEventListener('click', function(e) {
             form.action = span.dataset.url;
             if (!span.classList.contains('d-none')) span.classList.add('d-none');
-            text("", "", "Cadastra");
+            text("", "Cadastra");
             method.value = "POST";
         });
-
-        selectNumClasse.addEventListener('change', function(e){
-            cursoDefinedNameIfClasse()
-        })
 
         btnUps.forEach(item => {
             item.addEventListener('click', function(e) {
@@ -132,7 +107,7 @@
                 let tds = row.querySelectorAll('td');
                 form.action = item.dataset.up;
                 if (span.classList.contains('d-none')) span.classList.remove('d-none');
-                text(tds[0].innerHTML, tds[1].dataset.value, "Actualizar");
+                text(tds[0].innerHTML, "Actualizar");
                 method.value = "PUT";
             });
         });

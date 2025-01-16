@@ -25,7 +25,6 @@ class CursoRequest extends FormRequest
     {
         return [
             'nome' =>  ['required','string', 'max:255'],
-            'num_classe' => ['required', 'string'],
         ];
     }
 }

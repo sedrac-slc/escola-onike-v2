@@ -3,46 +3,25 @@
         <thead>
             <tr>
                 <th>
-                    <div class="th-icone">
-                        <i class="bi bi-person"></i>
-                        <span>Nome</span>
-                    </div>
+                    <span>Nome</span>
                 </th>
                 <th>
-                    <div class="th-icone">
-                        <i class="bi bi-person-vcard"></i>
-                        <span>BI</span>
-                    </div>
+                    <span>BI</span>
                 </th>
                 <th>
-                    <div class="th-icone">
-                        <i class="bi bi-envelope"></i>
-                        <span>Email</span>
-                    </div>
+                    <span>Email</span>
                 </th>
                 <th>
-                    <div class="th-icone">
-                        <i class="bi bi-gender-ambiguous"></i>
-                        <span>Gênero</span>
-                    </div>
+                    <span>Gênero</span>
                 </th>
                 <th>
-                    <div class="th-icone">
-                        <i class="bi bi-calendar"></i>
-                        <span>Aniversário</span>
-                    </div>
+                    <span>Aniversário</span>
                 </th>
                 <th>
-                    <div class="th-icone">
-                        <i class="bi bi-person"></i>
-                        <span>Função</span>
-                    </div>
+                    <span>Função</span>
                 </th>
                 <th colspan="2">
-                    <div class="th-icone">
-                        <i class="bi bi-tools"></i>
-                        <span>Acção</span>
-                    </div>
+                    <span>Acção</span>
                 </th>
             </tr>
         </thead>
@@ -57,7 +36,8 @@
                     <td>{{ $funcionario->user->funcao() }}</td>
                     <td>
                         <button class="btn btn-outline-danger btn-sm rounded-pill btn-del" data-bs-toggle="modal"
-                            data-bs-target="#modalDelete" data-del="{{ route('funcionarios.destroy', $funcionario->user->id) }}">
+                            data-bs-target="#modalDelete"
+                            data-del="{{ route('funcionarios.destroy', $funcionario->user->id) }}">
                             <div class="th-icone">
                                 <i class="bi bi-trash"></i>
                                 <span>eliminar</span>
@@ -67,7 +47,8 @@
                     <td>
                         <button class="btn btn-outline-warning btn-sm rounded-pill btn-up" type="button"
                             data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
-                            aria-controls="flush-collapseOne" data-up="{{ route('funcionarios.update', $funcionario->user->id) }}">
+                            aria-controls="flush-collapseOne"
+                            data-up="{{ route('funcionarios.update', $funcionario->user->id) }}">
                             <div class="th-icone">
                                 <i class="bi bi-pencil-square"></i>
                                 <span>editar</span>

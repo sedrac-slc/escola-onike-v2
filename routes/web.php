@@ -24,6 +24,7 @@ Route::middleware(['auth'])->group( function () {
     Route::get('ajax-curso/{curso}', [App\Http\Controllers\TurmaDisciplinaHorarioController::class, 'ajaxCurso'])->name('turma-disciplina-horario.ajaxcurso');
     Route::get('ajax-turmas-professor/{professor}', [App\Http\Controllers\TurmaController::class, 'ajaxTurmaProfessor'])->name('turmas.ajaxprofessor');
     Route::get('ajax-matricula/{aluno}', [App\Http\Controllers\MatriculaController::class, 'ajaxTurma'])->name('aluno-matricula.ajaxturma');
+    Route::get('ajax-classe-by-curso', [App\Http\Controllers\ClasseController::class, 'findByCurso'])->name('classes.ajaxcurso');
     Route::get('ajax-turmas/{curso}', [App\Http\Controllers\TurmaController::class, 'ajaxTurma'])->name('turmas.ajaxturma');
     Route::get('ajax-alunos/{turma}', [App\Http\Controllers\TurmaController::class, 'ajaxAluno'])->name('turma.ajaxaluno');
     Route::get('ajax-search-turma', [App\Http\Controllers\TurmaController::class, 'ajaxSearch'])->name('turma.ajaxsearch');

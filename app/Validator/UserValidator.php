@@ -25,12 +25,16 @@ class UserValidator{
 
     private static function dataNascimentoMinimo($data)
     {
-        if (!isset($data['data_nascimento'])) {
-            return false;
-        }
+        if (!isset($data['data_nascimento']))  return false;
 
         $dataNascimento = new DateTime($data['data_nascimento']);
         $dataAtual = new DateTime();
+
+        if ($dataNascimento > $dataAtual) {
+            toastr()->warning("A data de nascimento não pode ser maior que a data atual.");
+            return false;
+        }
+
         $idade = $dataNascimento->diff($dataAtual)->y;
 
         if($idade >= 5)  return true;

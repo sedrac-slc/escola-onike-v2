@@ -3,52 +3,28 @@
         <thead>
             <tr>
                 <th>
-                    <div class="th-icone">
-                        <i class="bi bi-calendar-plus"></i>
-                        <span>Curso</span>
-                    </div>
+                    <span>Curso</span>
                 </th>
                 <th>
-                    <div class="th-icone">
-                        <i class="bi bi-calendar"></i>
-                        <span>Ano lectivo</span>
-                    </div>
+                    <span>Ano lectivo</span>
                 </th>
                 <th>
-                    <div class="th-icone">
-                        <i class="bi bi-brightness-high"></i>
-                        <span>Periodo</span>
-                    </div>
+                    <span>Periodo</span>
                 </th>
                 <th>
-                    <div class="th-icone">
-                        <i class="bi bi-1-circle"></i>
-                        <span>Sala</span>
-                    </div>
+                    <span>Sala</span>
                 </th>
                 <th>
-                    <div class="th-icone">
-                        <i class="bi bi-3-circle"></i>
-                        <span>Classe</span>
-                    </div>
+                    <span>Classe</span>
                 </th>
                 <th colspan="2">
-                    <div class="th-icone">
-                        <i class="bi bi-people"></i>
-                        <span>Alunos</span>
-                    </div>
+                    <span>Alunos</span>
                 </th>
                 <th colspan="2">
-                    <div class="th-icone">
-                        <i class="bi bi-book"></i>
-                        <span>Disciplina</span>
-                    </div>
+                    <span>Disciplina</span>
                 </th>
                 <th colspan="2">
-                    <div class="th-icone">
-                        <i class="bi bi-tools"></i>
-                        <span>Acção</span>
-                    </div>
+                    <span>Acção</span>
                 </th>
             </tr>
         </thead>
@@ -59,10 +35,10 @@
                     <td>{{ $turma->ano_lectivo }}</td>
                     <td data-value={{ $turma->periodo }}>{{ $turma->periodo() }}</td>
                     <td>{{ $turma->sala }}</td>
-                    <td data-value={{ $turma->ano_curricular }}>{{ $turma->ano_curricular() }}</td>
+                    <td>{{ $turma->classe->numeroClasse() }}</td>
                     <td>
-                        <button class="btn btn-outline-primary btn-sm rounded-pill btn-turma-matricula" data-bs-toggle="modal"
-                        data-bs-target="#modalMatriculaForm" data-turma="{{$turma->id}}">
+                        <button class="btn btn-outline-primary btn-sm rounded-pill btn-turma-matricula"
+                            data-bs-toggle="modal" data-bs-target="#modalMatriculaForm" data-turma="{{ $turma->id }}">
                             <div class="th-icone">
                                 <i class="bi bi-plus"></i>
                                 <span>adicionar</span>
@@ -71,9 +47,10 @@
                     </td>
                     <td>
                         @php $count =  $turma->alunos->count(); @endphp
-                        <button class="btn btn-sm btn-outline-info btn-sm rounded-pill @if($count > 0)  btn-turma-aluno-list @endif" type="button"
-                            @if($count > 0)  data-bs-toggle="modal" data-bs-target="#modalTurmaAlunoList" data-url="{{ route('turma.ajaxaluno', $turma->id) }}" data-turma="{{$turma->id}}" @else disabled @endif
-                        >
+                        <button
+                            class="btn btn-sm btn-outline-info btn-sm rounded-pill @if ($count > 0) btn-turma-aluno-list @endif"
+                            type="button"
+                            @if ($count > 0) data-bs-toggle="modal" data-bs-target="#modalTurmaAlunoList" data-url="{{ route('turma.ajaxaluno', $turma->id) }}" data-turma="{{ $turma->id }}" @else disabled @endif>
                             <div class="th-icone">
                                 <i class="bi bi-pencil-square"></i>
                                 <span>listar({{ $count }})</span>
@@ -81,8 +58,9 @@
                         </button>
                     </td>
                     <td>
-                        <button class="btn btn-sm btn-outline-primary btn-sm rounded-pill btn-curso-disciplina-horario" data-bs-toggle="modal"
-                        data-bs-target="#modalCursoDisciplinaHorario" data-turma="{{$turma->id}}">
+                        <button class="btn btn-sm btn-outline-primary btn-sm rounded-pill btn-curso-disciplina-horario"
+                            data-bs-toggle="modal" data-bs-target="#modalCursoDisciplinaHorario"
+                            data-turma="{{ $turma->id }}">
                             <div class="th-icone">
                                 <i class="bi bi-plus"></i>
                                 <span>adicionar</span>
@@ -91,9 +69,10 @@
                     </td>
                     <td>
                         @php $count =  $turma->disciplinas->count(); @endphp
-                        <button class="btn btn-sm btn-outline-info btn-sm rounded-pill @if($count > 0) btn-curso-disciplina-horario-list @endif" type="button"
-                            @if($count > 0)  data-bs-toggle="modal" data-bs-target="#modalCursoDisciplinaHorarioList" data-url="{{ route('turma-disciplina-horario.ajaxcurso', $turma->id) }}" @else disabled @endif
-                        >
+                        <button
+                            class="btn btn-sm btn-outline-info btn-sm rounded-pill @if ($count > 0) btn-curso-disciplina-horario-list @endif"
+                            type="button"
+                            @if ($count > 0) data-bs-toggle="modal" data-bs-target="#modalCursoDisciplinaHorarioList" data-url="{{ route('turma-disciplina-horario.ajaxcurso', $turma->id) }}" @else disabled @endif>
                             <div class="th-icone">
                                 <i class="bi bi-pencil-square"></i>
                                 <span>listar({{ $count }})</span>

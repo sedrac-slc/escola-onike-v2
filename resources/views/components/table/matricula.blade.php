@@ -3,46 +3,25 @@
         <thead>
             <tr>
                 <th>
-                    <div class="th-icone">
-                        <i class="bi bi-people"></i>
-                        <span>Aluno</span>
-                    </div>
+                    <span>Aluno</span>
                 </th>
                 <th>
-                    <div class="th-icone">
-                        <i class="bi-calendar-plus"></i>
-                        <span>Curso</span>
-                    </div>
+                    <span>Curso</span>
                 </th>
                 <th>
-                    <div class="th-icone">
-                        <i class="bi bi-calendar"></i>
-                        <span>Ano lectivo</span>
-                    </div>
+                    <span>Ano lectivo</span>
                 </th>
                 <th>
-                    <div class="th-icone">
-                        <i class="bi bi-3-circle"></i>
-                        <span>Classe</span>
-                    </div>
+                    <span>Classe</span>
                 </th>
                 <th>
-                    <div class="th-icone">
-                        <i class="bi bi-brightness-high"></i>
-                        <span>Periodo</span>
-                    </div>
+                    <span>Periodo</span>
                 </th>
                 <th>
-                    <div class="th-icone">
-                        <i class="bi bi-1-circle"></i>
-                        <span>Sala</span>
-                    </div>
+                    <span>Sala</span>
                 </th>
                 <th colspan="2">
-                    <div class="th-icone">
-                        <i class="bi bi-tools"></i>
-                        <span>Acção</span>
-                    </div>
+                    <span>Acção</span>
                 </th>
             </tr>
         </thead>
@@ -70,7 +49,8 @@
                     <td>
                         <button class="btn btn-outline-warning btn-sm rounded-pill btn-up" type="button"
                             data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
-                            aria-controls="flush-collapseOne" data-up="{{ route('matriculas.update', $matricula->id) }}"
+                            aria-controls="flush-collapseOne"
+                            data-up="{{ route('matriculas.update', $matricula->id) }}"
                             data-aluno="{{ $matricula->aluno_id }}" data-turma="{{ $matricula->turma_id }}">
                             <div class="th-icone">
                                 <i class="bi bi-pencil-square"></i>

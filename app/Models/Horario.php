@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Enum\DiaSemanaEnum;
+use App\Enum\PeriodoEnum;
 
 class Horario extends Model
 {
@@ -15,6 +16,7 @@ class Horario extends Model
         'id',
         'curso_id',
         'dia_semana',
+        'periodo',
         'disciplina_id',
         'hora_inicio',
         'hora_termino',
@@ -45,6 +47,10 @@ class Horario extends Model
 
     public function diaSemana(){
         return DiaSemanaEnum::diaSemana($this->dia_semana);
+    }
+
+    public function periodo(){
+        return PeriodoEnum::periodo($this->periodo);
     }
 
     public function text(){

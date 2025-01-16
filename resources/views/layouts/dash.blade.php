@@ -211,15 +211,16 @@
     @parent
     <script>
         const toggleSidebarBtn = document.querySelector('#toggle-sidebar-btn');
-        const sidebarNav = document.querySelector('.sidebar');
+        const sidebarNav = document.querySelector('aside#sidebar');
+        const main = document.querySelector('main#main');
 
         toggleSidebarBtn.addEventListener('click', () => {
             if(sidebarNav.classList.contains("d-none")){
                 sidebarNav.classList.remove('d-none');
-                sidebarNav.style.position = "fixed";
+                main.classList.remove('viewer');
             }else{
                 sidebarNav.classList.add('d-none');
-                sidebarNav.style.position = "relative";
+                main.classList.add('viewer');
             }
         });
     </script>

@@ -3,34 +3,19 @@
         <thead>
             <tr>
                 <th>
-                    <div class="th-icone">
-                        <i class="bi bi-123"></i>
-                        <span>Número</span>
-                    </div>
+                    <span>Número</span>
                 </th>
                 <th>
-                    <div class="th-icone">
-                        <i class="bi bi-calendar-check"></i>
-                        <span>Data inicio</span>
-                    </div>
+                    <span>Data inicio</span>
                 </th>
                 <th>
-                    <div class="th-icone">
-                        <i class="bi bi-calendar-x"></i>
-                        <span>Data termino</span>
-                    </div>
+                    <span>Data termino</span>
                 </th>
                 <th>
-                    <div class="th-icone">
-                        <i class="bi bi-123"></i>
-                        <span>Notas</span>
-                    </div>
+                    <span>Notas</span>
                 </th>
                 <th colspan="2">
-                    <div class="th-icone">
-                        <i class="bi bi-tools"></i>
-                        <span>Acção</span>
-                    </div>
+                    <span>Acção</span>
                 </th>
             </tr>
         </thead>
@@ -42,9 +27,10 @@
                     <td>{{ $trimestre->data_termino }}</td>
                     <td>
                         @php $count =  $trimestre->notas->count(); @endphp
-                        <button class="btn btn-outline-info btn-sm rounded-pill @if($count > 0) btn-nota-trimestre-list @endif" type="button"
-                            @if($count > 0)  data-bs-toggle="modal" data-bs-target="#modalTrimestreNotaList" data-url="{{ route('trimestre-nota.ajaxTrimestreNota', $trimestre->id) }}" @else disabled @endif
-                        >
+                        <button
+                            class="btn btn-outline-info btn-sm rounded-pill @if ($count > 0) btn-nota-trimestre-list @endif"
+                            type="button"
+                            @if ($count > 0) data-bs-toggle="modal" data-bs-target="#modalTrimestreNotaList" data-url="{{ route('trimestre-nota.ajaxTrimestreNota', $trimestre->id) }}" @else disabled @endif>
                             <div class="th-icone">
                                 <i class="bi bi-pencil-square"></i>
                                 <span>listar({{ $count }})</span>
@@ -61,7 +47,8 @@
                     <td>
                         <button class="btn btn-outline-warning btn-sm rounded-pill btn-up" type="button"
                             data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
-                            aria-controls="flush-collapseOne" data-up="{{ route('trimestres.update', $trimestre->id) }}">
+                            aria-controls="flush-collapseOne"
+                            data-up="{{ route('trimestres.update', $trimestre->id) }}">
                             <i class="bi bi-pencil-square"></i>
                             <span>editar</span>
                         </button>

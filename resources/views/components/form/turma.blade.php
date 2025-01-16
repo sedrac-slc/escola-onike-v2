@@ -2,7 +2,6 @@
     @isset($cursos)
         <div class="col-md-6 p-1">
             <label for="curso_id" class="form-label">
-                <i class="bi bi-calendar-plus"></i>
                 <span>Curso:</span>
                 <span class="text-danger">*</span>
             </label>
@@ -16,7 +15,6 @@
     @isset($periodos)
         <div class="col-md-6 p-1">
             <label for="periodo" class="form-label">
-                <i class="bi bi-brightness-high"></i>
                 <span>Periodo:</span>
                 <span class="text-danger">*</span>
             </label>
@@ -27,23 +25,16 @@
             </select>
         </div>
     @endisset
-    @isset($anoCurricular)
-        <div class="col-md-6 p-1">
-            <label for="ano_curricular" class="form-label">
-                <i class="bi bi-1-circle"></i>
-                <span>Classe:</span>
-                <span class="text-danger">*</span>
-            </label>
-            <select name="ano_curricular" id="ano_curricular" class="form-control">
-                @foreach ($anoCurricular as $key => $value)
-                    <option value="{{ $key }}">{{ $value }}</option>
-                @endforeach
-            </select>
-        </div>
-    @endisset
+    <div class="col-md-6 p-1">
+        <label for="classe_id" class="form-label">
+            <span>Classe:</span>
+            <span class="text-danger">*</span>
+        </label>
+        <select name="classe_id" id="classe_id" class="form-control">
+        </select>
+    </div>
     <div class="col-md-6 p-1">
         <label for="ano_lectivo" class="form-label" class="form-control">
-            <i class="bi bi-123"></i>
             <span>Ano lectivo:</span>
             <span class="text-danger">*</span>
         </label>
@@ -51,7 +42,6 @@
     </div>
     <div class="col-md-6 p-1">
         <label for="sala" class="form-label" class="form-control">
-            <i class="bi bi-1-circle"></i>
             <span>Sala:</span>
             <span class="text-danger">*</span>
         </label>
@@ -59,6 +49,5 @@
     </div>
 </div>
 <button class="btn btn-outline-primary rounded-pill mt-3">
-    <i class="bi bi-check-circle"></i>
     <span id="span-turma">cadastra</span>
 </button>

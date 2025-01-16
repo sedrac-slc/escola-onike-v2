@@ -3,46 +3,25 @@
         <thead>
             <tr>
                 <th>
-                    <div class="th-icone">
-                        <i class="bi bi-person"></i>
-                        <span>Nome</span>
-                    </div>
+                    <span>Nome</span>
                 </th>
                 <th>
-                    <div class="th-icone">
-                        <i class="bi bi-person-vcard"></i>
-                        <span>BI</span>
-                    </div>
+                    <span>BI</span>
                 </th>
                 <th>
-                    <div class="th-icone">
-                        <i class="bi bi-envelope"></i>
-                        <span>Email</span>
-                    </div>
+                    <span>Email</span>
                 </th>
                 <th>
-                    <div class="th-icone">
-                        <i class="bi bi-gender-ambiguous"></i>
-                        <span>Gênero</span>
-                    </div>
+                    <span>Gênero</span>
                 </th>
                 <th>
-                    <div class="th-icone">
-                        <i class="bi bi-calendar"></i>
-                        <span>Aniversário</span>
-                    </div>
+                    <span>Aniversário</span>
                 </th>
                 <th colspan="2">
-                    <div class="th-icone">
-                        <i class="bi bi-book"></i>
-                        <span>Matrícula</span>
-                    </div>
+                    <span>Matrícula</span>
                 </th>
                 <th colspan="2">
-                    <div class="th-icone">
-                        <i class="bi bi-tools"></i>
-                        <span>Acção</span>
-                    </div>
+                    <span>Acção</span>
                 </th>
             </tr>
         </thead>
@@ -55,8 +34,8 @@
                     <td data-value={{ $aluno->user->genero }}>{{ $aluno->user->genero() }}</td>
                     <td>{{ $aluno->user->data_nascimento }}</td>
                     <td>
-                        <button class="btn btn-outline-primary btn-sm rounded-pill btn-aluno-matricula" data-bs-toggle="modal"
-                        data-bs-target="#modalMatriculaForm" data-aluno="{{$aluno->id}}">
+                        <button class="btn btn-outline-primary btn-sm rounded-pill btn-aluno-matricula"
+                            data-bs-toggle="modal" data-bs-target="#modalMatriculaForm" data-aluno="{{ $aluno->id }}">
                             <div class="th-icone">
                                 <i class="bi bi-plus"></i>
                                 <span>adicionar</span>
@@ -65,9 +44,10 @@
                     </td>
                     <td>
                         @php $count =  $aluno->matriculas->count(); @endphp
-                        <button class="btn btn-outline-info btn-sm rounded-pill @if($count > 0) btn-aluno-matricula-list  @endif" type="button"
-                            @if($count > 0)  data-bs-toggle="modal" data-bs-target="#modalMatriculaList" data-url="{{ route('aluno-matricula.ajaxturma', $aluno->id) }}" data-aluno="{{$aluno->id}}" @endif
-                        >
+                        <button
+                            class="btn btn-outline-info btn-sm rounded-pill @if ($count > 0) btn-aluno-matricula-list @endif"
+                            type="button"
+                            @if ($count > 0) data-bs-toggle="modal" data-bs-target="#modalMatriculaList" data-url="{{ route('aluno-matricula.ajaxturma', $aluno->id) }}" data-aluno="{{ $aluno->id }}" @endif>
                             <div class="th-icone">
                                 <i class="bi bi-pencil-square"></i>
                                 <span>listar({{ $count }})</span>

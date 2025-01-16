@@ -69,6 +69,7 @@
         const btnUps = document.querySelectorAll('.btn-up');
         const btnDels = document.querySelectorAll('.btn-del');
         const btnModals = document.querySelectorAll('.btn-turma-matricula');
+        const select = document.querySelector("select#curso_id");
 
         const method = document.querySelector('[name="_method"]');
         const span = document.querySelector('#formadd');
@@ -143,6 +144,24 @@
                 </tr>`
             });
         });
+
+        function ajaxGetClasses(){
+            const selectClasse = document.querySelector("select#classe_id");
+            fetch("{{route('classes.ajaxcurso')}}"+`?curso=${select.value}`)
+             .then(resp => resp.json())
+             .then(resp => {
+                let html = "";
+                console.log(resp)
+                resp.forEach(i => html += `<option value="${i.id}">${i.num_classe}</option>`)
+                selectClasse.innerHTML = html;
+             })
+        }
+
+        ajaxGetClasses();
+
+        select.addEventListener('change', ()=>{
+            ajaxGetClasses();
+        })
 
     </script>
 @endsection

@@ -2,13 +2,13 @@
 <div class="row">
     <div class="col-md-12">
         <label for="aluno" class="form-label">
-            <i class="bi bi-key"></i>
             <span>Aluno:</span>
             @if (!isset($require))
                 <span class="text-danger">*</span>
             @endif
         </label>
-        <input type="text" id="aluno_search" name="aluno" class="form-control" placeholder="Procurar aluno..." @isset($disabled) disabled @endisset />
+        <input type="text" id="aluno_search" name="aluno" class="form-control" placeholder="Procurar aluno..."
+            @isset($disabled) disabled @endisset />
         <div class="table-responsive">
             <table class="table text-center">
                 <thead>
@@ -17,34 +17,19 @@
                             <span>#</span>
                         </th>
                         <th>
-                            <div class="th-icone">
-                                <i class="bi bi-person"></i>
-                                <span>Nome</span>
-                            </div>
+                            <span>Nome</span>
                         </th>
                         <th>
-                            <div class="th-icone">
-                                <i class="bi bi-person-vcard"></i>
-                                <span>BI</span>
-                            </div>
+                            <span>BI</span>
                         </th>
                         <th>
-                            <div class="th-icone">
-                                <i class="bi bi-envelope"></i>
-                                <span>Email</span>
-                            </div>
+                            <span>Email</span>
                         </th>
                         <th>
-                            <div class="th-icone">
-                                <i class="bi bi-gender-ambiguous"></i>
-                                <span>Gênero</span>
-                            </div>
+                            <span>Gênero</span>
                         </th>
                         <th>
-                            <div class="th-icone">
-                                <i class="bi bi-calendar"></i>
-                                <span>Aniversário</span>
-                            </div>
+                            <span>Aniversário</span>
                         </th>
                     </tr>
                 </thead>
@@ -54,13 +39,13 @@
     </div>
     <div class="col-md-12">
         <label for="turma" class="form-label">
-            <i class="bi bi-collection"></i>
             <span>Turma:</span>
             @if (!isset($require))
                 <span class="text-danger">*</span>
             @endif
         </label>
-        <input type="text" id="turma_search" name="turma" class="form-control" placeholder="Procura turma ..." @isset($disabled) disabled @endisset />
+        <input type="text" id="turma_search" name="turma" class="form-control" placeholder="Procura turma ..."
+            @isset($disabled) disabled @endisset />
         <div class="table-responsive">
             <table class="table text-center">
                 <thead>
@@ -69,34 +54,19 @@
                             <span>#</span>
                         </th>
                         <th>
-                            <div class="th-icone">
-                                <i class="bi bi-calendar-plus"></i>
-                                <span>Curso</span>
-                            </div>
+                            <span>Curso</span>
                         </th>
                         <th>
-                            <div class="th-icone">
-                                <i class="bi bi-calendar"></i>
-                                <span>Ano lectivo</span>
-                            </div>
+                            <span>Ano lectivo</span>
                         </th>
                         <th>
-                            <div class="th-icone">
-                                <i class="bi bi-brightness-high"></i>
-                                <span>Periodo</span>
-                            </div>
+                            <span>Periodo</span>
                         </th>
                         <th>
-                            <div class="th-icone">
-                                <i class="bi bi-1-circle"></i>
-                                <span>Sala</span>
-                            </div>
+                            <span>Sala</span>
                         </th>
                         <th>
-                            <div class="th-icone">
-                                <i class="bi bi-3-circle"></i>
-                                <span>Classe</span>
-                            </div>
+                            <span>Classe</span>
                         </th>
                     </tr>
                 </thead>
@@ -105,11 +75,10 @@
         </div>
     </div>
 </div>
-@if(!isset($hidden_cadastra))
-<button class="btn btn-outline-primary rounded-pill mt-3">
-    <i class="bi bi-check-circle"></i>
-    <span id="span-curso">cadastra</span>
-</button>
+@if (!isset($hidden_cadastra))
+    <button class="btn btn-outline-primary rounded-pill mt-3">
+        <span id="span-curso">cadastra</span>
+    </button>
 @endif
 <script>
     const inputAlunoSearch = document.querySelector("#aluno_search");
@@ -117,13 +86,14 @@
         createAluno("", false);
     });
 
-    function createAluno(extra, check){
+    function createAluno(extra, check) {
         fetch("{{ route('aluno.ajaxsearch') }}" + `?content=${inputAlunoSearch.value}&${extra}`)
             .then(resp => resp.json())
             .then(resp => {
                 let html = ``
-                resp.forEach(item => { html +=
-                `<tr>
+                resp.forEach(item => {
+                    html +=
+                        `<tr>
                     <td>
                         <input type="radio" class='form-check' name="aluno_id" value="${item.id}" checked="${check}"/>
                     </td>
@@ -143,13 +113,14 @@
         createTurma("", false);
     });
 
-    function createTurma(extra, check){
+    function createTurma(extra, check) {
         fetch("{{ route('turma.ajaxsearch') }}" + `?content=${inputTurmaSearch.value}&${extra}`)
             .then(resp => resp.json())
             .then(resp => {
                 let html = ``
-                resp.forEach(item => { html +=
-                `<tr>
+                resp.forEach(item => {
+                    html +=
+                        `<tr>
                     <td>
                         <input type="radio" class='form-check' name="turma_id" value="${item.id}" checked="${check}"/>
                     </td>

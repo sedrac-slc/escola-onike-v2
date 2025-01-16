@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Enum\NumeroClasseEnum;
 
 return new class extends Migration
 {
@@ -13,9 +14,8 @@ return new class extends Migration
     {
         Schema::create('classes', function (Blueprint $table) {
             $table->uuid('id')->primary()->default(DB::raw('uuid()'));
-            $table->foreignUuid('turma_id')->constrained('turmas')->cascadeOnDelete();
             $table->foreignUuid('curso_id')->constrained('cursos')->cascadeOnDelete();
-            $table->string("numero_classe");
+            $table->enum('num_classe',NumeroClasseEnum::keys());
             $table->uuid('created_by')->nullable();
             $table->uuid('updated_by')->nullable();
             $table->text('concat_fields')->nullable();

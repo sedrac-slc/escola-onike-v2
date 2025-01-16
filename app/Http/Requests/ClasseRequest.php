@@ -24,9 +24,8 @@ class ClasseRequest extends FormRequest
     public function rules()
     {
         return [
-            'turma_id' =>  ['required','string'],
             'curso_id' =>  ['required','string'],
-            'numero_classe' => ['required', 'string'],
+            'num_classe' => ['required', 'string'],
         ];
     }
 }

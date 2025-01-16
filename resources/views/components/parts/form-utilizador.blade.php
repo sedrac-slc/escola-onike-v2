@@ -1,7 +1,6 @@
 @php $generos = App\Enum\GeneroEnum::list(); @endphp
 <div class="col-md-6 p-1">
     <label for="yourUsername" class="form-label">
-        <i class="bi bi-person"></i>
         <span>Nome</span>
         <small class="text-danger">*</small>
     </label>
@@ -13,7 +12,6 @@
 </div>
 <div class="col-md-6 p-1">
     <label for="yourEmail" class="form-label">
-        <i class="bi bi-envelope"></i>
         <span>Email</span>
         <small class="text-danger">*</small>
     </label>
@@ -27,7 +25,6 @@
 @if(!isset($hidden_password))
 <div class="col-md-6 p-1 item-password">
     <label for="yourPassword" class="form-label">
-        <i class="bi bi-shield"></i>
         <span>Senha:</span>
     </label>
     <input type="password" name="password" class="form-control" id="yourPassword" required
@@ -36,7 +33,6 @@
 </div>
 <div class="col-md-6 p-1 item-password">
     <label for="yourPasswordConfirmation" class="form-label">
-        <i class="bi bi-key"></i>
         <span>Confirma(senha):</span>
     </label>
     <input type="password" name="password_confirmation" class="form-control" id="yourPasswordConfirmation" required
@@ -46,7 +42,6 @@
 @endif
 <div class="col-md-6 p-1">
     <label for="genero" class="form-label">
-        <i class="bi bi-gender-ambiguous"></i>
         <span>Gênero</span>
         <small class="text-danger">*</small>
     </label>
@@ -58,7 +53,6 @@
 </div>
 <div class="col-md-6 p-1">
     <label for="yourBithday" class="form-label">
-        <i class="bi bi-calendar"></i>
         <span>Data nascimento</span>
         <small class="text-danger">*</small>
     </label>
@@ -68,7 +62,6 @@
 </div>
 <div class="col-md-6 p-1">
     <label for="yourBi" class="form-label">
-        <i class="bi bi-person-vcard"></i>
         <span>Bilhete de identidade</span>
         <small class="text-danger">*</small>
     </label>

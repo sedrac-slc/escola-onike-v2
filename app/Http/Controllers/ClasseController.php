@@ -20,8 +20,13 @@ class ClasseController extends Controller
         ]);
     }
 
+    public function findByCurso(Request $request){
+        if(!isset($request->curso)) return [];
+        return Classe::where('curso_id', $request->curso)->orderBy('created_at','DESC')->get();
+    }
+
     public function store(ClasseRequest $request){
-        if(classe::where($request->only(['curso_id', 'turma_id', 'numero_classe']))->exists()){
+        if(classe::where($request->only(['curso_id','num_classe']))->exists()){
             toastr()->Warning("O registro já se encontra cadastrado");
             return redirect()->back();
         }

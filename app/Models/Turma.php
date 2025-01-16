@@ -15,6 +15,7 @@ class Turma extends Model
     protected $fillable = [
         'id',
         'curso_id',
+        'classe_id',
         'ano_lectivo',
         'ano_curricular',
         'periodo',
@@ -50,6 +51,10 @@ class Turma extends Model
 
     public function curso(){
         return $this->belongsTo(Curso::class);
+    }
+
+    public function classe(){
+        return $this->belongsTo(Classe::class);
     }
 
     public function periodo(){

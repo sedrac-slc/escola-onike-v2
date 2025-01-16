@@ -3,52 +3,28 @@
         <thead>
             <tr>
                 <th>
-                    <div class="th-icone">
-                        <i class="bi bi-person"></i>
-                        <span>Nome</span>
-                    </div>
+                    <span>Nome</span>
                 </th>
                 <th>
-                    <div class="th-icone">
-                        <i class="bi bi-person-vcard"></i>
-                        <span>BI</span>
-                    </div>
+                    <span>BI</span>
                 </th>
                 <th>
-                    <div class="th-icone">
-                        <i class="bi bi-envelope"></i>
-                        <span>Email</span>
-                    </div>
+                    <span>Email</span>
                 </th>
                 <th>
-                    <div class="th-icone">
-                        <i class="bi bi-gender-ambiguous"></i>
-                        <span>Gênero</span>
-                    </div>
+                    <span>Gênero</span>
                 </th>
                 <th>
-                    <div class="th-icone">
-                        <i class="bi bi-calendar"></i>
-                        <span>Aniversário</span>
-                    </div>
+                    <span>Aniversário</span>
                 </th>
                 <th>
-                    <div class="th-icone">
-                        <i class="bi bi-calendar-plues"></i>
-                        <span>Formação</span>
-                    </div>
+                    <span>Formação</span>
                 </th>
                 <th colspan="2">
-                    <div class="th-icone">
-                        <i class="bi bi-book"></i>
-                        <span>Disciplina</span>
-                    </div>
+                    <span>Disciplina</span>
                 </th>
                 <th colspan="2">
-                    <div class="th-icone">
-                        <i class="bi bi-tools"></i>
-                        <span>Acção</span>
-                    </div>
+                    <span>Acção</span>
                 </th>
             </tr>
         </thead>
@@ -62,8 +38,9 @@
                     <td>{{ $professor->user->data_nascimento }}</td>
                     <td>{{ $professor->formacao }}</td>
                     <td>
-                        <button class="btn btn-sm btn-outline-primary btn-sm rounded-pill btn-curso-disciplina-horario" data-bs-toggle="modal"
-                        data-bs-target="#modalCursoDisciplinaHorario" data-professor="{{$professor->id}}">
+                        <button class="btn btn-sm btn-outline-primary btn-sm rounded-pill btn-curso-disciplina-horario"
+                            data-bs-toggle="modal" data-bs-target="#modalCursoDisciplinaHorario"
+                            data-professor="{{ $professor->id }}">
                             <div class="th-icone">
                                 <i class="bi bi-plus"></i>
                                 <span>adicionar</span>
@@ -73,7 +50,8 @@
                     <td>
                         @php $count =  $professor->leciona->count(); @endphp
                         <button
-                            class="btn btn-outline-info btn-sm rounded-pill @if ($count > 0) btn-curso-disciplina-horario-list @endif" type="button"
+                            class="btn btn-outline-info btn-sm rounded-pill @if ($count > 0) btn-curso-disciplina-horario-list @endif"
+                            type="button"
                             @if ($count > 0) data-bs-toggle="modal" data-bs-target="#modalCursoDisciplinaHorarioList" data-url="{{ route('turma-disciplina-horario.ajaxprofessor', $professor->id) }}" data-professor="{{ $professor->id }}" @else disabled @endif>
                             <div class="th-icone">
                                 <i class="bi bi-pencil-square"></i>

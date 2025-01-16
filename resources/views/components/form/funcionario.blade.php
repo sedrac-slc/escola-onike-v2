@@ -5,7 +5,6 @@
     @isset($funcoes)
         <div class="col-md-6 p-1">
             <label  for="funcao" class="form-label">
-                <i class="bi bi-book"></i>
                 <span>Funções:</span>
                 <span class="text-danger">*</span>
             </label>
@@ -18,6 +17,5 @@
     @endisset
 </div>
 <button class="btn btn-outline-primary rounded-pill mt-3">
-    <i class="bi bi-check-circle"></i>
     <span id="span-funcionario">cadastra</span>
 </button>
