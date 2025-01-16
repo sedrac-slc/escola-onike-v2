@@ -44,9 +44,15 @@ class DatabaseSeeder extends Seeder
         return Trimestre::updateOrCreate(['data_inicio' => $data['data_inicio'], 'data_termino' => $data['data_termino'] ], $data);
     }
 
-    private function createHorario($data){
+    private function createHorario($data, $disciplina, $curso){
         $data['concat_fields'] = $data['dia_semana'].'|'.$data['hora_inicio'].'|'.$data['hora_termino'];
-        return Horario::updateOrCreate(['dia_semana' => $data['dia_semana'], 'hora_inicio' => $data['hora_inicio'], 'hora_termino' => $data['hora_termino'] ], $data);
+        return Horario::updateOrCreate([
+            'dia_semana' => $data['dia_semana'],
+            'hora_inicio' => $data['hora_inicio'],
+            'hora_termino' => $data['hora_termino'],
+            'disciplina_id' => $disciplina->id,
+            'curso_id' => $curso->id,
+        ], $data);
     }
 
     private function createDisciplina($data){
@@ -243,30 +249,6 @@ class DatabaseSeeder extends Seeder
             'updated_by' => $user->id
         ]);
 
-        $horarioOne = $this->createHorario([
-            'dia_semana' => DiaSemanaEnum::SEGUNDA_FEIRA,
-            'hora_inicio' => "08:00:00",
-            'hora_termino' => "09:00:00",
-            'created_by' => $user->id,
-            'updated_by' => $user->id
-        ]);
-
-        $horarioTwo = $this->createHorario([
-            'dia_semana' => DiaSemanaEnum::SEGUNDA_FEIRA,
-            'hora_inicio' => "09:05:00",
-            'hora_termino' => "10:05:00",
-            'created_by' => $user->id,
-            'updated_by' => $user->id
-        ]);
-
-        $horarioThree = $this->createHorario([
-            'dia_semana' => DiaSemanaEnum::SEGUNDA_FEIRA,
-            'hora_inicio' => "10:10:00",
-            'hora_termino' => "12:00:00",
-            'created_by' => $user->id,
-            'updated_by' => $user->id
-        ]);
-
         $disciplinaOne = $this->createDisciplina([
             'nome' => 'Física',
             'created_by' => $user->id,
@@ -290,6 +272,56 @@ class DatabaseSeeder extends Seeder
             'created_by' => $user->id,
             'updated_by' => $user->id
         ]);
+
+
+
+        $horarioOne = $this->createHorario([
+            'dia_semana' => DiaSemanaEnum::SEGUNDA_FEIRA,
+            'hora_inicio' => "08:00:00",
+            'hora_termino' => "09:00:00",
+            'created_by' => $user->id,
+            'updated_by' => $user->id
+        ], $disciplinaThree, $cursoOne);
+
+        $horarioTwo = $this->createHorario([
+            'dia_semana' => DiaSemanaEnum::SEGUNDA_FEIRA,
+            'hora_inicio' => "09:05:00",
+            'hora_termino' => "10:05:00",
+            'created_by' => $user->id,
+            'updated_by' => $user->id
+        ], $disciplinaFour, $cursoOne);
+
+        $horarioThree = $this->createHorario([
+            'dia_semana' => DiaSemanaEnum::SEGUNDA_FEIRA,
+            'hora_inicio' => "10:10:00",
+            'hora_termino' => "12:00:00",
+            'created_by' => $user->id,
+            'updated_by' => $user->id
+        ], $disciplinaThree, $cursoOne);
+
+        $horarioFour = $this->createHorario([
+            'dia_semana' => DiaSemanaEnum::TERCA_FEIRA,
+            'hora_inicio' => "08:00:00",
+            'hora_termino' => "09:00:00",
+            'created_by' => $user->id,
+            'updated_by' => $user->id
+        ], $disciplinaTwo, $cursoTwo);
+
+        $horarioFive = $this->createHorario([
+            'dia_semana' => DiaSemanaEnum::TERCA_FEIRA,
+            'hora_inicio' => "09:05:00",
+            'hora_termino' => "10:05:00",
+            'created_by' => $user->id,
+            'updated_by' => $user->id
+        ], $disciplinaOne, $cursoTwo);
+
+        $horarioSix = $this->createHorario([
+            'dia_semana' => DiaSemanaEnum::TERCA_FEIRA,
+            'hora_inicio' => "10:10:00",
+            'hora_termino' => "12:00:00",
+            'created_by' => $user->id,
+            'updated_by' => $user->id
+        ], $disciplinaTwo, $cursoTwo);
 
         $professorOne = $this->createProfessor([
             'user_id' => $userTwo->id,

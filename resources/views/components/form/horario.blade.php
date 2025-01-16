@@ -1,32 +1,58 @@
 @php $dia_semanas = App\Enum\DiaSemanaEnum::list(); @endphp
+@php $disciplines = App\Models\Disciplina::get(); @endphp
+@php $cursos = App\Models\Curso::get(); @endphp
+
 <div class="row">
     <div class="col-md-6 p-1">
+        <label for="curso_id" class="form-label" class="form-control">
+            <span>Curso:</span>
+            @if (!isset($require))
+                <span class="text-danger">*</span>
+            @endif
+        </label>
+        <select id="curso_id" name="curso_id" class="form-control" value="{{ $horario->curso_id ?? old('curso_id') }}">
+            @foreach ($cursos as $curso)
+                <option value="{{$curso->id}}">{{$curso->nome}}</option>
+            @endforeach
+        </select>
+    </div>
+    <div class="col-md-6 p-1">
+        <label for="disciplina_id" class="form-label" class="form-control">
+            <span>Disciplina:</span>
+            @if (!isset($require))
+                <span class="text-danger">*</span>
+            @endif
+        </label>
+        <select id="disciplina_id" name="disciplina_id" class="form-control" value="{{ $horario->discipline_id ?? old('disciplina_id') }}">
+            @foreach ($disciplines as $discipline)
+                <option value="{{$discipline->id}}">{{$discipline->nome}}</option>
+            @endforeach
+        </select>
+    </div>
+    <div class="col-md-6 p-1">
         <label for="hora_inicio" class="form-label" class="form-control">
-            <i class="bi bi-calendar-check"></i>
             <span>Hora inicio:</span>
             @if (!isset($require))
                 <span class="text-danger">*</span>
             @endif
         </label>
         <input type="time" id="hora_inicio" name="hora_inicio" class="form-control"
-            value="{{ $trimestre->hora_inicio ?? old('hora_inicio') }}"
+            value="{{ $horario->hora_inicio ?? old('hora_inicio') }}"
             @isset($disabled) disabled @endisset />
     </div>
     <div class="col-md-6 p-1">
         <label for="hora_termino" class="form-label" class="form-control">
-            <i class="bi bi-calendar-x"></i>
             <span>Hora termino:</span>
             @if (!isset($require))
                 <span class="text-danger">*</span>
             @endif
         </label>
         <input type="time" id="hora_termino" name="hora_termino" class="form-control"
-            value="{{ $trimestre->hora_termino ?? old('hora_termino') }}"
+            value="{{ $horario->hora_termino ?? old('hora_termino') }}"
             @isset($disabled) disabled @endisset />
     </div>
     <div class="col-md-6 p-1">
         <label for="dia_semana" class="form-label">
-            <i class="bi bi-brightness-high"></i>
             <span>Dia da semana:</span>
             <span class="text-danger">*</span>
         </label>

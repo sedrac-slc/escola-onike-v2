@@ -3,34 +3,25 @@
         <thead>
             <tr>
                 <th>
-                    <div class="th-icone">
-                        <i class="bi bi-calendar-check"></i>
-                        <span>Dia semana</span>
-                    </div>
+                    <span>Dia semana</span>
                 </th>
                 <th>
-                    <div class="th-icone">
-                        <i class="bi bi-calendar"></i>
-                        <span>Hora inicio</span>
-                    </div>
+                    <span>Curso</span>
                 </th>
                 <th>
-                    <div class="th-icone">
-                        <i class="bi bi-calendar-x"></i>
-                        <span>Hora termino</span>
-                    </div>
+                    <span>Disciplina</span>
+                </th>
+                <th>
+                    <span>Hora inicio</span>
+                </th>
+                <th>
+                    <span>Hora termino</span>
                 </th>
                 <th colspan="2">
-                    <div class="th-icone">
-                        <i class="bi bi-book"></i>
-                        <span>Disciplina</span>
-                    </div>
+                    <span>Disciplina</span>
                 </th>
                 <th colspan="2">
-                    <div class="th-icone">
-                        <i class="bi bi-tools"></i>
-                        <span>Acção</span>
-                    </div>
+                    <span>Acção</span>
                 </th>
             </tr>
         </thead>
@@ -38,11 +29,14 @@
             @foreach ($horarios as $horario)
                 <tr>
                     <td data-value={{ $horario->dia_semana }}>{{ $horario->diaSemana() }}</td>
+                    <td>{{ $horario->curso->nome }}</td>
+                    <td>{{ $horario->disciplina->nome }}</td>
                     <td>{{ $horario->hora_inicio }}</td>
                     <td>{{ $horario->hora_termino }}</td>
                     <td>
-                        <button class="btn btn-outline-primary btn-sm rounded-pill btn-turma-disciplina-horario" data-bs-toggle="modal"
-                        data-bs-target="#modalProfessorDisciplinaHorario" data-horario="{{$horario->id}}">
+                        <button class="btn btn-outline-primary btn-sm rounded-pill btn-turma-disciplina-horario"
+                            data-bs-toggle="modal" data-bs-target="#modalProfessorDisciplinaHorario"
+                            data-horario="{{ $horario->id }}">
                             <div class="th-icone">
                                 <i class="bi bi-plus"></i>
                                 <span>adicionar</span>
@@ -51,9 +45,10 @@
                     </td>
                     <td>
                         @php $count =  countHorario($horario->id); @endphp
-                        <button class="btn btn-outline-info btn-sm rounded-pill @if($count > 0) btn-curso-disciplina-horario-list @endif" type="button"
-                            @if($count > 0)  data-bs-toggle="modal" data-bs-target="#modalCursoDisciplinaHorarioList" data-url="{{ route('turma-disciplina-horario.ajaxDisciplinaHorario', $horario->id) }}" @else disabled @endif
-                        >
+                        <button
+                            class="btn btn-outline-info btn-sm rounded-pill @if ($count > 0) btn-curso-disciplina-horario-list @endif"
+                            type="button"
+                            @if ($count > 0) data-bs-toggle="modal" data-bs-target="#modalCursoDisciplinaHorarioList" data-url="{{ route('turma-disciplina-horario.ajaxDisciplinaHorario', $horario->id) }}" @else disabled @endif>
                             <div class="th-icone">
                                 <i class="bi bi-pencil-square"></i>
                                 <span>listar({{ $count }})</span>

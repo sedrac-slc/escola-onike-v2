@@ -12,7 +12,7 @@ use App\Http\Requests\HorarioRequest;
 class HorarioController extends Controller
 {
     public function index(){
-        $horarios = Horario::orderBy('created_at','DESC')->paginate();
+        $horarios = Horario::with('curso','disciplina')->orderBy('created_at','DESC')->paginate();
         return view('pages.horario',[
             'horarios' => $horarios,
             'painel' => 'horario'

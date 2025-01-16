@@ -13,7 +13,9 @@ class Horario extends Model
 
     protected $fillable = [
         'id',
+        'curso_id',
         'dia_semana',
+        'disciplina_id',
         'hora_inicio',
         'hora_termino',
         'concat_fields',
@@ -31,6 +33,10 @@ class Horario extends Model
 
     public function disciplina(){
         return $this->belongsTo(Disciplina::class);
+    }
+
+    public function curso(){
+        return $this->belongsTo(Curso::class);
     }
 
     public function professores(){
