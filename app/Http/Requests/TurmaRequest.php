@@ -25,10 +25,10 @@ class TurmaRequest extends FormRequest
     {
         return [
             'ano_lectivo' => ['required','string'],
+            'classe_id' => ['required','string'],
             'curso_id' => ['required','string'],
             'periodo' => ['required','string','regex:/[MANHA|TARDE|NOITE]/i'],
             'sala' => ['required','string'],
-            'ano_curricular' => []
         ];
     }
 }

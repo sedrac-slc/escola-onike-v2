@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CursoRequest;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Curso;
 use Exception;
 
@@ -54,6 +55,12 @@ class CursoController extends Controller
             toastr()->error("Operação de eliminação não foi possível a sua realização");
         }
         return redirect()->back();
+    }
+
+    public function horarioPDF($id){
+        $curso = Curso::find($id);
+        $pdf = Pdf::loadView('pdfs.horario', ["curso" => $curso]);
+        return $pdf->stream("Horário {$curso->nome}.pdf");
     }
 
 }

@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 if(!function_exists('pivot_audict')){
 
     function pivot_audict($data){
@@ -55,3 +57,25 @@ if(!function_exists('countDisciplina')){
 
 }
 
+
+if(!function_exists('horarioDisc')){
+
+    function horarioDisc($curso, $periodo, $dia_semana, $start, $end){
+        // Converte os horários de início e término para objetos Carbon
+        $startTime = Carbon::createFromFormat('H\h:i\m', $start)->format('H:i:s');
+        $endTime = Carbon::createFromFormat('H\h:i\m', $end)->format('H:i:s');
+        // Consulta com os horários tratados como objetos de tempo
+        $data = App\Models\Horario::where('curso_id', $curso->id)
+            ->where('periodo', $periodo)
+            ->where('dia_semana', $dia_semana)
+            ->where('hora_inicio', '>=', $startTime)
+            // ->where('hora_termino', '<=', $endTime)
+            ->orderBy('id', 'desc')
+            ->first();
+
+        if(!isset($data->id)) return "-";
+
+        return $data->disciplina->nome;
+    }
+
+}

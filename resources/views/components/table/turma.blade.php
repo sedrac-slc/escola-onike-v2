@@ -6,6 +6,9 @@
                     <span>Curso</span>
                 </th>
                 <th>
+                    <span>Classe</span>
+                </th>
+                <th>
                     <span>Ano lectivo</span>
                 </th>
                 <th>
@@ -13,9 +16,6 @@
                 </th>
                 <th>
                     <span>Sala</span>
-                </th>
-                <th>
-                    <span>Classe</span>
                 </th>
                 <th colspan="2">
                     <span>Alunos</span>
@@ -32,22 +32,22 @@
             @foreach ($turmas as $turma)
                 <tr>
                     <td data-value={{ $turma->curso_id }}>{{ $turma->curso->text() }}</td>
+                    <td data-value={{ $turma->classe->id }}>{{ $turma->classe->numeroClasse() }}</td>
                     <td>{{ $turma->ano_lectivo }}</td>
                     <td data-value={{ $turma->periodo }}>{{ $turma->periodo() }}</td>
                     <td>{{ $turma->sala }}</td>
-                    <td>{{ $turma->classe->numeroClasse() }}</td>
                     <td>
-                        <button class="btn btn-outline-primary btn-sm rounded-pill btn-turma-matricula"
+                        <a href="#" class="btn btn-outline-primary btn-sm rounded-pill btn-turma-matricula"
                             data-bs-toggle="modal" data-bs-target="#modalMatriculaForm" data-turma="{{ $turma->id }}">
                             <div class="th-icone">
                                 <i class="bi bi-plus"></i>
                                 <span>adicionar</span>
                             </div>
-                        </button>
+                        </a>
                     </td>
                     <td>
                         @php $count =  $turma->alunos->count(); @endphp
-                        <button
+                        <a href="#"
                             class="btn btn-sm btn-outline-info btn-sm rounded-pill @if ($count > 0) btn-turma-aluno-list @endif"
                             type="button"
                             @if ($count > 0) data-bs-toggle="modal" data-bs-target="#modalTurmaAlunoList" data-url="{{ route('turma.ajaxaluno', $turma->id) }}" data-turma="{{ $turma->id }}" @else disabled @endif>
@@ -55,21 +55,21 @@
                                 <i class="bi bi-pencil-square"></i>
                                 <span>listar({{ $count }})</span>
                             </div>
-                        </button>
+                        </a>
                     </td>
                     <td>
-                        <button class="btn btn-sm btn-outline-primary btn-sm rounded-pill btn-curso-disciplina-horario"
+                        <a href="#" class="btn btn-sm btn-outline-primary btn-sm rounded-pill btn-curso-disciplina-horario"
                             data-bs-toggle="modal" data-bs-target="#modalCursoDisciplinaHorario"
                             data-turma="{{ $turma->id }}">
                             <div class="th-icone">
                                 <i class="bi bi-plus"></i>
                                 <span>adicionar</span>
                             </div>
-                        </button>
+                        </a>
                     </td>
                     <td>
                         @php $count =  $turma->disciplinas->count(); @endphp
-                        <button
+                        <a href="#"
                             class="btn btn-sm btn-outline-info btn-sm rounded-pill @if ($count > 0) btn-curso-disciplina-horario-list @endif"
                             type="button"
                             @if ($count > 0) data-bs-toggle="modal" data-bs-target="#modalCursoDisciplinaHorarioList" data-url="{{ route('turma-disciplina-horario.ajaxcurso', $turma->id) }}" @else disabled @endif>
@@ -77,22 +77,24 @@
                                 <i class="bi bi-pencil-square"></i>
                                 <span>listar({{ $count }})</span>
                             </div>
-                        </button>
+                        </a>
                     </td>
                     <td>
-                        <button class="btn btn-sm btn-outline-danger btn-sm rounded-pill btn-del" data-bs-toggle="modal"
-                            data-bs-target="#modalDelete" data-del="{{ route('turmas.destroy', $turma->id) }}">
+                        <a href="#" class="btn btn-sm btn-outline-danger btn-sm rounded-pill btn-del"
+                            data-bs-toggle="modal" data-bs-target="#modalDelete"
+                            data-del="{{ route('turmas.destroy', $turma->id) }}">
                             <i class="bi bi-trash"></i>
                             <span>eliminar</span>
-                        </button>
+                        </a>
                     </td>
                     <td>
-                        <button class="btn btn-sm btn-outline-warning btn-sm rounded-pill btn-up" type="button"
-                            data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
-                            aria-controls="flush-collapseOne" data-up="{{ route('turmas.update', $turma->id) }}">
+                        <a href="#" class="btn btn-sm btn-outline-warning btn-sm rounded-pill btn-up"
+                            type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne"
+                            aria-expanded="false" aria-controls="flush-collapseOne"
+                            data-up="{{ route('turmas.update', $turma->id) }}">
                             <i class="bi bi-pencil-square"></i>
                             <span>editar</span>
-                        </button>
+                        </a>
                     </td>
                 </tr>
             @endforeach

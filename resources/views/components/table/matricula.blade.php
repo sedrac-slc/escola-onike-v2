@@ -38,16 +38,16 @@
                     </td>
                     <td>{{ $matricula->turma->sala }}</td>
                     <td>
-                        <button class="btn btn-outline-danger btn-sm rounded-pill btn-del" data-bs-toggle="modal"
+                        <a href="#" class="btn btn-outline-danger btn-sm rounded-pill btn-del" data-bs-toggle="modal"
                             data-bs-target="#modalDelete" data-del="{{ route('matriculas.destroy', $matricula->id) }}">
                             <div class="th-icone">
                                 <i class="bi bi-trash"></i>
                                 <span>eliminar</span>
                             </div>
-                        </button>
+                        </a>
                     </td>
                     <td>
-                        <button class="btn btn-outline-warning btn-sm rounded-pill btn-up" type="button"
+                        <a href="#" class="btn btn-outline-warning btn-sm rounded-pill btn-up" type="button"
                             data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
                             aria-controls="flush-collapseOne"
                             data-up="{{ route('matriculas.update', $matricula->id) }}"
@@ -56,7 +56,7 @@
                                 <i class="bi bi-pencil-square"></i>
                                 <span>editar</span>
                             </div>
-                        </button>
+                        </a>
                     </td>
                 </tr>
             @endforeach

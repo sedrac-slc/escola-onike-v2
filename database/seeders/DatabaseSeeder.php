@@ -330,7 +330,7 @@ class DatabaseSeeder extends Seeder
             'dia_semana' => DiaSemanaEnum::SEGUNDA_FEIRA,
             "periodo" => PeriodoEnum::MANHA,
             'hora_inicio' => "08:00:00",
-            'hora_termino' => "09:00:00",
+            'hora_termino' => "08:40:00",
             'created_by' => $user->id,
             'updated_by' => $user->id
         ], $disciplinaThree, $cursoOne);

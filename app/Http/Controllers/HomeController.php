@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+use App\Utils\FileUploadUtil;
+use Illuminate\Http\Request;
 use App\Models\User;
 use Carbon\Carbon;
 use Exception;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -45,12 +47,9 @@ class HomeController extends Controller
         return redirect()->back();
     }
 
-
-    public function index()
-    {
+    public function index(){
         return view('home', [ "painel" => "home",]);
     }
-
 
     public function update(Request $request, $id) {
         $request->validate([
@@ -78,6 +77,23 @@ class HomeController extends Controller
         $request['password'] = Hash::make($request->newpassword);
 
         return $this->change($request, $id, "newpassword");
+    }
+
+    public function photo(Request $request, $id)
+    {
+        try {
+            $user = User::find($id);
+            DB::transaction(function () use ($request, $user) {
+                $data = $request->all();
+                FileUploadUtil::uploadUserPhoto($request,$user,$data);
+                $user->update($data);
+            });
+            toastr()->success("Foto de perfil actualizar com successo");
+            return redirect()->back();
+        } catch (Exception) {
+            toastr()->error("Não foi possível actualizar foto de perfil");
+            return redirect()->back();
+        }
     }
 
 }

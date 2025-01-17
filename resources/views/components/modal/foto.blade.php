@@ -1,6 +1,6 @@
 <div class="modal fade" id="modalFoto" tabindex="-1" role="dialog" aria-labelledby="modalFotoLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-      <form class="modal-content" action="#" method="POST" id="formFoto" enctype="multipart/form-data">
+      <form class="modal-content" action="{{ route('user.photo', $user_id) }}" method="POST" id="formFoto" enctype="multipart/form-data">
         @csrf
         <div class="modal-header bg-warning text-white">
           <h5 class="modal-title" id="modalFotoLabel">
@@ -12,7 +12,7 @@
         </div>
         <div class="modal-body">
           <div class="form-group">
-            <input type="file" name="image" id="image" class="form-control" placeholder="Escolha a imagem, para ser a foto de perfil"/>
+            <input type="file" name="file" id="file" class="form-control" placeholder="Escolha a imagem, para ser a foto de perfil"/>
           </div>
           <input type="hidden" name="user_id" @isset($user_id) value="{{$user_id}}" @endisset/>
         </div>

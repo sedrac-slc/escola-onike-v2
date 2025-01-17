@@ -87,17 +87,17 @@
 
         function text(...arg) {
             selectDefault(arg[0], 'curso_id');
-            document.querySelector('#ano_lectivo').value = arg[1];
-            selectDefault(arg[2], 'periodo');
-            document.querySelector('#sala').value = arg[3];
-            selectDefault(arg[4], 'ano_curricular');
+            selectDefault(arg[1], 'classe_id');
+            document.querySelector('#ano_lectivo').value = arg[2];
+            selectDefault(arg[3], 'periodo');
+            document.querySelector('#sala').value = arg[4];
             document.querySelector('#span-turma').innerHTML = arg[5];
         }
 
         span.addEventListener('click', function(e) {
             form.action = span.dataset.url;
             if (!span.classList.contains('d-none')) span.classList.add('d-none');
-            text("", "", "", "", "","Cadastra");
+            text("", "", "", "", "", "Cadastra");
             method.value = "POST";
         });
 
@@ -107,8 +107,16 @@
                 let tds = row.querySelectorAll('td');
                 form.action = item.dataset.up;
                 if (span.classList.contains('d-none')) span.classList.remove('d-none');
-                text(tds[0].dataset.value, tds[1].innerHTML, tds[2].dataset.value, tds[3].innerHTML, tds[4].dataset.value, "Actualizar");
+                text(
+                    tds[0].dataset.value,
+                    tds[1].dataset.value,
+                    tds[2].innerHTML ,
+                    tds[3].dataset.value,
+                    tds[4].innerHTML,
+                    "Actualizar"
+                );
                 method.value = "PUT";
+                ajaxGetClasses();
             });
         });
 
@@ -145,23 +153,41 @@
             });
         });
 
-        function ajaxGetClasses(){
+        function ajaxGetClasses() {
             const selectClasse = document.querySelector("select#classe_id");
-            fetch("{{route('classes.ajaxcurso')}}"+`?curso=${select.value}`)
-             .then(resp => resp.json())
-             .then(resp => {
-                let html = "";
-                console.log(resp)
-                resp.forEach(i => html += `<option value="${i.id}">${i.num_classe}</option>`)
-                selectClasse.innerHTML = html;
-             })
+            fetch("{{ route('classes.ajaxcurso') }}" + `?curso=${select.value}`)
+                .then(resp => resp.json())
+                .then(resp => {
+                    let html = "";
+                    console.log(resp)
+                    resp.forEach(i => html += `<option value="${i.id}">${numeroClasse(i.num_classe)}</option>`)
+                    selectClasse.innerHTML = html;
+                })
         }
 
         ajaxGetClasses();
 
-        select.addEventListener('change', ()=>{
+        select.addEventListener('change', () => {
             ajaxGetClasses();
         })
 
+        function numeroClasse(numClasse) {
+            switch (numClasse) {
+                case "7":
+                    return "7ª classe";
+                case "8":
+                    return "8ª classe";
+                case "9":
+                    return "9ª classe";
+                case "10":
+                    return "10ª classe";
+                case "11":
+                    return "11ª classe";
+                case "12":
+                    return "12ª classe";
+                default:
+                    return "13ª classe";
+            }
+        }
     </script>
 @endsection

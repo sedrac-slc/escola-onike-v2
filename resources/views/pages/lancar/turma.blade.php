@@ -93,7 +93,7 @@
                                         <tr>
                                             <td>{{ $turmaDisciplinaHorario->turma->curso->nome }}</td>
                                             <td>{{ $turmaDisciplinaHorario->disciplina->nome }}</td>
-                                            <td>{{ $turmaDisciplinaHorario->turma->curso->numeroClasse() }}</td>
+                                            <td>{{ $turmaDisciplinaHorario->turma->classe->numeroClasse() }}</td>
                                             <td>{{ $turmaDisciplinaHorario->turma->ano_lectivo }}</td>
                                             <td>{{ $turmaDisciplinaHorario->turma->periodo() }}</td>
                                             <td>{{ $turmaDisciplinaHorario->turma->sala }}</td>

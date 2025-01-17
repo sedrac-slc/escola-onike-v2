@@ -27,7 +27,7 @@
                     <td>{{ $trimestre->data_termino }}</td>
                     <td>
                         @php $count =  $trimestre->notas->count(); @endphp
-                        <button
+                        <a href="#"
                             class="btn btn-outline-info btn-sm rounded-pill @if ($count > 0) btn-nota-trimestre-list @endif"
                             type="button"
                             @if ($count > 0) data-bs-toggle="modal" data-bs-target="#modalTrimestreNotaList" data-url="{{ route('trimestre-nota.ajaxTrimestreNota', $trimestre->id) }}" @else disabled @endif>
@@ -35,23 +35,24 @@
                                 <i class="bi bi-pencil-square"></i>
                                 <span>listar({{ $count }})</span>
                             </div>
-                        </button>
+                        </a>
                     </td>
                     <td>
-                        <button class="btn btn-outline-danger btn-sm rounded-pill btn-del" data-bs-toggle="modal"
-                            data-bs-target="#modalDelete" data-del="{{ route('trimestres.destroy', $trimestre->id) }}">
+                        <a href="#" class="btn btn-outline-danger btn-sm rounded-pill btn-del"
+                            data-bs-toggle="modal" data-bs-target="#modalDelete"
+                            data-del="{{ route('trimestres.destroy', $trimestre->id) }}">
                             <i class="bi bi-trash"></i>
                             <span>eliminar</span>
-                        </button>
+                        </a>
                     </td>
                     <td>
-                        <button class="btn btn-outline-warning btn-sm rounded-pill btn-up" type="button"
+                        <a href="#" class="btn btn-outline-warning btn-sm rounded-pill btn-up" type="button"
                             data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
                             aria-controls="flush-collapseOne"
                             data-up="{{ route('trimestres.update', $trimestre->id) }}">
                             <i class="bi bi-pencil-square"></i>
                             <span>editar</span>
-                        </button>
+                        </a>
                     </td>
                 </tr>
             @endforeach
