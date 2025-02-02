@@ -15,12 +15,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('turmas', function (Blueprint $table) {
-            $table->uuid('id')->primary()->default(DB::raw('uuid()'));
+            $table->uuid('id')->primary();
             $table->foreignUuid('curso_id')->constrained('cursos')->cascadeOnDelete();
             $table->foreignUuid('classe_id')->constrained('classes')->cascadeOnDelete();
             $table->enum('periodo', PeriodoEnum::keys());
             $table->enum("ano_curricular", AnoCurricularEnum::keys())->nullable();
-            $table->string("ano_lectivo");
+            $table->string("ano_lectivo")->nullable();
             $table->string("sala");
             $table->uuid('created_by')->nullable();
             $table->uuid('updated_by')->nullable();

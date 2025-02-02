@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('alunos', function (Blueprint $table) {
-            $table->uuid('id')->primary()->default(DB::raw('uuid()'));
+            $table->uuid('id')->primary();
             $table->foreignUuid('user_id')->constrained('users')->cascadeOnDelete()->unique();
             $table->uuid('created_by')->nullable();
             $table->uuid('updated_by')->nullable();

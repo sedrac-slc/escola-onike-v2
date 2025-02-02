@@ -5,6 +5,7 @@
     $isManha = $isAll || PeriodoEnum::MANHA == $period;
     $isTarde = $isAll || PeriodoEnum::TARDE == $period;
     $isNoite = $isAll || PeriodoEnum::NOITE == $period;
+    $ano_lectivo = $curso->lectivo_ano;
 @endphp
 <!DOCTYPE html>
 <html lang="en">
@@ -17,53 +18,36 @@
         .mt-10px{margin-top: 10px;}
         .mt-20px{margin-top: 20px;}
         .mt-40px{margin-top: 40px;}
+        .pl-10px{padding-left: 10px;}
+        .text-left{text-align: left;}
         .text-center{text-align: center;}
         .text-uppercase{text-transform:  uppercase;}
         .text-underline{text-decoration:  underline;}
         .space-enter{margin-left: 140px;}
         .space-ano-lectve{margin-left: 140px;}
-        table, th, td{border-collapse: collapse;  border: 1px solid; width: 100%;}
+         table, th, td{border-collapse: collapse;  border: 1px solid; width: 100%;}
+         .logo{
+            height: 100px;
+            width: 100px;
+            margin-left: 19rem;
+            margin-bottom: 0.5rem;
+        }
     </style>
 </head>
 <body>
+    <div>
+        <img src="{{ public_path('img/logo.png') }}" class="logo">
+    </div>
     <div>
         <div class="text-center text-underline">Complexo Escolar Privado Onilke</div>
         <div class="text-center text-uppercase mt-20px">Horário {{$curso->nome}}</div>
     </div>
 
-    @if ($isManha)
-        <div class="mt-40px">
-            <div class="text-center">
-                <span>Período: Manhã</span>
-                <span class="space-enter">Entrada: 08h:00</span>
-                <span class="space-ano-lectve">Ano lectivo: {{$curso->ano_lectivo}}</span>
-            </div>
-            <table class="text-center mt-10px">
-                <thead>
-                    <tr>
-                        <th>Entrada</th>
-                        <th>Saída</th>
-                        <th>Segunda feira</th>
-                        <th>Terça feira</th>
-                        <th>Quarta feira</th>
-                        <th>Quinta feira</th>
-                        <th>Sexta feira</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>08h:00m</td>
-                        <td>08h:40m</td>
-                        <td>{{ horarioDisc($curso, PeriodoEnum::MANHA, DiaSemanaEnum::SEGUNDA_FEIRA, "08h:00m", "08h:40m") }}</td>
-                        <td>{{ horarioDisc($curso, PeriodoEnum::MANHA, DiaSemanaEnum::TERCA_FEIRA, "08h:00m", "08h:40m") }}</td>
-                        <td>{{ horarioDisc($curso, PeriodoEnum::MANHA, DiaSemanaEnum::QUARTA_FEIRA, "08h:00m", "08h:40m") }}</td>
-                        <td>{{ horarioDisc($curso, PeriodoEnum::MANHA, DiaSemanaEnum::QUINTA_FEIRA, "08h:00m", "08h:40m") }}</td>
-                        <td>{{ horarioDisc($curso, PeriodoEnum::MANHA, DiaSemanaEnum::SEXTA_FEIRA, "08h:00m", "08h:40m") }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    @endif
+    @include('pdfs.periodo-manha')
+
+    @include('pdfs.periodo-tarde')
+
+    @include('pdfs.periodo-noite')
 
 </body>
 </html>

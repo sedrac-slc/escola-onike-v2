@@ -33,7 +33,7 @@
                 <tr>
                     <td data-value={{ $turma->curso_id }}>{{ $turma->curso->text() }}</td>
                     <td data-value={{ $turma->classe->id }}>{{ $turma->classe->numeroClasse() }}</td>
-                    <td>{{ $turma->ano_lectivo }}</td>
+                    <td>{{ $turma->curso->lectivo_ano }}</td>
                     <td data-value={{ $turma->periodo }}>{{ $turma->periodo() }}</td>
                     <td>{{ $turma->sala }}</td>
                     <td>

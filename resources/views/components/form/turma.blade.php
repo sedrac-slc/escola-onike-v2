@@ -7,7 +7,7 @@
             </label>
             <select name="curso_id" id="curso_id" class="form-control">
                 @foreach ($cursos as $curso)
-                    <option value="{{ $curso->id }}">{{ $curso->text() }}</option>
+                    <option value="{{ $curso->id }}">{{ $curso->textLective() }}</option>
                 @endforeach
             </select>
         </div>
@@ -33,12 +33,11 @@
         <select name="classe_id" id="classe_id" class="form-control">
         </select>
     </div>
-    <div class="col-md-6 p-1">
+    <div class="col-md-6 p-1 d-none">
         <label for="ano_lectivo" class="form-label" class="form-control">
             <span>Ano lectivo:</span>
-            <span class="text-danger">*</span>
         </label>
-        <input type="text" class="form-control" name="ano_lectivo" id="ano_lectivo" />
+        <input type="text" class="form-control" name="ano_lectivo" id="ano_lectivo" disabled/>
     </div>
     <div class="col-md-6 p-1">
         <label for="sala" class="form-label" class="form-control">

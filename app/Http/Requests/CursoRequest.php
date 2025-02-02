@@ -25,6 +25,7 @@ class CursoRequest extends FormRequest
     {
         return [
             'nome' =>  ['required','string', 'max:255'],
+            'lective_ano' =>  ['nullable','string', 'max:255'],
         ];
     }
 }

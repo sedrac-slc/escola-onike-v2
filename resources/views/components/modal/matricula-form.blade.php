@@ -43,7 +43,7 @@
                 <button type="button" class="btn btn-warning" data-bs-dismiss="modal">
                     <span>Não, cancela</span>
                 </button>
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary" id="btn-matricula-add">
                     <span>Sim, confirmo</span>
                 </button>
             </div>

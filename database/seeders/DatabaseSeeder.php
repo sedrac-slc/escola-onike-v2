@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
 
     private function createCurso($data){
         $data['concat_fields'] = $data['nome'];
+        if(!isset($data['lectivo_ano']))  $data['lectivo_ano'] = "2024/2025";
         return Curso::updateOrCreate(['nome' => $data['nome'] ], $data);
     }
 
@@ -255,7 +256,7 @@ class DatabaseSeeder extends Seeder
         ], $cursoFour);
 
         $turmaOne = $this->createTurma([
-            'ano_lectivo' => "2023/2024",
+            'ano_lectivo' => "2024/2025",
             "periodo" => PeriodoEnum::MANHA,
             "sala" => "1",
             "classe_id" => $classOne->id,
@@ -265,7 +266,7 @@ class DatabaseSeeder extends Seeder
         ], $cursoOne);
 
         $turmaTwo = $this->createTurma([
-            'ano_lectivo' => "2023/2024",
+            'ano_lectivo' => "2024/2025",
             "periodo" =>  PeriodoEnum::TARDE,
             "sala" => "2",
             "classe_id" => $classTwo->id,
@@ -275,7 +276,7 @@ class DatabaseSeeder extends Seeder
         ], $cursoOne);
 
         $turmaThree = $this->createTurma([
-            'ano_lectivo' => "2023/2024",
+            'ano_lectivo' => "2024/2025",
             "periodo" => PeriodoEnum::MANHA,
             "sala" => "1",
             "classe_id" => $classThree->id,
@@ -285,7 +286,7 @@ class DatabaseSeeder extends Seeder
         ], $cursoTwo);
 
         $turmaFour = $this->createTurma([
-            'ano_lectivo' => "2023/2024",
+            'ano_lectivo' => "2024/2025",
             "periodo" => PeriodoEnum::TARDE,
             "sala" => "2",
             "classe_id" => $classFour->id,
@@ -294,10 +295,26 @@ class DatabaseSeeder extends Seeder
             'updated_by' => $user->id
         ], $cursoTwo);
 
-        $trimestre = $this->createTrimestre([
-            'data_inicio' => '2024-03-30',
-            'data_termino' => '2023-06-27',
+        $trimestreOne = $this->createTrimestre([
+            'data_inicio' => '2025-01-10',
+            'data_termino' => '2025-04-13',
             'numero' => '1',
+            'created_by' => $user->id,
+            'updated_by' => $user->id
+        ]);
+
+        $trimestreTwo = $this->createTrimestre([
+            'data_inicio' => '2025-05-01',
+            'data_termino' => '2025-08-04',
+            'numero' => '2',
+            'created_by' => $user->id,
+            'updated_by' => $user->id
+        ]);
+
+        $trimestreThree = $this->createTrimestre([
+            'data_inicio' => '2025-08-09',
+            'data_termino' => '2025-11-12',
+            'numero' => '3',
             'created_by' => $user->id,
             'updated_by' => $user->id
         ]);
@@ -338,8 +355,8 @@ class DatabaseSeeder extends Seeder
         $horarioTwo = $this->createHorario([
             'dia_semana' => DiaSemanaEnum::SEGUNDA_FEIRA,
             "periodo" => PeriodoEnum::MANHA,
-            'hora_inicio' => "09:05:00",
-            'hora_termino' => "10:05:00",
+            'hora_inicio' => "08:45:00",
+            'hora_termino' => "09:25:00",
             'created_by' => $user->id,
             'updated_by' => $user->id
         ], $disciplinaFour, $cursoOne);
@@ -347,26 +364,26 @@ class DatabaseSeeder extends Seeder
         $horarioThree = $this->createHorario([
             'dia_semana' => DiaSemanaEnum::SEGUNDA_FEIRA,
             "periodo" => PeriodoEnum::MANHA,
-            'hora_inicio' => "10:10:00",
-            'hora_termino' => "12:00:00",
+            'hora_inicio' => "09:30:00",
+            'hora_termino' => "10:10:00",
             'created_by' => $user->id,
             'updated_by' => $user->id
         ], $disciplinaThree, $cursoOne);
 
         $horarioFour = $this->createHorario([
-            'dia_semana' => DiaSemanaEnum::TERCA_FEIRA,
+            'dia_semana' => DiaSemanaEnum::SEGUNDA_FEIRA,
             "periodo" => PeriodoEnum::MANHA,
-            'hora_inicio' => "08:00:00",
-            'hora_termino' => "09:00:00",
+            'hora_inicio' => "10:40:00",
+            'hora_termino' => "12:00:00",
             'created_by' => $user->id,
             'updated_by' => $user->id
-        ], $disciplinaTwo, $cursoTwo);
+        ], $disciplinaTwo, $cursoOne);
 
         $horarioFive = $this->createHorario([
             'dia_semana' => DiaSemanaEnum::TERCA_FEIRA,
             "periodo" => PeriodoEnum::MANHA,
-            'hora_inicio' => "09:05:00",
-            'hora_termino' => "10:05:00",
+            'hora_inicio' => "08:00:00",
+            'hora_termino' => "08:30:00",
             'created_by' => $user->id,
             'updated_by' => $user->id
         ], $disciplinaOne, $cursoTwo);
@@ -374,7 +391,25 @@ class DatabaseSeeder extends Seeder
         $horarioSix = $this->createHorario([
             'dia_semana' => DiaSemanaEnum::TERCA_FEIRA,
             "periodo" => PeriodoEnum::MANHA,
-            'hora_inicio' => "10:10:00",
+            'hora_inicio' => "08:40:00",
+            'hora_termino' => "09:20:00",
+            'created_by' => $user->id,
+            'updated_by' => $user->id
+        ], $disciplinaTwo, $cursoTwo);
+
+        $horarioSeven = $this->createHorario([
+            'dia_semana' => DiaSemanaEnum::TERCA_FEIRA,
+            "periodo" => PeriodoEnum::MANHA,
+            'hora_inicio' => "09:30:00",
+            'hora_termino' => "10:30:00",
+            'created_by' => $user->id,
+            'updated_by' => $user->id
+        ], $disciplinaTwo, $cursoTwo);
+
+        $horarioEight = $this->createHorario([
+            'dia_semana' => DiaSemanaEnum::TERCA_FEIRA,
+            "periodo" => PeriodoEnum::MANHA,
+            'hora_inicio' => "10:40:00",
             'hora_termino' => "12:00:00",
             'created_by' => $user->id,
             'updated_by' => $user->id

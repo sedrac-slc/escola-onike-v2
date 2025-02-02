@@ -61,7 +61,7 @@ if(!function_exists('countDisciplina')){
 if(!function_exists('horarioDisc')){
 
     function horarioDisc($curso, $periodo, $dia_semana, $start, $end){
-        // Converte os horários de início e término para objetos Carbon
+
         $startTime = Carbon::createFromFormat('H\h:i\m', $start)->format('H:i:s');
         $endTime = Carbon::createFromFormat('H\h:i\m', $end)->format('H:i:s');
         // Consulta com os horários tratados como objetos de tempo
@@ -69,13 +69,31 @@ if(!function_exists('horarioDisc')){
             ->where('periodo', $periodo)
             ->where('dia_semana', $dia_semana)
             ->where('hora_inicio', '>=', $startTime)
-            // ->where('hora_termino', '<=', $endTime)
+            ->where('hora_termino', '<=', $endTime)
             ->orderBy('id', 'desc')
             ->first();
 
         if(!isset($data->id)) return "-";
 
         return $data->disciplina->nome;
+    }
+
+}
+
+
+if(!function_exists('getNotaTrimestre')){
+
+    function getNotaTrimestre($aluno_id, $turma_id, $disciplina_id, $trimestre_code){
+
+        $trimestre = App\Models\Trimestre::where('numero', $trimestre_code)->first();
+
+        if(!isset($trimestre->id)) return null;
+
+        return App\Models\Nota::where('aluno_id', $aluno_id)
+            ->where('trimestre_id', $trimestre->id)
+            ->where('disciplina_id', $disciplina_id)
+            ->where('turma_id', $turma_id)
+            ->first();
     }
 
 }

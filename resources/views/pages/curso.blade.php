@@ -91,13 +91,14 @@
 
         function text(...arg) {
             document.querySelector('#nome').value = arg[0];
-            document.querySelector('#span-curso').innerHTML = arg[1];
+            document.querySelector('#lectivo_ano').value = arg[1];
+            document.querySelector('#span-curso').innerHTML = arg[2];
         }
 
         span.addEventListener('click', function(e) {
             form.action = span.dataset.url;
             if (!span.classList.contains('d-none')) span.classList.add('d-none');
-            text("", "Cadastra");
+            text("", "", "Cadastra");
             method.value = "POST";
         });
 
@@ -107,7 +108,7 @@
                 let tds = row.querySelectorAll('td');
                 form.action = item.dataset.up;
                 if (span.classList.contains('d-none')) span.classList.remove('d-none');
-                text(tds[0].innerHTML, "Actualizar");
+                text(tds[0].innerHTML,tds[1].innerHTML, "Actualizar");
                 method.value = "PUT";
             });
         });

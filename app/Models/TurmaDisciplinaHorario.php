@@ -47,7 +47,7 @@ class TurmaDisciplinaHorario extends Model
     }
 
     public function text(){
-        return $this->turma->curso->nome.'|'.$this->turma->curso->numeroClasse().'|'.$this->disciplina->nome.'|'.$this->horario->text();
+        return $this->turma->curso->nome.'|'.$this->disciplina->nome.'|'.$this->horario->text();
     }
 
 }

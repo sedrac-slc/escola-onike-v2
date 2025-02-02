@@ -2,13 +2,13 @@
 @section('content')
     @php $auth = auth()->user(); @endphp
     @php $funcao =  $auth->funcao(); @endphp
-    <div class="pagetitle">
-        <h1>Bem vindo!</h1>
+    <div class="pagetitle ">
+        <h1 class="text-white">Bem vindo!</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item">Usuário</li>
-                <li class="breadcrumb-item active">Perfil</li>
+                <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
+                <li class="breadcrumb-item text-white">Usuário</li>
+                <li class="breadcrumb-item active text-white">Perfil</li>
             </ol>
         </nav>
     </div>

@@ -16,6 +16,7 @@ Route::middleware(['auth'])->group( function () {
 
     Route::get('ajax-disciplina-professor/{disciplina}', [App\Http\Controllers\TurmaDisciplinaHorarioController::class, 'ajaxDisciplinaProfessor'])->name('turma-disciplina-horario.ajaxDisciplinaProfessor');
     Route::get('ajax-disciplina-horario/{horario}', [App\Http\Controllers\TurmaDisciplinaHorarioController::class, 'ajaxDisciplinaHorario'])->name('turma-disciplina-horario.ajaxDisciplinaHorario');
+    Route::get('ajax-notas-turma/{turma}/trimestre/{trimestre}/disciplina/{disciplina}', [App\Http\Controllers\NotaController::class, 'ajaxTurmaTrimestre'])->name('notas.ajaxTurmaTrimestre');
     Route::get('ajax-coordenador-curso/{coordenador}', [App\Http\Controllers\CoordenadorController::class, 'ajaxCoordenadorCursos'])->name('coordenador-curso.ajaxCoordenadorCursos');
     Route::get('ajax-disciplina/{disciplina}', [App\Http\Controllers\TurmaDisciplinaHorarioController::class, 'ajaxDisciplina'])->name('turma-disciplina-horario.ajaxdisciplina');
     Route::get('ajax-professor/{professor}', [App\Http\Controllers\TurmaDisciplinaHorarioController::class, 'ajaxProfessor'])->name('turma-disciplina-horario.ajaxprofessor');
@@ -25,11 +26,14 @@ Route::middleware(['auth'])->group( function () {
     Route::get('ajax-matricula/{aluno}', [App\Http\Controllers\MatriculaController::class, 'ajaxTurma'])->name('aluno-matricula.ajaxturma');
     Route::get('ajax-classe-by-curso', [App\Http\Controllers\ClasseController::class, 'findByCurso'])->name('classes.ajaxcurso');
     Route::get('ajax-aluno-curso/{curso}', [App\Http\Controllers\AlunoController::class, 'ajaxCurso'])->name('aluno.ajaxcurso');
-    Route::get('curso-horario-pdf/{id}', [App\Http\Controllers\CursoController::class, 'horarioPDF'])->name('curso.horario-pdf');
     Route::get('ajax-turmas/{curso}', [App\Http\Controllers\TurmaController::class, 'ajaxTurma'])->name('turmas.ajaxturma');
     Route::get('ajax-alunos/{turma}', [App\Http\Controllers\TurmaController::class, 'ajaxAluno'])->name('turma.ajaxaluno');
     Route::get('ajax-search-turma', [App\Http\Controllers\TurmaController::class, 'ajaxSearch'])->name('turma.ajaxsearch');
     Route::get('ajax-search-aluno', [App\Http\Controllers\AlunoController::class, 'ajaxSearch'])->name('aluno.ajaxsearch');
+
+    Route::get('curso-horario-pdf/{id}', [App\Http\Controllers\CursoController::class, 'horarioPDF'])->name('curso.horario-pdf');
+    Route::get('notas-alunos-pdf/{id}', [App\Http\Controllers\NotaController::class, 'notaPDF'])->name('notas.pdf');
+
     Route::get('notas-alunos/{id}', [App\Http\Controllers\NotaController::class, 'alunos'])->name('notas.alunos');
     Route::get('notas-aluno', [App\Http\Controllers\NotaController::class, 'aluno'])->name('notas.aluno');
     Route::get('notas', [App\Http\Controllers\NotaController::class, 'index'])->name('notas.index');

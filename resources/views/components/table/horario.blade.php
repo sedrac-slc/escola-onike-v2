@@ -32,9 +32,9 @@
             @foreach ($horarios as $horario)
                 <tr>
                     <td data-value={{ $horario->dia_semana }}>{{ $horario->diaSemana() }}</td>
-                    <td>{{ $horario->curso->nome }}</td>
-                    <td>{{ $horario->disciplina->nome }}</td>
-                    <td>{{ $horario->periodo() }}</td>
+                    <td data-value={{ $horario->curso->id }}>{{ $horario->curso->nome }}</td>
+                    <td data-value={{ $horario->disciplina->id }}>{{ $horario->disciplina->nome }}</td>
+                    <td data-value={{ $horario->periodo }}>{{ $horario->periodo() }}</td>
                     <td>{{ $horario->hora_inicio }}</td>
                     <td>{{ $horario->hora_termino }}</td>
                     <td>

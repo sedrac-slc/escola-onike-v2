@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('classes', function (Blueprint $table) {
-            $table->uuid('id')->primary()->default(DB::raw('uuid()'));
+            $table->uuid('id')->primary();
             $table->foreignUuid('curso_id')->constrained('cursos')->cascadeOnDelete();
             $table->enum('num_classe',NumeroClasseEnum::keys());
             $table->uuid('created_by')->nullable();

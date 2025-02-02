@@ -38,7 +38,21 @@ function requestCreateTable(url) {
             });
 
             painel.innerHTML = html == "" ? "" : createTable(html)
+            buttonOpen(html);
         })
+}
+
+
+function buttonOpen(html){
+    const btnForm = document.querySelector("#btn-matricula-add");
+    if(html == ""){
+        if(!btnForm.classList.contains('d-none'))
+            btnForm.classList.add('d-none');
+        return;
+    }
+
+    if(btnForm.classList.contains('d-none'))
+        btnForm.classList.remove('d-none');
 }
 
 function createTable(html) {

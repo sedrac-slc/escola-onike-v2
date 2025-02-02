@@ -14,7 +14,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create(Matricula::TABLE, function (Blueprint $table) {
-            $table->uuid('id')->primary()->default(DB::raw('uuid()'));
+            $table->uuid('id')->primary();
             $table->foreignUuid('aluno_id')->constrained('alunos')->cascadeOnDelete();
             $table->foreignUuid('turma_id')->constrained('turmas')->cascadeOnDelete();
             $table->uuid('created_by')->nullable();

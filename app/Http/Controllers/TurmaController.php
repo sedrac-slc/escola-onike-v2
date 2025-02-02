@@ -28,11 +28,19 @@ class TurmaController extends Controller
         ]);
     }
 
+    private function anoLective($data){
+        if(isset($data['ano_lectivo'])) return $data;
+        $curso = Curso::find($data['curso_id']);
+        $data['ano_lectivo'] = $curso->lectivo_ano;
+        return $data;
+    }
+
     public function store(TurmaRequest $request){
         try{
             $data = $request->all();
             $data['created_by'] = $data['updated_by'] = auth()->user()->id;
             $data['created_at'] = $data['updated_at'] = now();
+            $data = $this->anoLective($data);
             $turma = Turma::create($data);
             $turma->update(["concat_fields" => $turma->curso->concat_fields.'|'.$turma->concatFields() ]);
             toastr()->success("Operação de criação foi realizada com sucesso");
@@ -48,6 +56,7 @@ class TurmaController extends Controller
             $data['updated_by'] = auth()->user()->id;
             $data['updated_at'] = now();
             $turma = Turma::with('curso')->find($id);
+            $data = $this->anoLective($data);
             $turma->update($data);
             $turma->update(["concat_fields" => $turma->curso->concat_fields.'|'.$turma->concatFields() ]);
             toastr()->success("Operação de actualização foi realizada com sucesso");

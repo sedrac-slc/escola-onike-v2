@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('notas', function (Blueprint $table) {
-            $table->uuid('id')->primary()->default(DB::raw('uuid()'));
+            $table->uuid('id')->primary();
             $table->foreignUuid('aluno_id')->constrained('alunos')->cascadeOnDelete();
             $table->foreignUuid('turma_id')->constrained('turmas')->cascadeOnDelete();
             $table->foreignUuid('trimestre_id')->constrained('trimestres')->cascadeOnDelete();

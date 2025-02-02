@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Barryvdh\DomPDF\Facade\Pdf;
+
 use App\Models\TurmaDisciplinaHorario;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\NotaRequest;
@@ -102,11 +104,11 @@ class NotaController extends Controller
                 ];
                 Nota::updateOrCreate($alunos, array_merge($alunos, $notas));
             }
-            toastr()->success("Operação de eliminação foi realizada com sucesso");
+            toastr()->success("Notas lançadas com sucesso");
             return redirect()->back();
         }
 
-        toastr()->error("Operação de eliminação não foi possível a sua realização");
+        toastr()->error("Não foi possível o processo de lançamento das notas");
         return redirect()->back();
     }
 
@@ -114,6 +116,32 @@ class NotaController extends Controller
         foreach ($array as $elemento)
             if ($elemento !== $valor) return false;
         return true;
+    }
+
+    public function ajaxTurmaTrimestre($turma, $trimestre, $disciplina){
+        return Nota::with('aluno.user')->where('disciplina_id', $disciplina)
+        ->where('trimestre_id', $trimestre)
+        ->where('turma_id', $turma)
+        ->orderBy('created_by','DESC')
+        ->get();
+    }
+
+    public function notaPDF($id){
+        $turmaDisciplinaHorario = TurmaDisciplinaHorario::with('turma.curso', 'disciplina')->find($id);
+        $alunos = Aluno::with('user')->join(Matricula::TABLE, 'aluno_id', 'alunos.id')
+            ->where('turma_id',$turmaDisciplinaHorario->turma_id)
+            ->select('alunos.*')
+            ->get();
+
+        if(sizeof($alunos) == 0){
+            toastr()->warning("Esta turma não tem alunos, adiciona alunos nesta turma");
+            return back();
+        }
+
+        $pdf = Pdf::loadView('pdfs.pauta', [
+             "turmaDisciplinaHorario" => $turmaDisciplinaHorario, 'alunos' => $alunos,
+        ]);
+        return $pdf->stream("Pauta {$turmaDisciplinaHorario->disciplina->nome}.pdf");
     }
 
 }

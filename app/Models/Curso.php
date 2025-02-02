@@ -13,6 +13,7 @@ class Curso extends Model
     protected $fillable = [
         'id',
         'nome',
+        'lectivo_ano',
         'concat_fields',
         'created_by',
         'updated_by',
@@ -28,6 +29,10 @@ class Curso extends Model
 
     public function coordenadores(){
         return $this->belongsToMany(Coordenador::class);
+    }
+
+    public function textLective(){
+        return isset($this->lectivo_ano) ? $this->nome .' - '. $this->lectivo_ano : $this->nome ;
     }
 
     public function text(){

@@ -1,6 +1,6 @@
 @extends('layouts.dash')
 @php
-   $isDirectorOrSecretario = auth()->user()->isDirectorOrSecretario();
+    $isDirectorOrSecretario = auth()->user()->isDirectorOrSecretario();
 @endphp
 @section('css')
     @parent
@@ -39,52 +39,28 @@
                                 <thead>
                                     <tr>
                                         <th>
-                                            <div class="th-icone">
-                                                <i class="bi bi-calendar-plus"></i>
-                                                <span>Curso</span>
-                                            </div>
+                                            <span>Curso</span>
                                         </th>
                                         <th>
-                                            <div class="th-icone">
-                                                <i class="bi bi-book"></i>
-                                                <span>Disciplina</span>
-                                            </div>
+                                            <span>Disciplina</span>
                                         </th>
                                         <th>
-                                            <div class="th-icone">
-                                                <i class="bi bi-sun"></i>
-                                                <span>Classe</span>
-                                            </div>
+                                            <span>Classe</span>
                                         </th>
                                         <th>
-                                            <div class="th-icone">
-                                                <i class="bi bi-calendar"></i>
-                                                <span>Ano lectivo</span>
-                                            </div>
+                                            <span>Ano lectivo</span>
                                         </th>
                                         <th>
-                                            <div class="th-icone">
-                                                <i class="bi bi-brightness-high"></i>
-                                                <span>Periodo</span>
-                                            </div>
+                                            <span>Periodo</span>
                                         </th>
                                         <th>
-                                            <div class="th-icone">
-                                                <i class="bi bi-1-circle"></i>
-                                                <span>Sala</span>
-                                            </div>
+                                            <span>Sala</span>
                                         </th>
                                         <th>
-                                            <div class="th-icone">
-                                                <i class="bi bi-hour"></i>
-                                                <span>Horario</span>
-                                            </div>
+                                            <span>Horario</span>
                                         </th>
-                                        <th>
-                                            <div class="th-icone">
-                                                <i class="bi bi-123"></i>
-                                                <span>Nota</span>
-                                            </div>
+                                        <th colspan="2">
+                                            <span>Nota</span>
                                         </th>
                                     </tr>
                                 </thead>
@@ -100,16 +76,23 @@
                                             <td>{{ $turmaDisciplinaHorario->horario->intervalo() }}</td>
                                             <td>
                                                 <a href="{{ route('notas.alunos', $turmaDisciplinaHorario->id) }}"
-                                                    class="btn @if($isDirectorOrSecretario) btn-outline-info @else btn-outline-warning @endif btn-sm rounded-pill">
+                                                    class="btn @if ($isDirectorOrSecretario) btn-outline-info @else btn-outline-warning @endif btn-sm rounded-pill">
                                                     <div class="th-icone">
-                                                        @if($isDirectorOrSecretario)
+                                                        @if ($isDirectorOrSecretario)
                                                             <i class="bi bi-eye"></i>
-                                                            <span>{{ "Visualizar" }}</span>
+                                                            <span>{{ 'Visualizar' }}</span>
                                                         @else
                                                             <i class="bi bi-pencil-square"></i>
-                                                            <span>{{ "Lançar" }}</span>
+                                                            <span>{{ 'Lançar' }}</span>
                                                         @endif
                                                     </div>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                 <a target="_blank" href="{{ route('notas.pdf', $turmaDisciplinaHorario->id) }}"
+                                                    class="btn btn-outline-danger  btn-sm rounded-pill">
+                                                    <i class="bi bi-file-pdf"></i>
+                                                    <span>{{ 'pdf' }}</span>
                                                 </a>
                                             </td>
                                         </tr>

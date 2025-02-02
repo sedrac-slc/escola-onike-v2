@@ -14,7 +14,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('horarios', function (Blueprint $table) {
-            $table->uuid('id')->primary()->default(DB::raw('uuid()'));
+            $table->uuid('id')->primary();
             $table->foreignUuid('disciplina_id')->constrained('disciplinas')->cascadeOnDelete();
             $table->foreignUuid('curso_id')->constrained('cursos')->cascadeOnDelete();
             $table->enum('periodo', PeriodoEnum::keys());

@@ -15,7 +15,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create(TurmaDisciplinaHorario::TABLE, function (Blueprint $table) {
-            $table->uuid('id')->primary()->default(DB::raw('uuid()'));
+            $table->uuid('id')->primary();
             $table->foreignUuid('turma_id')->constrained('turmas')->cascadeOnDelete();
             $table->foreignUuid('disciplina_id')->constrained('disciplinas')->cascadeOnDelete();
             $table->foreignUuid('horario_id')->constrained('horarios')->cascadeOnDelete();

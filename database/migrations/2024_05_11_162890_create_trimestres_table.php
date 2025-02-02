@@ -14,7 +14,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('trimestres', function (Blueprint $table) {
-            $table->uuid('id')->primary()->default(DB::raw('uuid()'));
+            $table->uuid('id')->primary();
             $table->enum('numero', NumeroEnum::keys());
             $table->date('data_inicio');
             $table->date('data_termino');

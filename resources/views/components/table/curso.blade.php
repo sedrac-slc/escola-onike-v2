@@ -6,6 +6,9 @@
                     <span>Nome</span>
                 </th>
                 <th>
+                    <span>Ano lectivo</span>
+                </th>
+                <th>
                     <span>Horáro</span>
                 </th>
                 <th>
@@ -23,8 +26,9 @@
             @foreach ($cursos as $curso)
                 <tr>
                     <td>{{ $curso->nome }}</td>
+                    <td>{{ $curso->lectivo_ano ?? '-' }}</td>
                     <td>
-                        <a href="{{ route('curso.horario-pdf', $curso->id) }}" class="btn btn-outline-success btn-sm rounded-pill">
+                        <a target="_blank" href="{{ route('curso.horario-pdf', $curso->id) }}" class="btn btn-outline-success btn-sm rounded-pill">
                             <i class="bi bi-file-earmark-pdf"></i>
                             <span>PDF</span>
                         </a>
