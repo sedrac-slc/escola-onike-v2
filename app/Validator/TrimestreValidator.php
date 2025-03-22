@@ -8,7 +8,7 @@ use DateTime;
 class TrimestreValidator{
 
 
-    private static function data($data)
+    public static function data($data)
     {
         if (!isset($data['data_inicio']))  return false;
         if (!isset($data['data_termino']))  return false;

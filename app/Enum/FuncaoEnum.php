@@ -14,7 +14,7 @@ final class FuncaoEnum{
             case FuncaoEnum::COORDENADOR_CURSO:
                 return "Coordenador do curso";
             case FuncaoEnum::DIRECTOR_GERAL:
-                return "Director Geral";
+                return "Director Pedagógico";
             case FuncaoEnum::SECRETARIO:
                 return "Secretario(a)";
             case FuncaoEnum::PROFESSOR:
