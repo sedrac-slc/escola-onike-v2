@@ -8,7 +8,7 @@ use App\Models\Horario;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\HorarioRequest;
-use App\Validator\TrimestreValidator;
+use App\Validator\HorarioValidator;
 
 class HorarioController extends Controller
 {
@@ -23,7 +23,7 @@ class HorarioController extends Controller
     public function store(HorarioRequest $request){
         try{
             $data = $request->all();
-            if(!TrimestreValidator::data($data)) return redirect()->back();
+            if(!HorarioValidator::data($data)) return redirect()->back();
             $data['created_by'] = $data['updated_by'] = auth()->user()->id;
             $data['created_at'] = $data['updated_at'] = now();
             Horario::create($data);
@@ -37,7 +37,7 @@ class HorarioController extends Controller
     public function update(HorarioRequest $request, $id){
         try{
             $data = $request->all();
-            if(!TrimestreValidator::data($data)) return redirect()->back();
+            if(!HorarioValidator::data($data)) return redirect()->back();
             $data['updated_by'] = auth()->user()->id;
             $data['updated_at'] = now();
             $horario = Horario::find($id);
