@@ -99,7 +99,7 @@
                                 : 0;
                         $nota = round($mt + $npt);
                     }else{
-                        $nota = round(($mt1 + $mt2 + $mt3 ) / 3) ;
+                        $nota = is_numeric($mt1) && is_numeric($mt2) && is_numeric($mt3) ? round(($mt1 + $mt2 + $mt3 ) / 3) : 0;
                     }
 
                 @endphp
